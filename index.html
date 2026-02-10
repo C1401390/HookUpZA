@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UpZA - Cape Town Adult Classifieds</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-black text-light">
+
+Navbar with admin link · HTML
+Copy
+
+<!-- REPLACE YOUR NAVBAR WITH THIS - ADD ADMIN DASHBOARD LINK -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top shadow-lg">
+  <div class="container">
+    <a class="navbar-brand fw-bold fs-3" href="index.html">
+      <span class="text-danger">Hook</span><span class="text-white">UpZA</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto gap-4">
+        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Categories</a>
+          <ul class="dropdown-menu bg-dark border-0 shadow-lg">
+            <li><a class="dropdown-item text-light" href="#mw4m">Men Looking for Women</a></li>
+            <li><a class="dropdown-item text-light" href="#wf4m">Women Looking for Men</a></li>
+            <li><a class="dropdown-item text-light" href="#mw4mw">Men Looking for Men</a></li>
+            <li><a class="dropdown-item text-light" href="#wf4w">Women Looking for Women</a></li>
+            <li><a class="dropdown-item text-light" href="#couples">Couples Looking for...</a></li>
+            <li><a class="dropdown-item text-light" href="#lgbtq">LGBTQ+</a></li>
+            <li><a class="dropdown-item text-light" href="#hookups">Casual Hookups</a></li>
+            <li><a class="dropdown-item text-light" href="#services">Services & Escorts</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="shop.html"><i class="bi bi-bag-heart me-1"></i>Toys Shop</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="post-ad.html" data-action="post-ad">Post Ad</a>
+        </li>
+        
+        <!-- ADMIN DASHBOARD LINK (only visible if logged in as admin) -->
+        <li class="nav-item" id="adminDashboardLink" style="display: none;">
+          <a class="nav-link text-warning fw-bold" href="admin-dashboard.html">
+            <i class="bi bi-shield-check me-1"></i>Admin
+          </a>
+        </li>
+      </ul>
+      
+      <ul class="navbar-nav gap-3">
+        <!-- Show when NOT logged in -->
+        <li class="nav-item" id="loginBtn">
+          <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+            <i class="bi bi-box-arrow-in-right me-1"></i>Login
+          </a>
+        </li>
+        <li class="nav-item" id="signupBtn">
+          <a class="nav-link btn btn-outline-danger px-4" href="#" data-bs-toggle="modal" data-bs-target="#signupModal">
+            <i class="bi bi-person-plus me-1"></i>Sign Up
+          </a>
+        </li>
+        
+        <!-- Show when logged in (hidden by default) -->
+        <li class="nav-item dropdown" id="userDropdown" style="display: none;">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+            <i class="bi bi-person-circle me-1"></i><span id="navUsername">User</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end bg-dark border-0 shadow-lg">
+            <li><a class="dropdown-item text-light" href="my-ads.html"><i class="bi bi-list-ul me-2"></i>My Ads</a></li>
+            <li><a class="dropdown-item text-light" href="post-ad.html"><i class="bi bi-plus-circle me-2"></i>Post New Ad</a></li>
+            <li><hr class="dropdown-divider border-secondary"></li>
+            <li><a class="dropdown-item text-danger" href="#" onclick="handleLogout(); return false;"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Enhanced Hero Section -->
+<section class="hero position-relative text-white text-center d-flex align-items-center">
+  <!-- Background with sensual, abstract design -->
+  <div class="hero-bg position-absolute top-0 start-0 w-100 h-100 d-none d-md-block">
+    <video autoplay muted loop playsinline class="w-100 h-100 object-fit-cover">
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-bokeh-of-lights-on-a-dark-background-1947-large.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-bg position-absolute top-0 start-0 w-100 h-100 d-md-none" 
+       style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); opacity: 0.9;"></div>
+  <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100"></div>
+  
+  <div class="container position-relative py-5">
+    <!-- Main Branding -->
+    <div class="mb-4">
+      <h1 class="display-1 fw-bold mb-3 hero-title animate-fade-in">
+        <span class="text-danger">Hook</span><span class="text-white">UpZA</span>
+      </h1>
+      <p class="lead mb-3 fs-3 fw-light hero-subtitle">Cape Town's most discreet adult classifieds & hookup community</p>
+    </div>
+
+    <!-- Privacy & Safety Trust Badges -->
+    <div class="privacy-badges mb-5">
+      <div class="d-flex justify-content-center gap-4 flex-wrap mb-3">
+        <div class="trust-badge">
+          <i class="bi bi-shield-lock-fill fs-3 text-success mb-2"></i>
+          <p class="small mb-0 fw-bold">256-Bit Encryption</p>
+        </div>
+        <div class="trust-badge">
+          <i class="bi bi-eye-slash-fill fs-3 text-info mb-2"></i>
+          <p class="small mb-0 fw-bold">Anonymous Browsing</p>
+        </div>
+        <div class="trust-badge">
+          <i class="bi bi-check-circle-fill fs-3 text-warning mb-2"></i>
+          <p class="small mb-0 fw-bold">Verified Members</p>
+        </div>
+        <div class="trust-badge">
+          <i class="bi bi-trash3-fill fs-3 text-danger mb-2"></i>
+          <p class="small mb-0 fw-bold">Auto-Delete After 30 Days</p>
+        </div>
+      </div>
+      <p class="text-light opacity-90 fs-6 mb-0">
+        <i class="bi bi-incognito me-2"></i>
+        Your privacy is our priority. No data sold. No tracking. No judgment.
+      </p>
+    </div>
+
+    <!-- Primary CTAs -->
+    <div class="d-flex justify-content-center gap-3 flex-wrap mb-4">
+      <a href="post-ad.html" 
+         class="btn btn-danger btn-lg px-5 py-3 fw-bold cta-pulse" 
+         data-action="post-ad">
+        <i class="bi bi-plus-circle me-2"></i>Post Free Ad Now
+      </a>
+      <a href="#ads" class="btn btn-outline-light btn-lg px-5 py-3 fw-bold">
+        <i class="bi bi-search me-2"></i>Browse Premium Ads
+      </a>
+    </div>
+
+    <!-- Secondary CTAs - Shop & Vendor Portal -->
+    <div class="d-flex justify-content-center gap-3 flex-wrap mb-5">
+      <a href="shop.html" class="btn btn-outline-warning btn-md px-4 py-2 fw-bold">
+        <i class="bi bi-bag-heart-fill me-2"></i>Adult Toys Shop
+      </a>
+      <a href="vendor-portal.html" 
+         class="btn btn-outline-info btn-md px-4 py-2 fw-bold"
+         data-action="vendor-portal">
+        <i class="bi bi-shop me-2"></i>Vendor Portal
+      </a>
+      <a href="#safety" class="btn btn-outline-success btn-md px-4 py-2 fw-bold">
+        <i class="bi bi-shield-check me-2"></i>Safety Guide
+      </a>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="row g-3 justify-content-center">
+      <div class="col-6 col-md-2">
+        <div class="stats-card p-3 rounded">
+          <h3 class="text-danger fw-bold mb-1 counter" data-target="5000">0</h3>
+          <p class="small mb-0 opacity-75">Active Members</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-2">
+        <div class="stats-card p-3 rounded">
+          <h3 class="text-danger fw-bold mb-1 counter" data-target="1200">0</h3>
+          <p class="small mb-0 opacity-75">Live Ads</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-2">
+        <div class="stats-card p-3 rounded">
+          <h3 class="text-danger fw-bold mb-1">100%</h3>
+          <p class="small mb-0 opacity-75">Discreet</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-2">
+        <div class="stats-card p-3 rounded">
+          <h3 class="text-danger fw-bold mb-1">24/7</h3>
+          <p class="small mb-0 opacity-75">Support</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-2">
+        <div class="stats-card p-3 rounded">
+          <h3 class="text-danger fw-bold mb-1">500+</h3>
+          <p class="small mb-0 opacity-75">Vendors</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trust Statement -->
+    <div class="trust-statement mt-5 p-4 rounded" style="background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1);">
+      <h5 class="text-warning mb-3">
+        <i class="bi bi-hand-thumbs-up-fill me-2"></i>Our Privacy Commitment
+      </h5>
+      <div class="row g-3 text-start">
+        <div class="col-md-4">
+          <p class="small mb-0">
+            <i class="bi bi-check-circle text-success me-2"></i>
+            <strong>No Email Required:</strong> Sign up with just a username
+          </p>
+        </div>
+        <div class="col-md-4">
+          <p class="small mb-0">
+            <i class="bi bi-check-circle text-success me-2"></i>
+            <strong>Discreet Billing:</strong> All charges show as "Online Services"
+          </p>
+        </div>
+        <div class="col-md-4">
+          <p class="small mb-0">
+            <i class="bi bi-check-circle text-success me-2"></i>
+            <strong>Private Chat:</strong> Messages encrypted end-to-end
+          </p>
+        </div>
+        <div class="col-md-4">
+          <p class="small mb-0">
+            <i class="bi bi-check-circle text-success me-2"></i>
+            <strong>No Face Required:</strong> Blur or crop photos for anonymity
+          </p>
+        </div>
+        <div class="col-md-4">
+          <p class="small mb-0">
+            <i class="bi bi-check-circle text-success me-2"></i>
+            <strong>Delete Anytime:</strong> Remove your account instantly, no questions
+          </p>
+        </div>
+        <div class="col-md-4">
+          <p class="small mb-0">
+            <i class="bi bi-check-circle text-success me-2"></i>
+            <strong>Moderated 24/7:</strong> Report inappropriate content immediately
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Search Bar -->
+  <section class="py-4 bg-black border-bottom border-secondary">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <input type="text" id="searchInput" class="form-control form-control-lg bg-dark border-danger text-light text-center" placeholder="Search ads (type to filter live)...">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Premium Ads – 8 full cards -->
+  <section class="py-5 bg-black" id="ads">
+    <div class="container">
+      <h2 class="text-center mb-5 fw-bold text-warning">
+        <i class="bi bi-star-fill me-2"></i>Featured Premium Ads
+      </h2>
+      <div class="row g-4" id="premiumAds">
+        <!-- Card 1 -->
+        <div class="col-md-6 col-lg-4 col-xl-3">
+          <div class="card h-100 premium" onclick="openDetailModal(this)"
+               data-title="Elite VIP Escort – Waterfront"
+               data-desc="Luxury GFE & companionship. Discreet, professional, unforgettable. Available for dinner dates, travel companionship, and private sessions. Upscale clientele only."
+               data-contact="WhatsApp: 082 999 8888 | Email: elite@vip.za"
+               data-social="Instagram: @elitevipct | Twitter: @VIPWaterfront | OnlyFans: elitevip"
+               data-online="Online now"
+               data-services="GFE: Yes | Webcam: Yes | Video Calls: Yes | Sells Pics/Videos: Yes | Extra: Travel companion, fetish friendly, dinner dates"
+               data-gallery="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800,https://images.unsplash.com/photo-1519741497674-8c4d8f3c9d5c?auto=format&fit=crop&w=800,https://images.unsplash.com/photo-1554151229-14d0188d57c9?auto=format&fit=crop&w=800">
+            <div class="position-absolute top-0 end-0 m-2" style="z-index: 10;">
+              <span class="badge bg-warning text-dark"><i class="bi bi-star-fill"></i> PREMIUM</span>
+            </div>
+            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Elite VIP">
+            <div class="card-body">
+              <h5 class="card-title">Elite VIP Escort – Waterfront</h5>
+              <p class="card-text small text-muted mb-3">Luxury GFE & companionship. Professional & discreet.</p>
+              <div class="d-flex align-items-center mb-2">
+                <span class="online-dot bg-success"></span>
+                <small class="text-success fw-bold">Online now</small>
+              </div>
+              <div class="mb-3">
+                <span class="badge bg-dark me-1"><i class="bi bi-camera-video"></i> Video Calls</span>
+                <span class="badge bg-dark me-1"><i class="bi bi-images"></i> Gallery</span>
+                <span class="badge bg-dark me-1"><i class="bi bi-shield-check"></i> Verified</span>
+              </div>
+              <p class="text-center mb-3">
+                <span class="expiry-badge bg-danger text-white px-3 py-1 rounded-pill">Premium • 30 days</span>
+              </p>
+              <a href="#" class="btn btn-sm btn-outline-danger w-100 fw-bold" onclick="event.stopPropagation();">
+                <i class="bi bi-chat-dots-fill me-1"></i> Message Now
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-md-6 col-lg-4 col-xl-3">
+          <div class="card h-100 premium" onclick="openDetailModal(this)"
+               data-title="Premium Sensual Companion – Sea Point"
+               data-desc="Exclusive intimate sessions & roleplay. R1500/hr. Outcalls available. Specializing in tantric experiences and sensual massage. Discreet and professional."
+               data-contact="WhatsApp: 083 777 6666"
+               data-social="Instagram: @sensualpremiumct"
+               data-online="Last seen 10 mins ago"
+               data-services="GFE: Yes | Roleplay: Yes | Webcam: Yes | Video Calls: Yes | Sells Pics/Videos: Yes | Extra: Tantric massage, sensual experiences"
+               data-gallery="https://images.unsplash.com/photo-1519741497674-8c4d8f3c9d5c?auto=format&fit=crop&w=400,https://images.unsplash.com/photo-1554151229-14d0188d57c9?auto=format&fit=crop&w=400,https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400">
+            <div class="position-absolute top-0 end-0 m-2" style="z-index: 10;">
+              <span class="badge bg-warning text-dark"><i class="bi bi-star-fill"></i> PREMIUM</span>
+            </div>
+            <img src="https://images.unsplash.com/photo-1519741497674-8c4d8f3c9d5c?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Sensual Companion">
+            <div class="card-body">
+              <h5 class="card-title">Premium Sensual Companion – Sea Point</h5>
+              <p class="card-text small text-muted mb-3">Exclusive sessions & roleplay. R1500/hr outcalls.</p>
+              <div class="d-flex align-items-center mb-2">
+                <span class="online-dot bg-warning"></span>
+                <small class="text-warning fw-bold">Last seen 10 mins ago</small>
+              </div>
+              <div class="mb-3">
+                <span class="badge bg-dark me-1"><i class="bi bi-camera-video"></i> Video Calls</span>
+                <span class="badge bg-dark me-1"><i class="bi bi-images"></i> Gallery</span>
+                <span class="badge bg-dark me-1"><i class="bi bi-shield-check"></i> Verified</span>
+              </div>
+              <p class="text-center mb-3">
+                <span class="expiry-badge bg-danger text-white px-3 py-1 rounded-pill">Premium • 30 days</span>
+              </p>
+              <a href="#" class="btn btn-sm btn-outline-danger w-100 fw-bold" onclick="event.stopPropagation();">
+                <i class="bi bi-chat-dots-fill me-1"></i> Message Now
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-md-6 col-lg-4 col-xl-3">
+          <div class="card h-100 premium" onclick="openDetailModal(this)"
+               data-title="Luxury Companion – Camps Bay"
+               data-desc="Sophisticated GFE for discerning gentlemen. Available for dinner dates, events, and private encounters. Elegant, educated, and discreet. R2000/hr."
+               data-contact="WhatsApp: 084 888 7777 | Email: luxury@campsbay.za"
+               data-social="Instagram: @luxurycampsbay | Twitter: @LuxuryCompanionCT"
+               data-online="Online now"
+               data-services="GFE: Yes | Webcam: Yes | Video Calls: Yes | Sells Pics/Videos: Yes | Extra: Event companion, travel, dinner dates"
+               data-gallery="https://images.unsplash.com/photo-1554151229-14d0188d57c9?auto=format&fit=crop&w=400,https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400,https://images.unsplash.com/photo-1519741497674-8c4d8f3c9d5c?auto=format&fit=crop&w=400">
+            <div class="position-absolute top-0 end-0 m-2" style="z-index: 10;">
+              <span class="badge bg-warning text-dark"><i class="bi bi-star-fill"></i> PREMIUM</span>
+            </div>
+            <img src="https://images.unsplash.com/photo-1554151229-14d0188d57c9?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Luxury Companion">
+            <div class="card-body">
+              <h5 class="card-title">Luxury Companion – Camps Bay</h5>
+              <p class="card-text small text-muted mb-3">Sophisticated GFE. R2000/hr. Events & travel.</p>
+              <div class="d-flex align-items-center mb-2">
+                <span class="online-dot bg-success"></span>
+                <small class="text-success fw-bold">Online now</small>
+              </div>
+              <div class="mb-3">
+                <span class="badge bg-dark me-1"><i class="bi bi-camera-video"></i> Video Calls</span>
+                <span class="badge bg-dark me-1"><i class="bi bi-images"></i> Gallery</span>
+                <span class="badge bg-dark me-1"><i class="bi bi-shield-check"></i> Verified</span>
+              </div>
+              <p class="text-center mb-3">
+                <span class="expiry-badge bg-danger text-white px-3 py-1 rounded-pill">Premium • 30 days</span>
+              </p>
+              <a href="#" class="btn btn-sm btn-outline-danger w-100 fw-bold" onclick="event.stopPropagation();">
+                <i class="bi bi-chat-dots-fill me-1"></i> Message Now
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="col-md-6 col-lg-4 col-xl-3">
+          <div class="card h-100 premium" onclick="openDetailModal(this)"
+               data-title="VIP Exotic Beauty – Green Point"
+               data-desc="International model offering exclusive companionship. Webcam shows, video calls, and private sessions. Fluent in English, French, and Portuguese. R1800/hr."
+               data-contact="WhatsApp: 085 555 4444"
+               data-social="Instagram: @vipexoticgp | OnlyFans: @exoticbeautyct"
+               data-online="Online now"
+               data-services="GFE: Yes | Webcam: Yes | Video Calls: Yes | Sells Pics/Videos: Yes | Extra: International, multilingual, webcam shows"
+               data-gallery="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400,https://images.unsplash.com/photo-1546961329-78bef3044d1d?auto=format&fit=crop&w=400,https://images.unsplash.com/photo-1552374196-1ab2deecdecd?auto=format&fit=crop&w=400">
+            <div class="position-absolute top-0 end-0 m-2" style="z-index: 10;">
+              <span class="badge bg-warning text-dark"><i class="bi bi-star-fill"></i> PREMIUM</span>
+            </div>
+            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="VIP Exotic Beauty">
+            <div class="card-body">
+              <h5 class="card-title">VIP Exotic Beauty – Green Point</h5>
+              <p class="card-text small text-muted mb-3">International model. Webcam & private sessions.</p>
+              <div class="d-flex align-items-center mb-2">
+                <span class="online-dot bg-success"></span>
+                <small class="text-success fw-bold">Online now</small>
+              </div>
+              <div class="mb-3">
+                <span class="badge bg-dark me-1"><i class="bi bi-camera-video"></i> Video Calls</span>
+                <span class="badge bg-dark me-1"><i class="bi bi-images"></i> Gallery</span>
+                <span class="badge bg-dark me-1"><i class="bi bi-shield-check"></i> Verified</span>
+              </div>
+              <p class="text-center mb-3">
+                <span class="expiry-badge bg-danger text-white px-3 py-1 rounded-pill">Premium • 30 days</span>
+              </p>
+              <a href="#" class="btn btn-sm btn-outline-danger w-100 fw-bold" onclick="event.stopPropagation();">
+                <i class="bi bi-chat-dots-fill me-1"></i> Message Now
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="col-md-6 col-lg-4 col-xl-3">
+          <div class="card h-100 premium" onclick="openDetailModal(this)"
+               data-title="Exotic Beauty – City Bowl"
+               data-desc="Exotic experiences, full service. R600+. Outcalls."
+               data-contact="WhatsApp: 088 901 2345"
+               data-social="Instagram: @exoticcitybowl"
+               data-online="Last seen 15 mins ago"
+               data-services="GFE: Yes | Webcam: Yes | Video Calls: Yes | Sells Pics/Videos: Yes | Extra: Exotic, full service"
+               data-gallery="https://images.unsplash.com/photo-1546961329-78bef3044d1d?auto=format&fit=crop&w=400,https://images.unsplash.com/photo-1552374196-1ab2deecdecd?auto=format&fit=crop&w=400,https://images.unsplash.com/photo-1519741497674-8c4d8f3c9d5c?auto=format&fit=crop&w=400">
+            <div class="position-absolute top-0 end-0 m-2" style="z-index: 10;">
+              <span class="badge bg-warning text-dark"><i class="bi bi-star-fill"></i> PREMIUM</span>
+            </div>
+            <img src="https://images.unsplash.com/photo-1546961329-78bef3044d1d?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Exotic Beauty">
+            <div class="card-body">
+              <h5 class="card-title">Exotic Beauty – City Bowl</h5>
+              <p class="card-text small text-muted mb-3">Exotic experiences, full service. R600+. Outcalls.</p>
+              <div class="d-flex align-items-center mb-2">
+                <span class="online-dot bg-warning"></span>
+                <small class="text-warning fw-bold">Last seen 15 mins ago</small>
+              </div>
+              <div class="mb-3">
+                <span class="badge bg-dark me-1"><i class="bi bi-camera-video"></i> Video Calls</span>
+                <span class="badge bg-dark me-1"><i class="bi bi-images"></i> Gallery</span>
+                <span class="badge bg-dark me-1"><i class="bi bi-shield-check"></i> Verified</span>
+              </div>
+              <p class="text-center mb-3">
+                <span class="expiry-badge bg-danger text-white px-3 py-1 rounded-pill">Premium • 30 days</span>
+              </p>
+              <a href="#" class="btn btn-sm btn-outline-danger w-100 fw-bold" onclick="event.stopPropagation();">
+                <i class="bi bi-chat-dots-fill me-1"></i> Message Now
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="col-md-6 col-lg-4 col-xl-3">
+          <div class="card h-100 premium" onclick="openDetailModal(this)"
+               data-title="Sophisticated Lady – Constantia"
+               data-desc="Sophisticated companion for evenings. R700/hr. Incalls."
+               data-contact="WhatsApp: 089 012 3456"
+               data-social="Instagram: @sophisticatedconst | Twitter: @ladycpt"
+               data-online="Online now"
+               data-services="GFE: Yes | Webcam: No | Video Calls: Yes | Sells Pics/Videos: No | Extra: Dinner dates, sophisticated"
+               data-gallery="https://images.unsplash.com/photo-1552374196-1ab2deecdecd?auto=format&fit=crop&w=400,https://images.unsplash.com/photo-1519741497674-8c4d8f3c9d5c?auto=format&fit=crop&w=400,https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400">
+            <div class="position-absolute top-0 end-0 m-2" style="z-index: 10;">
+              <span class="badge bg-warning text-dark"><i class="bi bi-star-fill"></i> PREMIUM</span>
+            </div>
+            <img src="https://images.unsplash.com/photo-1552374196-1ab2deecdecd?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Sophisticated Lady">
+            <div class="card-body">
+              <h5 class="card-title">Sophisticated Lady – Constantia</h5>
+              <p class="card-text small text-muted mb-3">Sophisticated companion for evenings. R700/hr. Incalls.</p>
+              <div class="d-flex align-items-center mb-2">
+                <span class="online-dot bg-success"></span>
+                <small class="text-success fw-bold">Online now</small>
+              </div>
+              <div class="mb-3">
+                <span class="badge bg-dark me-1"><i class="bi bi-camera-video"></i> Video Calls</span>
+                <span class="badge bg-dark me-1"><i class="bi bi-images"></i> Gallery</span>
+                <span class="badge bg-dark me-1"><i class="bi bi-shield-check"></i> Verified</span>
+              </div>
+              <p class="text-center mb-3">
+                <span class="expiry-badge bg-danger text-white px-3 py-1 rounded-pill">Premium • 30 days</span>
+              </p>
+              <a href="#" class="btn btn-sm btn-outline-danger w-100 fw-bold" onclick="event.stopPropagation();">
+                <i class="bi bi-chat-dots-fill me-1"></i> Message Now
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 7 -->
+        <div class="col-md-6 col-lg-4 col-xl-3">
+          <div class="card h-100 premium" onclick="openDetailModal(this)"
+               data-title="Elegant Escort – Rondebosch"
+               data-desc="Intimate massages and more. Incalls only, R500/hr."
+               data-contact="WhatsApp: 086 789 0123"
+               data-social="Twitter: @elegantescortct | Instagram: @elegantronde"
+               data-online="Last seen 30 mins ago"
+               data-services="GFE: Yes | Webcam: Yes | Video Calls: Yes | Sells Pics/Videos: Yes | Extra: Intimate massage, full service"
+               data-gallery="https://images.unsplash.com/photo-1546961329-78bef3044d1d?auto=format&fit=crop&w=400,https://images.unsplash.com/photo-1554151229-14d0188d57c9?auto=format&fit=crop&w=400,https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400">
+            <div class="position-absolute top-0 end-0 m-2" style="z-index: 10;">
+              <span class="badge bg-warning text-dark"><i class="bi bi-star-fill"></i> PREMIUM</span>
+            </div>
+            <img src="https://images.unsplash.com/photo-1546961329-78bef3044d1d?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Elegant Escort">
+            <div class="card-body">
+              <h5 class="card-title">Elegant Escort – Rondebosch</h5>
+              <p class="card-text small text-muted mb-3">Intimate massages and more. Incalls only, R500/hr.</p>
+              <div class="d-flex align-items-center mb-2">
+                <span class="online-dot bg-warning"></span>
+                <small class="text-warning fw-bold">Last seen 30 mins ago</small>
+              </div>
+              <div class="mb-3">
+                <span class="badge bg-dark me-1"><i class="bi bi-camera-video"></i> Video Calls</span>
+                <span class="badge bg-dark me-1"><i class="bi bi-images"></i> Gallery</span>
+                <span class="badge bg-dark me-1"><i class="bi bi-shield-check"></i> Verified</span>
+              </div>
+              <p class="text-center mb-3">
+                <span class="expiry-badge bg-danger text-white px-3 py-1 rounded-pill">Premium • 30 days</span>
+              </p>
+              <a href="#" class="btn btn-sm btn-outline-danger w-100 fw-bold" onclick="event.stopPropagation();">
+                <i class="bi bi-chat-dots-fill me-1"></i> Message Now
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 8 -->
+        <div class="col-md-6 col-lg-4 col-xl-3">
+          <div class="card h-100 premium" onclick="openDetailModal(this)"
+               data-title="Playful Minx – Woodstock"
+               data-desc="Fun, flirty hookups. 20s, adventurous. Free for right guy."
+               data-contact="WhatsApp: 087 890 1234"
+               data-social="Instagram: @playfulminx | Snapchat: minxwood"
+               data-online="Online now"
+               data-services="GFE: Yes | Webcam: Yes | Video Calls: No | Sells Pics/Videos: No | Extra: Flirty, adventurous"
+               data-gallery="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400,https://images.unsplash.com/photo-1552374196-1ab2deecdecd?auto=format&fit=crop&w=400,https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400">
+            <div class="position-absolute top-0 end-0 m-2" style="z-index: 10;">
+              <span class="badge bg-warning text-dark"><i class="bi bi-star-fill"></i> PREMIUM</span>
+            </div>
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Playful Minx">
+            <div class="card-body">
+              <h5 class="card-title">Playful Minx – Woodstock</h5>
+              <p class="card-text small text-muted mb-3">Fun, flirty hookups. 20s, adventurous. Free for right guy.</p>
+              <div class="d-flex align-items-center mb-2">
+                <span class="online-dot bg-success"></span>
+                <small class="text-success fw-bold">Online now</small>
+              </div>
+              <div class="mb-3">
+                <span class="badge bg-dark me-1"><i class="bi bi-camera-video"></i> Video Calls</span>
+                <span class="badge bg-dark me-1"><i class="bi bi-images"></i> Gallery</span>
+                <span class="badge bg-dark me-1"><i class="bi bi-shield-check"></i> Verified</span>
+              </div>
+              <p class="text-center mb-3">
+                <span class="expiry-badge bg-danger text-white px-3 py-1 rounded-pill">Premium • 30 days</span>
+              </p>
+              <a href="#" class="btn btn-sm btn-outline-danger w-100 fw-bold" onclick="event.stopPropagation();">
+                <i class="bi bi-chat-dots-fill me-1"></i> Message Now
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ <!-- Categories with Free Ads -->
+<section class="py-5 bg-black" style="padding-top: 100px;">
+  <div class="container">
+
+    <!-- Men Looking for Women -->
+    <h2 class="text-danger mb-5 fw-bold text-center" id="mw4m">Men Looking for Women</h2>
+    <div class="row g-4 mb-5">
+      <!-- Free Ad 1 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Tall & Fit Guy – City Bowl"
+             data-desc="Looking for fun, no-strings woman 25–40. Discreet, respectful. Outcalls preferred. Interests: hiking, wine tasting, beach walks."
+             data-contact="WhatsApp: 071 234 5678"
+             data-social="Instagram: @tallfitct"
+             data-online="Online now"
+             data-services="Casual meets, roleplay"
+             data-expiry="2">
+          <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Tall & Fit Guy – City Bowl</h5>
+            <p class="card-text small text-muted mb-3">Looking for fun, no-strings woman 25–40.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-success"></span>
+              <small class="text-success fw-bold">Online now</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 2 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Ad 2 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Handsome Professional – Sea Point"
+             data-desc="Seeking adventurous lady for discreet meets. Safe & respectful. Interests: travel, fine dining, movies."
+             data-contact="WhatsApp: 082 345 6789"
+             data-social="Twitter: @handsomepro"
+             data-online="Last seen 30 mins ago"
+             data-services="Discreet meets, massage"
+             data-expiry="3">
+          <img src="https://images.unsplash.com/photo-1556155092-490a1ba16284?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Handsome Professional – Sea Point</h5>
+            <p class="card-text small text-muted mb-3">Seeking adventurous lady for discreet meets.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-warning"></span>
+              <small class="text-warning fw-bold">Last seen 30 mins ago</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 3 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Ad 3 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Easy Going Guy – Rondebosch"
+             data-desc="Looking for casual fun with open-minded woman. No drama, just good times. Interests: music, gaming, chill nights."
+             data-contact="WhatsApp: 083 456 7890"
+             data-social="Instagram: @easygoingct"
+             data-online="Online now"
+             data-services="Casual fun, movie nights"
+             data-expiry="5">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Easy Going Guy – Rondebosch</h5>
+            <p class="card-text small text-muted mb-3">Looking for casual fun with open-minded woman.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-success"></span>
+              <small class="text-success fw-bold">Online now</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 5 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Ad 4 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Adventurous 30s Guy – Camps Bay"
+             data-desc="Fit guy seeking spontaneous meets with confident women. Discretion assured. Interests: surfing, parties, outdoor adventures."
+             data-contact="WhatsApp: 084 567 8901"
+             data-social="Instagram: @adventureguyct"
+             data-online="Last seen 10 mins ago"
+             data-services="Spontaneous meets, adventure dates"
+             data-expiry="4">
+          <img src="https://images.unsplash.com/photo-1564564244660-5d73c057f2d8?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Adventurous 30s Guy – Camps Bay</h5>
+            <p class="card-text small text-muted mb-3">Fit guy seeking spontaneous meets with confident women.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-warning"></span>
+              <small class="text-warning fw-bold">Last seen 10 mins ago</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 4 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Women Looking for Men -->
+    <h2 class="text-danger mb-5 fw-bold text-center" id="wf4m">Women Looking for Men</h2>
+    <div class="row g-4 mb-5">
+      <!-- Free Ad 1 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Curvy Queen – Bellville"
+             data-desc="Pampering sessions, no rush. Clean & safe. R400–R800. WhatsApp only. Interests: spa days, shopping, romance."
+             data-contact="WhatsApp: 085 678 9012"
+             data-social="Instagram: @curvyqueenct"
+             data-online="Online now"
+             data-services="Pampering, full service"
+             data-expiry="1">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Curvy Queen – Bellville</h5>
+            <p class="card-text small text-muted mb-3">Pampering sessions, no rush. R400–R800.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-success"></span>
+              <small class="text-success fw-bold">Online now</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 1 day</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Ad 2 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Sensual Beauty – Rondebosch"
+             data-desc="Intimate massages and more. Incalls only, R500/hr. Interests: yoga, music, dancing."
+             data-contact="WhatsApp: 086 789 0123"
+             data-social="Twitter: @sensualbeautyct"
+             data-online="Last seen 30 mins ago"
+             data-services="Intimate massages, GFE"
+             data-expiry="2">
+          <img src="https://images.unsplash.com/photo-1546961329-78bef3044d1d?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Sensual Beauty – Rondebosch</h5>
+            <p class="card-text small text-muted mb-3">Intimate massages and more. R500/hr.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-warning"></span>
+              <small class="text-warning fw-bold">Last seen 30 mins ago</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 2 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Ad 3 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Playful 20s Babe – Woodstock"
+             data-desc="Fun & flirty meets. Adventurous spirit. No strings attached. Interests: parties, travel, nightlife."
+             data-contact="WhatsApp: 087 890 1234"
+             data-social="Snapchat: playfulbabe_ct"
+             data-online="Online now"
+             data-services="Casual hookups, fun dates"
+             data-expiry="3">
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Playful 20s Babe – Woodstock</h5>
+            <p class="card-text small text-muted mb-3">Fun & flirty meets. Adventurous spirit.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-success"></span>
+              <small class="text-success fw-bold">Online now</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 3 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Ad 4 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Elegant Lady – Constantia"
+             data-desc="Sophisticated meets with mature men. Dinner dates & more. Discreet & classy."
+             data-contact="WhatsApp: 088 901 2345"
+             data-social="Instagram: @elegantladyct"
+             data-online="Last seen 1 hour ago"
+             data-services="Dinner dates, companionship"
+             data-expiry="4">
+          <img src="https://images.unsplash.com/photo-1552374196-1ab2deecdecd?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Elegant Lady – Constantia</h5>
+            <p class="card-text small text-muted mb-3">Sophisticated meets with mature men.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-warning"></span>
+              <small class="text-warning fw-bold">Last seen 1 hour ago</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 4 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Men Looking for Men -->
+    <h2 class="text-danger mb-5 fw-bold text-center" id="mw4mw">Men Looking for Men</h2>
+    <div class="row g-4 mb-5">
+      <!-- Free Ad 1 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Fit Gym Buddy – Observatory"
+             data-desc="Looking for discreet gym buddy meets. 30s, muscular. Safe play only. Interests: fitness, sports."
+             data-contact="WhatsApp: 089 012 3456"
+             data-social="Instagram: @gymbuddyct"
+             data-online="Online now"
+             data-services="Discreet meets, massage"
+             data-expiry="2">
+          <img src="https://images.unsplash.com/photo-1552374196-1ab2deecdecd?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Fit Gym Buddy – Observatory</h5>
+            <p class="card-text small text-muted mb-3">Looking for discreet gym buddy meets. 30s, muscular.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-success"></span>
+              <small class="text-success fw-bold">Online now</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 2 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Ad 2 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Professional Top – Gardens"
+             data-desc="Experienced, clean, looking for bottom guys 25–45. Hotel meets. Discreet & safe."
+             data-contact="WhatsApp: 070 123 4567"
+             data-social="Grindr: ProfTopCT"
+             data-online="Last seen 20 mins ago"
+             data-services="Top, safe play"
+             data-expiry="3">
+          <img src="https://images.unsplash.com/photo-1564564244660-5d73c057f2d8?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Professional Top – Gardens</h5>
+            <p class="card-text small text-muted mb-3">Experienced, clean, looking for bottom guys 25–45.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-warning"></span>
+              <small class="text-warning fw-bold">Last seen 20 mins ago</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 3 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Ad 3 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Chill Bottom – Woodstock"
+             data-desc="Looking for top guys for fun times. 28, slim, clean. No rush. Interests: gaming, Netflix."
+             data-contact="WhatsApp: 071 890 1234"
+             data-social="Grindr: ChillBottomCT"
+             data-online="Online now"
+             data-services="Bottom, casual fun"
+             data-expiry="4">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Chill Bottom – Woodstock</h5>
+            <p class="card-text small text-muted mb-3">Looking for top guys for fun times. 28, slim, clean.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-success"></span>
+              <small class="text-success fw-bold">Online now</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 4 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Ad 4 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Bi Curious Guy – Observatory"
+             data-desc="Exploring, looking for similar guys. Discreet, first timers welcome. Safe only."
+             data-contact="WhatsApp: 072 901 2345"
+             data-social="Grindr: BiCuriousCT"
+             data-online="Last seen 1 hour ago"
+             data-services="Exploration, safe play"
+             data-expiry="5">
+          <img src="https://images.unsplash.com/photo-1488161628817-157390cc3020?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Bi Curious Guy – Observatory</h5>
+            <p class="card-text small text-muted mb-3">Exploring, looking for similar guys. Discreet.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-warning"></span>
+              <small class="text-warning fw-bold">Last seen 1 hour ago</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 5 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Women Looking for Women -->
+    <h2 class="text-danger mb-5 fw-bold text-center" id="wf4w">Women Looking for Women</h2>
+    <div class="row g-4 mb-5">
+      <!-- Free Ad 1 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Sensual Bi Babe – Gardens"
+             data-desc="Looking for fun with women. 28, curvy, open-minded. Interests: wine nights, massages."
+             data-contact="WhatsApp: 073 012 3456"
+             data-social="Instagram: @sensualbibabe"
+             data-online="Online now"
+             data-services="Lesbian meets, sensual play"
+             data-expiry="2">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Sensual Bi Babe – Gardens</h5>
+            <p class="card-text small text-muted mb-3">Looking for fun with women. 28, curvy, open-minded.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-success"></span>
+              <small class="text-success fw-bold">Online now</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 2 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Ad 2 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Playful Lesbian – Woodstock"
+             data-desc="Flirty meets with girls. 25, adventurous. Interests: parties, dancing, beach days."
+             data-contact="WhatsApp: 074 123 4567"
+             data-social="Instagram: @playfullesbianct"
+             data-online="Last seen 45 mins ago"
+             data-services="Casual hookups, fun dates"
+             data-expiry="3">
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Playful Lesbian – Woodstock</h5>
+            <p class="card-text small text-muted mb-3">Flirty meets with girls. 25, adventurous.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-warning"></span>
+              <small class="text-warning fw-bold">Last seen 45 mins ago</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 3 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Ad 3 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Elegant Bi Woman – Constantia"
+             data-desc="Seeking sensual connection with women. Classy, discreet. Interests: art, wine, travel."
+             data-contact="WhatsApp: 075 234 5678"
+             data-social="Instagram: @elegantbiwoman"
+             data-online="Online now"
+             data-services="Sensual meets, companionship"
+             data-expiry="4">
+          <img src="https://images.unsplash.com/photo-1552374196-1ab2deecdecd?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Elegant Bi Woman – Constantia</h5>
+            <p class="card-text small text-muted mb-3">Seeking sensual connection with women. Classy, discreet.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-success"></span>
+              <small class="text-success fw-bold">Online now</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 4 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Ad 4 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Adventurous Femme – Sea Point"
+             data-desc="Looking for fun with other women. 32, fit, open. Interests: hiking, nightlife, yoga."
+             data-contact="WhatsApp: 076 345 6789"
+             data-social="Instagram: @adventfemme_ct"
+             data-online="Last seen 15 mins ago"
+             data-services="Casual fun, adventure dates"
+             data-expiry="5">
+          <img src="https://images.unsplash.com/photo-1519741497674-8c4d8f3c9d5c?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Adventurous Femme – Sea Point</h5>
+            <p class="card-text small text-muted mb-3">Looking for fun with other women. 32, fit, open.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-warning"></span>
+              <small class="text-warning fw-bold">Last seen 15 mins ago</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 5 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Couples Looking for... -->
+    <h2 class="text-danger mb-5 fw-bold text-center" id="couples">Couples Looking for...</h2>
+    <div class="row g-4 mb-5">
+      <!-- Free Ad 1 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Open Couple – Camps Bay"
+             data-desc="Bi couple looking for fun with single women or couples. Discreet, safe play. Interests: travel, parties."
+             data-contact="WhatsApp: 077 456 7890"
+             data-social="Instagram: @opencouplect"
+             data-online="Online now"
+             data-services="Swinging, threesomes"
+             data-expiry="2">
+          <img src="https://images.unsplash.com/photo-1519741497674-8c4d8f3c9d5c?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Open Couple – Camps Bay</h5>
+            <p class="card-text small text-muted mb-3">Bi couple looking for fun with single women or couples.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-success"></span>
+              <small class="text-success fw-bold">Online now</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 2 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Ad 2 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Swing Couple – Constantia"
+             data-desc="Experienced couple seeking other couples or singles. No drama. Interests: wine, dinners, hotel meets."
+             data-contact="WhatsApp: 078 567 8901"
+             data-social="Instagram: @swingcouplect"
+             data-online="Last seen 1 hour ago"
+             data-services="Swinging, group play"
+             data-expiry="3">
+          <img src="https://images.unsplash.com/photo-1552374196-1ab2deecdecd?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Swing Couple – Constantia</h5>
+            <p class="card-text small text-muted mb-3">Experienced couple seeking other couples or singles.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-warning"></span>
+              <small class="text-warning fw-bold">Last seen 1 hour ago</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 3 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Ad 3 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Bi Curious Couple – Gardens"
+             data-desc="New to scene, looking for gentle introduction. Prefer women or couples. Discreet only."
+             data-contact="WhatsApp: 079 678 9012"
+             data-social="Instagram: @bicuriouscouple"
+             data-online="Online now"
+             data-services="Exploration, soft swap"
+             data-expiry="4">
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Bi Curious Couple – Gardens</h5>
+            <p class="card-text small text-muted mb-3">New to scene, looking for gentle introduction.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-success"></span>
+              <small class="text-success fw-bold">Online now</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 4 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Ad 4 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Party Couple – Woodstock"
+             data-desc="Fun-loving couple seeking similar for parties & play. Open-minded. Interests: nightlife, festivals."
+             data-contact="WhatsApp: 080 789 0123"
+             data-social="Instagram: @partycouplect"
+             data-online="Last seen 45 mins ago"
+             data-services="Group play, parties"
+             data-expiry="5">
+          <img src="https://images.unsplash.com/photo-1546961329-78bef3044d1d?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Party Couple – Woodstock</h5>
+            <p class="card-text small text-muted mb-3">Fun-loving couple seeking similar for parties & play.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-warning"></span>
+              <small class="text-warning fw-bold">Last seen 45 mins ago</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 5 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LGBTQ+ -->
+    <h2 class="text-danger mb-5 fw-bold text-center" id="lgbtq">LGBTQ+</h2>
+    <div class="row g-4 mb-5">
+      <!-- Free Ad 1 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Queer Non-Binary – Observatory"
+             data-desc="Looking for open-minded connections. Genderfluid, 27. Interests: art, music, activism."
+             data-contact="WhatsApp: 081 890 1234"
+             data-social="Instagram: @queernonbinaryct"
+             data-online="Online now"
+             data-services="Exploration, friendship+"
+             data-expiry="2">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Queer Non-Binary – Observatory</h5>
+            <p class="card-text small text-muted mb-3">Looking for open-minded connections. Genderfluid, 27.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-success"></span>
+              <small class="text-success fw-bold">Online now</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 2 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Ad 2 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Gay Trans Man – Woodstock"
+             data-desc="Looking for respectful dates or fun. 29, post-op. Interests: gaming, hiking, coffee dates."
+             data-contact="WhatsApp: 082 901 2345"
+             data-social="Instagram: @gaytransmanct"
+             data-online="Last seen 1 hour ago"
+             data-services="Dates, casual meets"
+             data-expiry="3">
+          <img src="https://images.unsplash.com/photo-1488161628817-157390cc3020?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Gay Trans Man – Woodstock</h5>
+            <p class="card-text small text-muted mb-3">Looking for respectful dates or fun. 29, post-op.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-warning"></span>
+              <small class="text-warning fw-bold">Last seen 1 hour ago</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 3 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Ad 3 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Lesbian Couple – Gardens"
+             data-desc="Looking for third or fun with other women. 30s, loving & open. Interests: travel, food, music."
+             data-contact="WhatsApp: 083 012 3456"
+             data-social="Instagram: @lesbiancouplect"
+             data-online="Online now"
+             data-services="Threesomes, group fun"
+             data-expiry="4">
+          <img src="https://images.unsplash.com/photo-1552374196-1ab2deecdecd?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Lesbian Couple – Gardens</h5>
+            <p class="card-text small text-muted mb-3">Looking for third or fun with other women. 30s, loving & open.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-success"></span>
+              <small class="text-success fw-bold">Online now</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 4 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Ad 4 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Pansexual Explorer – Sea Point"
+             data-desc="Open to all genders. Looking for fun connections. 26, creative. Interests: art, festivals, deep talks."
+             data-contact="WhatsApp: 084 123 4567"
+             data-social="Instagram: @panexplorerct"
+             data-online="Last seen 20 mins ago"
+             data-services="Exploration, casual fun"
+             data-expiry="5">
+          <img src="https://images.unsplash.com/photo-1564564244660-5d73c057f2d8?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Pansexual Explorer – Sea Point</h5>
+            <p class="card-text small text-muted mb-3">Open to all genders. Looking for fun connections. 26, creative.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-warning"></span>
+              <small class="text-warning fw-bold">Last seen 20 mins ago</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 5 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Casual Hookups -->
+    <h2 class="text-danger mb-5 fw-bold text-center" id="hookups">Casual Hookups</h2>
+    <div class="row g-4 mb-5">
+      <!-- Free Ad 1 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="No Strings Guy – Observatory"
+             data-desc="Quick, discreet hookups. 32, clean, safe. No drama. WhatsApp only."
+             data-contact="WhatsApp: 085 234 5678"
+             data-social="None"
+             data-online="Online now"
+             data-services="Quick hookups"
+             data-expiry="1">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">No Strings Guy – Observatory</h5>
+            <p class="card-text small text-muted mb-3">Quick, discreet hookups. 32, clean, safe.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-success"></span>
+              <small class="text-success fw-bold">Online now</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 1 day</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Ad 2 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Spontaneous Girl – Woodstock"
+             data-desc="Looking for same-night fun. 25, adventurous. Hotel or your place."
+             data-contact="WhatsApp: 086 345 6789"
+             data-social="Snapchat: spontgirl_ct"
+             data-online="Last seen 15 mins ago"
+             data-services="Same-night hookups"
+             data-expiry="2">
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Spontaneous Girl – Woodstock</h5>
+            <p class="card-text small text-muted mb-3">Looking for same-night fun. 25, adventurous.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-warning"></span>
+              <small class="text-warning fw-bold">Last seen 15 mins ago</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 2 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Ad 3 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Late Night Buddy – Sea Point"
+             data-desc="Available late nights for quick meets. 29, fit. Discreet & clean."
+             data-contact="WhatsApp: 087 456 7890"
+             data-social="None"
+             data-online="Online now"
+             data-services="Late night hookups"
+             data-expiry="3">
+          <img src="https://images.unsplash.com/photo-1564564244660-5d73c057f2d8?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Late Night Buddy – Sea Point</h5>
+            <p class="card-text small text-muted mb-3">Available late nights for quick meets. 29, fit.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-success"></span>
+              <small class="text-success fw-bold">Online now</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 3 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Ad 4 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Weekend Fun Girl – Constantia"
+             data-desc="Available weekends for casual play. 26, open-minded. No strings."
+             data-contact="WhatsApp: 088 567 8901"
+             data-social="Instagram: @weekendfungirl"
+             data-online="Last seen 40 mins ago"
+             data-services="Weekend hookups"
+             data-expiry="4">
+          <img src="https://images.unsplash.com/photo-1552374196-1ab2deecdecd?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Weekend Fun Girl – Constantia</h5>
+            <p class="card-text small text-muted mb-3">Available weekends for casual play. 26, open-minded.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-warning"></span>
+              <small class="text-warning fw-bold">Last seen 40 mins ago</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 4 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Services & Escorts -->
+    <h2 class="text-danger mb-5 fw-bold text-center" id="services">Services & Escorts</h2>
+    <div class="row g-4 mb-5">
+      <!-- Free Ad 1 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Luxury Massage – Waterfront"
+             data-desc="Relaxing full body massage. R600/hr. Incalls & outcalls. Discreet location."
+             data-contact="WhatsApp: 089 678 9012"
+             data-social="Instagram: @luxurymassagect"
+             data-online="Online now"
+             data-services="Massage, relaxation"
+             data-expiry="2">
+          <img src="https://images.unsplash.com/photo-1519741497674-8c4d8f3c9d5c?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Luxury Massage – Waterfront</h5>
+            <p class="card-text small text-muted mb-3">Relaxing full body massage. R600/hr.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-success"></span>
+              <small class="text-success fw-bold">Online now</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 2 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Ad 2 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Elite Companion – Camps Bay"
+             data-desc="High-class escort for discerning clients. R1500/hr. Discreet & professional."
+             data-contact="WhatsApp: 090 789 0123"
+             data-social="Instagram: @elitecompanionct"
+             data-online="Last seen 20 mins ago"
+             data-services="Companionship, GFE"
+             data-expiry="3">
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Elite Companion – Camps Bay</h5>
+            <p class="card-text small text-muted mb-3">High-class escort for discerning clients. R1500/hr.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-warning"></span>
+              <small class="text-warning fw-bold">Last seen 20 mins ago</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 3 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Ad 3 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Tantric Specialist – Constantia"
+             data-desc="Tantric & sensual massage. R800/hr. Deep relaxation & energy work."
+             data-contact="WhatsApp: 091 890 1234"
+             data-social="Instagram: @tantricspecialist"
+             data-online="Online now"
+             data-services="Tantric massage"
+             data-expiry="4">
+          <img src="https://images.unsplash.com/photo-1552374196-1ab2deecdecd?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Tantric Specialist – Constantia</h5>
+            <p class="card-text small text-muted mb-3">Tantric & sensual massage. R800/hr.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-success"></span>
+              <small class="text-success fw-bold">Online now</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 4 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Ad 4 -->
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 free-ad" onclick="openDetailModal(this)"
+             data-title="Exotic Dancer – Green Point"
+             data-desc="Private shows & lap dances. R1000/session. Discreet venue."
+             data-contact="WhatsApp: 092 901 2345"
+             data-social="Instagram: @exoticdancerct"
+             data-online="Last seen 10 mins ago"
+             data-services="Private shows, lap dances"
+             data-expiry="5">
+          <img src="https://images.unsplash.com/photo-1546961329-78bef3044d1d?auto=format&fit=crop&w=400&h=250" class="card-img-top" alt="Ad">
+          <div class="card-body">
+            <h5 class="card-title">Exotic Dancer – Green Point</h5>
+            <p class="card-text small text-muted mb-3">Private shows & lap dances. R1000/session.</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-warning"></span>
+              <small class="text-warning fw-bold">Last seen 10 mins ago</small>
+            </div>
+            <p class="text-muted small mb-2">Expires in 5 days</p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100" onclick="event.stopPropagation();">Message</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+  <!-- Only Modal with carousel only images-->
+
+  <!-- Modal -->
+  <div class="modal fade" id="adDetailModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content bg-dark text-light border border-danger">
+        <div class="modal-header border-0">
+          <h5 class="modal-title text-danger" id="adDetailTitle">Ad Details</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-4">
+            <div class="col-md-5">
+              <img id="adDetailMainImage" src="" class="img-fluid rounded shadow mb-3" alt="Teaser">
+              <div id="adGalleryCarousel" class="carousel slide mb-3 d-none" data-bs-ride="carousel">
+                <div class="carousel-inner" id="adGalleryInner"></div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#adGalleryCarousel" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#adGalleryCarousel" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            </div>
+            <div class="col-md-7">
+              <h4 id="adDetailVendorName" class="mb-2"></h4>
+              <p id="adDetailStatus" class="mb-3 small fw-bold"></p>
+              <p id="adDetailDescription" class="mb-4"></p>
+              <p><strong>Services:</strong> <span id="adDetailServices"></span></p>
+              <p><strong>Contact:</strong> <span id="adDetailContact"></span></p>
+              <p><strong>Social Links:</strong> <span id="adDetailSocial"></span></p>
+              <hr class="my-4 border-secondary">
+              <h6 class="mb-3">Internal Chat</h6>
+              <textarea class="form-control bg-secondary border-0 text-light mb-3" rows="4" placeholder="Type your message here..."></textarea>
+              <button class="btn btn-danger w-100">Send Message (Mock)</button>
+              <p class="text-muted small mt-3">Private & moderated chat — keep it respectful.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<!-- ================================================ -->
+<!-- PASTE IT RIGHT BEFORE: <script src="js/auth.js"></script> -->
+<!-- ================================================ -->
+
+<!-- Signup Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content bg-dark text-light border-danger">
+      <div class="modal-header border-danger">
+        <h5 class="modal-title text-danger">
+          <i class="bi bi-shield-lock-fill me-2"></i>Create Your Private Account
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <div class="alert alert-info border-info bg-transparent mb-4">
+          <h6 class="fw-bold mb-2"><i class="bi bi-incognito me-2"></i>100% Anonymous Signup</h6>
+          <ul class="small mb-0 ps-3">
+            <li>No email required - just pick a username</li>
+            <li>No personal info stored</li>
+            <li>Delete your account anytime, instantly</li>
+          </ul>
+        </div>
+        
+        <div class="mb-4">
+          <h6 class="text-warning mb-3">Choose Account Type:</h6>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="account-type-card p-4 rounded border border-secondary cursor-pointer" onclick="selectAccountType('free')" id="freeAccountCard">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                  <h5 class="text-success mb-0"><i class="bi bi-person-circle me-2"></i>Free User</h5>
+                  <span class="badge bg-success">R0/month</span>
+                </div>
+                <ul class="small mb-0 ps-3">
+                  <li>Post unlimited free ads (3-day expiry)</li>
+                  <li>Browse all listings</li>
+                  <li>Send/receive messages</li>
+                </ul>
+                <div class="form-check mt-3">
+                  <input class="form-check-input" type="radio" name="accountType" id="freeAccount" value="free" checked>
+                  <label class="form-check-label fw-bold" for="freeAccount">Select Free Account</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="account-type-card p-4 rounded border border-warning cursor-pointer" onclick="selectAccountType('vendor')" id="vendorAccountCard">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                  <h5 class="text-warning mb-0"><i class="bi bi-star-fill me-2"></i>Vendor Premium</h5>
+                  <span class="badge bg-warning text-dark">R299/month</span>
+                </div>
+                <ul class="small mb-0 ps-3">
+                  <li>Featured ads (30-day expiry)</li>
+                  <li>Priority in search results</li>
+                  <li>Photo galleries (up to 10 photos)</li>
+                </ul>
+                <div class="form-check mt-3">
+                  <input class="form-check-input" type="radio" name="accountType" id="vendorAccount" value="vendor">
+                  <label class="form-check-label fw-bold" for="vendorAccount">Select Vendor Account</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <form id="signupForm">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Username <span class="text-danger">*</span></label>
+              <input type="text" class="form-control bg-dark border-secondary text-light" id="username" placeholder="e.g., SexyCapeTown25" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Password <span class="text-danger">*</span></label>
+              <div class="input-group">
+                <input type="password" class="form-control bg-dark border-secondary text-light" id="password" placeholder="Min 8 characters" required>
+                <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('password')"><i class="bi bi-eye"></i></button>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Age <span class="text-danger">*</span></label>
+              <select class="form-select bg-dark border-secondary text-light" id="age" required>
+                <option value="">Select your age</option>
+                <option value="18-24">18-24</option>
+                <option value="25-34">25-34</option>
+                <option value="35-44">35-44</option>
+                <option value="45-54">45-54</option>
+                <option value="55+">55+</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Location <span class="text-muted">(Optional)</span></label>
+              <select class="form-select bg-dark border-secondary text-light" id="location">
+                <option value="">Select area</option>
+                <option value="City Bowl">City Bowl</option>
+                <option value="Sea Point">Sea Point</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Email <span class="text-muted">(Optional)</span></label>
+              <input type="email" class="form-control bg-dark border-secondary text-light" id="email" placeholder="your@email.com (optional)">
+            </div>
+            <div id="vendorFields" class="d-none">
+              <div class="col-12"><hr class="border-warning my-4"></div>
+              <div class="col-md-6">
+                <label class="form-label">Business Name</label>
+                <input type="text" class="form-control bg-dark border-secondary text-light" id="businessName">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">WhatsApp Number</label>
+                <input type="tel" class="form-control bg-dark border-secondary text-light" id="whatsapp">
+              </div>
+              <div class="col-12">
+                <label class="form-label">Service Description</label>
+                <textarea class="form-control bg-dark border-secondary text-light" id="serviceDesc" rows="3"></textarea>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="terms" required>
+                <label class="form-check-label small" for="terms">I confirm I am 18+ and agree to the Terms</label>
+              </div>
+            </div>
+          </div>
+          <div class="d-grid gap-2 mt-4">
+            <button type="submit" class="btn btn-danger btn-lg fw-bold" id="signupBtn">
+              <i class="bi bi-check-circle me-2"></i>Create My Private Account
+            </button>
+            <p class="text-center small text-muted mb-0">
+              Already have an account? 
+              <a href="#" class="text-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#loginModal">Login here</a>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-dark text-light border-danger">
+      <div class="modal-header border-danger">
+        <h5 class="modal-title text-danger"><i class="bi bi-box-arrow-in-right me-2"></i>Login to Your Account</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <form id="loginForm">
+          <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input type="text" class="form-control bg-dark border-secondary text-light" id="loginUsername" placeholder="Your username" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <div class="input-group">
+              <input type="password" class="form-control bg-dark border-secondary text-light" id="loginPassword" placeholder="Your password" required>
+              <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('loginPassword')"><i class="bi bi-eye"></i></button>
+            </div>
+          </div>
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="rememberMe">
+            <label class="form-check-label small" for="rememberMe">Remember me</label>
+          </div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-danger btn-lg fw-bold"><i class="bi bi-box-arrow-in-right me-2"></i>Login Securely</button>
+          </div>
+          <p class="text-center small text-muted mt-3 mb-0">
+            Don't have an account? 
+            <a href="#" class="text-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#signupModal">Sign up now</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================ -->
+<!-- END OF SECTION TO COPY -->
+<!-- ================================================ -->
+
+<!-- Bootstrap JS (if not already included) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Shared Authentication Script -->
+<script src="js/auth.js"></script>
+
+<script>
+  // ============================================
+  // INDEX SCRIPT - COMPLETE WITH ALL FIXES
+  // ============================================
+  const API = 'http://127.0.0.1:5000';
+  
+  // Load all active ads
+  async function loadLiveAds() {
+    try {
+      console.log('🔄 Loading ads from:', `${API}/api/public_ads`);
+      
+      const res = await fetch(`${API}/api/public_ads`);
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
+      }
+      
+      const data = await res.json();
+      console.log('📡 Loaded ads:', data.ads.length);
+      
+      if (!data.ads || data.ads.length === 0) {
+        console.log('❌ No ads found');
+        return;
+      }
+      
+      // Separate premium and free ads
+      const premiumAds = data.ads.filter(ad => ad.is_premium === 1);
+      const freeAds = data.ads.filter(ad => ad.is_premium === 0);
+      
+      console.log('💎 Premium ads:', premiumAds.length);
+      console.log('🆓 Free ads:', freeAds.length);
+      
+      // Load premium ads - REPLACE fake ads
+      if (premiumAds.length > 0) {
+        const premiumContainer = document.getElementById('premiumAds');
+        if (premiumContainer) {
+          // REPLACE all content (removes fake ads)
+          premiumContainer.innerHTML = premiumAds.map(ad => createLiveAdCard(ad)).join('');
+          console.log('✅ Premium ads loaded, fake ads removed');
+        }
+      }
+      
+      // Load free ads - ADD to existing sections
+      freeAds.forEach(ad => {
+        // Find the section based on category
+        let section;
+        
+        switch(ad.category) {
+          case 'mw4m':
+            section = document.querySelector('#mw4m').nextElementSibling;
+            break;
+          case 'wf4m':
+            section = document.querySelector('#wf4m').nextElementSibling;
+            break;
+          case 'mw4mw':
+            section = document.querySelector('#mw4mw').nextElementSibling;
+            break;
+          case 'wf4w':
+            section = document.querySelector('#wf4w').nextElementSibling;
+            break;
+          case 'couples':
+            section = document.querySelector('#couples').nextElementSibling;
+            break;
+          case 'lgbtq':
+            section = document.querySelector('#lgbtq').nextElementSibling;
+            break;
+          case 'hookups':
+            section = document.querySelector('#hookups').nextElementSibling;
+            break;
+          case 'services':
+            section = document.querySelector('#services').nextElementSibling;
+            break;
+        }
+        
+        if (section && section.classList.contains('row')) {
+          section.innerHTML += createLiveAdCard(ad);
+          console.log(`✅ Added ad to ${ad.category} section`);
+        }
+      });
+      
+    } catch (error) {
+      console.error('❌ Error loading ads:', error);
+    }
+  }
+  
+  // ============================================
+  // ✅ FIXED: Create ad card HTML with proper quote escaping
+  // ============================================
+  function createLiveAdCard(ad) {
+    // Parse photos from JSON string
+    let photos = [];
+    try {
+      if (ad.photos) {
+        photos = typeof ad.photos === 'string' ? JSON.parse(ad.photos) : ad.photos;
+      }
+    } catch (e) {
+      console.error('Error parsing photos for ad', ad.id, e);
+    }
+    
+    // Get first photo or use default
+    const mainPhoto = photos && photos.length > 0
+      ? `${API}${photos[0]}`
+      : 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&h=250';
+    
+    console.log(`Ad ${ad.id}: Using photo:`, mainPhoto);
+    
+    // Calculate days remaining
+    const daysLeft = calculateDaysRemaining(ad.expires_at);
+    
+    // Parse services
+    let services = [];
+    try {
+      if (ad.services) {
+        services = typeof ad.services === 'string' ? JSON.parse(ad.services) : ad.services;
+      }
+    } catch (e) {
+      console.error('Error parsing services for ad', ad.id, e);
+    }
+    
+    // Escape HTML
+    const title = escapeHtml(ad.title || 'Untitled');
+    const description = escapeHtml(ad.description || '').substring(0, 100);
+    const location = escapeHtml(ad.location || 'Location not specified');
+    const contact = escapeHtml(ad.contact || '');
+    const rate = escapeHtml(ad.rate || '');
+    
+    // ✅ FIX: Properly escape quotes for data attributes
+    // Use single quotes for data attributes containing JSON
+    const galleryJson = JSON.stringify(photos).replace(/'/g, "\\'");
+    const servicesJson = JSON.stringify(services).replace(/'/g, "\\'");
+    
+    return `
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card h-100 ${ad.is_premium ? 'premium' : 'free-ad'}"
+             onclick="openDetailModal(this)"
+             data-title="${title}"
+             data-desc="${escapeHtml(ad.description || '')}"
+             data-contact="${contact}"
+             data-social=""
+             data-online="Online now"
+             data-services='${servicesJson}'
+             data-gallery='${galleryJson}'
+             data-rate="${rate}"
+             data-location="${location}"
+             data-expires="${ad.expires_at}">
+          ${ad.is_premium ? `
+            <div class="position-absolute top-0 end-0 m-2" style="z-index: 10;">
+              <span class="badge bg-warning text-dark"><i class="bi bi-star-fill"></i> PREMIUM</span>
+            </div>
+          ` : ''}
+          <img src="${mainPhoto}"
+               class="card-img-top"
+               alt="${title}"
+               style="height: 250px; object-fit: cover;"
+               onerror="this.src='https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&h=250'">
+          <div class="card-body">
+            <h5 class="card-title">${title}</h5>
+            <p class="card-text small text-muted mb-3">${description}...</p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="online-dot bg-success"></span>
+              <small class="text-success fw-bold">Online now</small>
+            </div>
+            ${services.length > 0 ? `
+              <div class="mb-3">
+                ${services.slice(0, 3).map(s =>
+                  `<span class="badge bg-dark me-1"><i class="bi bi-star"></i> ${escapeHtml(s)}</span>`
+                ).join('')}
+              </div>
+            ` : ''}
+            <p class="text-center mb-3">
+              <span class="expiry-badge ${ad.is_premium ? 'bg-danger' : 'bg-secondary'} text-white px-3 py-1 rounded-pill">
+                ${ad.is_premium ? 'Premium' : 'Free'} • ${daysLeft} days
+              </span>
+            </p>
+            <a href="#" class="btn btn-sm btn-outline-danger w-100 fw-bold" onclick="event.stopPropagation();">
+              <i class="bi bi-chat-dots-fill me-1"></i> Message Now
+            </a>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  
+  // ============================================
+  // Open detail modal with debugging
+  // ============================================
+  function openDetailModal(cardElement) {
+    console.log('🔍 MODAL DEBUG - Starting...');
+    console.log('📦 Card element:', cardElement);
+    
+    const title = cardElement.dataset.title || cardElement.getAttribute('data-title');
+    const desc = cardElement.dataset.desc || cardElement.getAttribute('data-desc');
+    const contact = cardElement.dataset.contact || cardElement.getAttribute('data-contact');
+    const social = cardElement.dataset.social || cardElement.getAttribute('data-social');
+    const online = cardElement.dataset.online || cardElement.getAttribute('data-online');
+    const servicesStr = cardElement.dataset.services || cardElement.getAttribute('data-services');
+    const galleryStr = cardElement.dataset.gallery || cardElement.getAttribute('data-gallery');
+    const rate = cardElement.dataset.rate || cardElement.getAttribute('data-rate');
+    const location = cardElement.dataset.location || cardElement.getAttribute('data-location');
+    
+    console.log('📸 Gallery string (raw):', galleryStr);
+    console.log('📸 Gallery string type:', typeof galleryStr);
+    
+    let services = [];
+    let gallery = [];
+    
+    // Parse services
+    try {
+      if (servicesStr) {
+        services = typeof servicesStr === 'string' ? JSON.parse(servicesStr) : servicesStr;
+      }
+    } catch (e) {
+      if (servicesStr) {
+        services = servicesStr.split(',').map(s => s.trim());
+      }
+      console.log('⚠️ Services parse failed, using split:', services);
+    }
+    
+    // Parse gallery - WITH DETAILED LOGGING
+    try {
+      if (galleryStr) {
+        console.log('🔄 Attempting to parse gallery...');
+        gallery = typeof galleryStr === 'string' ? JSON.parse(galleryStr) : galleryStr;
+        console.log('✅ Gallery parsed successfully:', gallery);
+      }
+    } catch (e) {
+      console.error('❌ Gallery parse error:', e);
+      console.log('🔄 Trying fallback parsing...');
+      
+      if (galleryStr && galleryStr.includes('http')) {
+        gallery = galleryStr.split(',').map(url => url.trim());
+        console.log('⚠️ Fake ad detected, using split:', gallery);
+      } else {
+        console.error('💥 Could not parse gallery at all!');
+      }
+    }
+    
+    console.log('📸 Final gallery array:', gallery);
+    console.log('📸 Gallery length:', gallery.length);
+    
+    // Set modal content
+    document.getElementById('adDetailTitle').textContent = title;
+    document.getElementById('adDetailVendorName').textContent = title;
+    document.getElementById('adDetailStatus').innerHTML = `<span class="online-dot bg-success"></span> ${online}`;
+    document.getElementById('adDetailDescription').textContent = desc;
+    document.getElementById('adDetailServices').textContent = services.join(', ') || 'Not specified';
+    document.getElementById('adDetailContact').textContent = contact;
+    document.getElementById('adDetailSocial').textContent = social || 'Not provided';
+    
+    // Set main image - WITH DETAILED LOGGING
+    const mainImg = document.getElementById('adDetailMainImage');
+    console.log('🖼️ Main image element:', mainImg);
+    
+    if (gallery.length > 0) {
+      const firstPhoto = gallery[0];
+      console.log('📷 First photo from gallery:', firstPhoto);
+      console.log('📷 First photo type:', typeof firstPhoto);
+      console.log('📷 Starts with http?', firstPhoto.startsWith('http'));
+      console.log('📷 Starts with /?', firstPhoto.startsWith('/'));
+      
+      // Check if URL starts with http (fake ad) or / (real ad)
+      const imageUrl = firstPhoto.startsWith('http') ? firstPhoto : `${API}${firstPhoto}`;
+      console.log('🖼️ FINAL IMAGE URL:', imageUrl);
+      
+      mainImg.src = imageUrl;
+      
+      mainImg.onerror = function() {
+        console.error('❌ IMAGE FAILED TO LOAD:', this.src);
+        console.error('❌ Using fallback image');
+        this.src = 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400';
+      };
+      
+      mainImg.onload = function() {
+        console.log('✅ IMAGE LOADED SUCCESSFULLY:', this.src);
+      };
+    } else {
+      console.log('⚠️ No gallery photos, using default');
+      mainImg.src = 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400';
+    }
+    
+    // Gallery carousel
+    const carouselDiv = document.getElementById('adGalleryCarousel');
+    const carouselInner = document.getElementById('adGalleryInner');
+    
+    if (gallery.length > 1) {
+      console.log('🎠 Building carousel with', gallery.length, 'photos');
+      carouselInner.innerHTML = gallery.map((photo, index) => {
+        const photoUrl = photo.startsWith('http') ? photo : `${API}${photo}`;
+        console.log(`📷 Carousel photo ${index}:`, photoUrl);
+        
+        return `
+          <div class="carousel-item ${index === 0 ? 'active' : ''}">
+            <img src="${photoUrl}"
+                 class="d-block w-100 rounded"
+                 alt="Photo ${index + 1}"
+                 style="max-height: 400px; object-fit: cover;"
+                 onerror="this.src='https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400'">
+          </div>
+        `;
+      }).join('');
+      carouselDiv.classList.remove('d-none');
+    } else {
+      carouselDiv.classList.add('d-none');
+    }
+    
+    // Show modal
+    console.log('✅ Opening modal...');
+    const modal = new bootstrap.Modal(document.getElementById('adDetailModal'));
+    modal.show();
+  }
+  
+  // Helper functions
+  function calculateDaysRemaining(expiresAt) {
+    const now = new Date();
+    const expires = new Date(expiresAt);
+    const diff = expires - now;
+    return Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)));
+  }
+  
+  function escapeHtml(text) {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+  
+  // Load ads when page loads
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('🚀 Page loaded, loading ads...');
+    loadLiveAds();
+    checkAdminStatus();
+  });
+  
+  // Refresh every 60 seconds
+  setInterval(loadLiveAds, 60000);
+  
+  // Search functionality
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput) {
+    searchInput.addEventListener('input', function() {
+      const filter = this.value.toLowerCase().trim();
+      document.querySelectorAll('.card').forEach(card => {
+        const text = card.textContent.toLowerCase();
+        const col = card.closest('.col-md-6,.col-lg-4,.col-xl-3');
+        if (col) {
+          col.style.display = text.includes(filter) || filter === '' ? '' : 'none';
+        }
+      });
+    });
+  }
+  
+  // Check if user is admin and show admin dashboard link
+  async function checkAdminStatus() {
+    try {
+      const res = await fetch(`${API}/api/check_auth`, {
+        credentials: 'include'
+      });
+      
+      if (res.ok) {
+        const data = await res.json();
+        
+        // Get navbar elements
+        const loginBtn = document.getElementById('loginBtn');
+        const signupBtn = document.getElementById('signupBtn');
+        const userDropdown = document.getElementById('userDropdown');
+        const navUsername = document.getElementById('navUsername');
+        const adminDashboardLink = document.getElementById('adminDashboardLink');
+        
+        // Show user dropdown, hide login/signup
+        if (loginBtn) loginBtn.style.display = 'none';
+        if (signupBtn) signupBtn.style.display = 'none';
+        if (userDropdown) userDropdown.style.display = 'block';
+        if (navUsername) navUsername.textContent = data.username;
+        
+        // Show admin dashboard link if admin
+        if (data.role === 'admin' && adminDashboardLink) {
+          adminDashboardLink.style.display = 'block';
+        }
+      }
+    } catch (error) {
+      console.log('Not logged in');
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+
+
+Site functionality is perfect,except for the modals now. All I think now is that our admin account icon or dropdown to have an option for admin dashboard or the navbar to have an admin dashboard so it can be easy to navigate than typing on url to get to admin dashboard. Atleast on admin, its easy to navigate to users and so on.
+
+
+
+
+index.html:1599 🆓 Free ads: 8
+index.html:1671 Ad 15: Using photo: http://127.0.0.1:5000/uploads/1_20260209182152_Onother1led.jpeg
+index.html:1671 Ad 14: Using photo: http://127.0.0.1:5000/uploads/2_20260209181452_574472021_122142462788943335_6215441750056714414_n.jpg
+index.html:1671 Ad 8: Using photo: https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&h=250
+index.html:1671 Ad 3: Using photo: https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&h=250
+index.html:1671 Ad 2: Using photo: https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&h=250
+index.html:1607 ✅ Premium ads loaded, fake ads removed
+index.html:1671 Ad 16: Using photo: http://127.0.0.1:5000/uploads/3_20260209233830_570616940_10243618641780362_801884485051471186_n.jpg
+index.html:1645 ✅ Added ad to lgbtq section
+index.html:1671 Ad 13: Using photo: http://127.0.0.1:5000/uploads/3_20260209181301_515965373_122229892940219653_5349989227687190653_n.jpg
+index.html:1645 ✅ Added ad to mw4m section
+index.html:1671 Ad 12: Using photo: http://127.0.0.1:5000/uploads/5_20260209021021_514272707_122132576630943335_4145897255646117723_n.jpg
+index.html:1645 ✅ Added ad to mw4m section
+index.html:1671 Ad 11: Using photo: http://127.0.0.1:5000/uploads/1_20260209012701_515373809_122229433952219653_1219881942302589549_n.jpg
+index.html:1645 ✅ Added ad to mw4m section
+index.html:1671 Ad 10: Using photo: https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&h=250
+index.html:1645 ✅ Added ad to hookups section
+index.html:1671 Ad 9: Using photo: https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&h=250
+index.html:1645 ✅ Added ad to mw4m section
+index.html:1671 Ad 7: Using photo: https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&h=250
+index.html:1645 ✅ Added ad to wf4w section
+index.html:1671 Ad 1: Using photo: https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&h=250
+index.html:1645 ✅ Added ad to mw4m section
+
+
+
+
+
+
+🔍 SESSION DEBUG for admin_all_ads:
+   Session ID: 1
+   Username: admin
+   Role: admin
+127.0.0.1 - - [09/Feb/2026 23:39:02] "GET /api/admin/all_ads HTTP/1.1" 200 -
+
+🔍 SESSION DEBUG for admin_stats:
+   Session ID: 1
+   Username: admin
+   Role: admin
+127.0.0.1 - - [09/Feb/2026 23:39:02] "GET /api/admin/stats HTTP/1.1" 200 -
+
+🔍 SESSION DEBUG for approve_ad:
+   Session ID: 1
+   Username: admin
+   Role: admin
+127.0.0.1 - - [09/Feb/2026 23:39:06] "POST /api/admin/approve_ad/16 HTTP/1.1" 200 -
+
+🔍 SESSION DEBUG for admin_all_ads:
+   Session ID: 1
+   Username: admin
+   Role: admin
+127.0.0.1 - - [09/Feb/2026 23:39:07] "GET /api/admin/all_ads HTTP/1.1" 200 -
+
+🔍 SESSION DEBUG for admin_stats:
+   Session ID: 1
+   Username: admin
+   Role: admin
+127.0.0.1 - - [09/Feb/2026 23:39:07] "GET /api/admin/stats HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:39:11] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:39:11] "GET /uploads/2_20260209181452_574472021_122142462788943335_6215441750056714414_n.jpg HTTP/1.1" 304 -                                                                
+127.0.0.1 - - [09/Feb/2026 23:39:11] "GET /uploads/1_20260209182152_Onother1led.jpeg HTTP/1.1" 304 -
+127.0.0.1 - - [09/Feb/2026 23:39:11] "GET /uploads/3_20260209181301_515965373_122229892940219653_5349989227687190653_n.jpg HTTP/1.1" 304 -                                                                
+127.0.0.1 - - [09/Feb/2026 23:39:11] "GET /uploads/5_20260209021021_514272707_122132576630943335_4145897255646117723_n.jpg HTTP/1.1" 304 -                                                                
+127.0.0.1 - - [09/Feb/2026 23:39:11] "GET /uploads/3_20260209233830_570616940_10243618641780362_801884485051471186_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:39:11] "GET /uploads/1_20260209012701_515373809_122229433952219653_1219881942302589549_n.jpg HTTP/1.1" 304 -                                                                
+127.0.0.1 - - [09/Feb/2026 23:39:14] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:39:14] "GET /uploads/1_20260209182152_Onother1led.jpeg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:39:14] "GET /uploads/2_20260209181452_574472021_122142462788943335_6215441750056714414_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:39:14] "GET /uploads/3_20260209181301_515965373_122229892940219653_5349989227687190653_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:39:14] "GET /uploads/3_20260209233830_570616940_10243618641780362_801884485051471186_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:39:14] "GET /uploads/1_20260209012701_515373809_122229433952219653_1219881942302589549_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:39:14] "GET /uploads/5_20260209021021_514272707_122132576630943335_4145897255646117723_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:39:15] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:39:15] "GET /uploads/1_20260209182152_Onother1led.jpeg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:39:15] "GET /uploads/2_20260209181452_574472021_122142462788943335_6215441750056714414_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:39:15] "GET /uploads/1_20260209012701_515373809_122229433952219653_1219881942302589549_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:39:15] "GET /uploads/5_20260209021021_514272707_122132576630943335_4145897255646117723_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:39:15] "GET /uploads/3_20260209181301_515965373_122229892940219653_5349989227687190653_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:39:15] "GET /uploads/3_20260209233830_570616940_10243618641780362_801884485051471186_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:40:16] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:41:16] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:42:16] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:42:48] "GET /uploads/2_20260209181452_574472021_122142462788943335_6215441750056714414_n.jpg HTTP/1.1" 304 -                                                                
+127.0.0.1 - - [09/Feb/2026 23:42:48] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [09/Feb/2026 23:43:16] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:44:16] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:44:56] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:44:56] "GET /uploads/2_20260209181452_574472021_122142462788943335_6215441750056714414_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:44:56] "GET /uploads/1_20260209182152_Onother1led.jpeg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:44:56] "GET /uploads/3_20260209181301_515965373_122229892940219653_5349989227687190653_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:44:56] "GET /uploads/5_20260209021021_514272707_122132576630943335_4145897255646117723_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:44:56] "GET /uploads/3_20260209233830_570616940_10243618641780362_801884485051471186_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:44:56] "GET /uploads/1_20260209012701_515373809_122229433952219653_1219881942302589549_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:45:56] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:46:03] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:46:03] "GET /uploads/3_20260209233830_570616940_10243618641780362_801884485051471186_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:46:04] "GET /uploads/1_20260209182152_Onother1led.jpeg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:46:04] "GET /uploads/2_20260209181452_574472021_122142462788943335_6215441750056714414_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:46:04] "GET /uploads/3_20260209181301_515965373_122229892940219653_5349989227687190653_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:46:04] "GET /uploads/1_20260209012701_515373809_122229433952219653_1219881942302589549_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:46:04] "GET /uploads/5_20260209021021_514272707_122132576630943335_4145897255646117723_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:47:04] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:48:04] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:49:04] "GET /api/public_ads HTTP/1.1" 200 -
+^C^C%                                                                                                (venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/Claude]
+└─$ python3 app.py
+✅ Database initialized/updated successfully!
+==================================================
+🚀 HookUpZA Backend Server Starting...
+==================================================
+📍 Server: http://127.0.0.1:5000
+🔐 Database: hookupza.db
+🔧 CORS enabled for: 127.0.0.1:5500, 5501
+==================================================
+ * Serving Flask app 'app'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.                                                                                    
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+ * Restarting with stat
+✅ Database initialized/updated successfully!
+==================================================
+🚀 HookUpZA Backend Server Starting...
+==================================================
+📍 Server: http://127.0.0.1:5000
+🔐 Database: hookupza.db
+🔧 CORS enabled for: 127.0.0.1:5500, 5501
+==================================================
+ * Debugger is active!
+ * Debugger PIN: 730-017-868
+127.0.0.1 - - [09/Feb/2026 23:53:44] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:53:44] "GET /uploads/5_20260209021021_514272707_122132576630943335_4145897255646117723_n.jpg HTTP/1.1" 304 -                                                                
+127.0.0.1 - - [09/Feb/2026 23:53:44] "GET /uploads/3_20260209181301_515965373_122229892940219653_5349989227687190653_n.jpg HTTP/1.1" 304 -                                                                
+127.0.0.1 - - [09/Feb/2026 23:53:44] "GET /uploads/2_20260209181452_574472021_122142462788943335_6215441750056714414_n.jpg HTTP/1.1" 304 -                                                                
+127.0.0.1 - - [09/Feb/2026 23:53:44] "GET /uploads/1_20260209012701_515373809_122229433952219653_1219881942302589549_n.jpg HTTP/1.1" 304 -                                                                
+127.0.0.1 - - [09/Feb/2026 23:53:44] "GET /uploads/1_20260209182152_Onother1led.jpeg HTTP/1.1" 304 -
+127.0.0.1 - - [09/Feb/2026 23:53:44] "GET /uploads/3_20260209233830_570616940_10243618641780362_801884485051471186_n.jpg HTTP/1.1" 304 -                                                                  
+127.0.0.1 - - [09/Feb/2026 23:53:50] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:53:50] "GET /uploads/1_20260209182152_Onother1led.jpeg HTTP/1.1" 304 -
+127.0.0.1 - - [09/Feb/2026 23:53:50] "GET /uploads/3_20260209233830_570616940_10243618641780362_801884485051471186_n.jpg HTTP/1.1" 304 -                                                                  
+127.0.0.1 - - [09/Feb/2026 23:53:50] "GET /uploads/2_20260209181452_574472021_122142462788943335_6215441750056714414_n.jpg HTTP/1.1" 304 -                                                                
+127.0.0.1 - - [09/Feb/2026 23:53:50] "GET /uploads/3_20260209181301_515965373_122229892940219653_5349989227687190653_n.jpg HTTP/1.1" 304 -                                                                
+127.0.0.1 - - [09/Feb/2026 23:53:50] "GET /uploads/1_20260209012701_515373809_122229433952219653_1219881942302589549_n.jpg HTTP/1.1" 304 -                                                                
+127.0.0.1 - - [09/Feb/2026 23:53:50] "GET /uploads/5_20260209021021_514272707_122132576630943335_4145897255646117723_n.jpg HTTP/1.1" 304 -                                                                
+127.0.0.1 - - [09/Feb/2026 23:53:53] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:53:54] "GET /uploads/1_20260209182152_Onother1led.jpeg HTTP/1.1" 304 -
+127.0.0.1 - - [09/Feb/2026 23:53:54] "GET /uploads/3_20260209233830_570616940_10243618641780362_801884485051471186_n.jpg HTTP/1.1" 304 -                                                                  
+127.0.0.1 - - [09/Feb/2026 23:53:54] "GET /uploads/2_20260209181452_574472021_122142462788943335_6215441750056714414_n.jpg HTTP/1.1" 304 -                                                                
+127.0.0.1 - - [09/Feb/2026 23:53:54] "GET /uploads/3_20260209181301_515965373_122229892940219653_5349989227687190653_n.jpg HTTP/1.1" 304 -                                                                
+127.0.0.1 - - [09/Feb/2026 23:53:54] "GET /uploads/1_20260209012701_515373809_122229433952219653_1219881942302589549_n.jpg HTTP/1.1" 304 -                                                                
+127.0.0.1 - - [09/Feb/2026 23:53:54] "GET /uploads/5_20260209021021_514272707_122132576630943335_4145897255646117723_n.jpg HTTP/1.1" 304 -                                                                
+127.0.0.1 - - [09/Feb/2026 23:54:06] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:54:07] "GET /uploads/1_20260209182152_Onother1led.jpeg HTTP/1.1" 304 -
+127.0.0.1 - - [09/Feb/2026 23:54:07] "GET /uploads/2_20260209181452_574472021_122142462788943335_6215441750056714414_n.jpg HTTP/1.1" 304 -                                                                
+127.0.0.1 - - [09/Feb/2026 23:54:07] "GET /uploads/3_20260209233830_570616940_10243618641780362_801884485051471186_n.jpg HTTP/1.1" 304 -                                                                  
+127.0.0.1 - - [09/Feb/2026 23:54:07] "GET /uploads/3_20260209181301_515965373_122229892940219653_5349989227687190653_n.jpg HTTP/1.1" 304 -                                                                
+127.0.0.1 - - [09/Feb/2026 23:54:07] "GET /uploads/5_20260209021021_514272707_122132576630943335_4145897255646117723_n.jpg HTTP/1.1" 304 -                                                                
+127.0.0.1 - - [09/Feb/2026 23:54:07] "GET /uploads/1_20260209012701_515373809_122229433952219653_1219881942302589549_n.jpg HTTP/1.1" 304 -                                                                
+127.0.0.1 - - [09/Feb/2026 23:55:07] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:56:07] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:56:33] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:56:33] "GET /uploads/1_20260209182152_Onother1led.jpeg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:56:33] "GET /uploads/2_20260209181452_574472021_122142462788943335_6215441750056714414_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:56:33] "GET /uploads/3_20260209233830_570616940_10243618641780362_801884485051471186_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:56:33] "GET /uploads/1_20260209012701_515373809_122229433952219653_1219881942302589549_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:56:33] "GET /uploads/3_20260209181301_515965373_122229892940219653_5349989227687190653_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:56:33] "GET /uploads/5_20260209021021_514272707_122132576630943335_4145897255646117723_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:56:36] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:56:36] "GET /uploads/1_20260209182152_Onother1led.jpeg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:56:36] "GET /uploads/2_20260209181452_574472021_122142462788943335_6215441750056714414_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:56:36] "GET /uploads/3_20260209233830_570616940_10243618641780362_801884485051471186_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:56:36] "GET /uploads/3_20260209181301_515965373_122229892940219653_5349989227687190653_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:56:36] "GET /uploads/5_20260209021021_514272707_122132576630943335_4145897255646117723_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:56:36] "GET /uploads/1_20260209012701_515373809_122229433952219653_1219881942302589549_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:56:37] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:56:37] "GET /uploads/1_20260209182152_Onother1led.jpeg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:56:37] "GET /uploads/2_20260209181452_574472021_122142462788943335_6215441750056714414_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:56:37] "GET /uploads/1_20260209012701_515373809_122229433952219653_1219881942302589549_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:56:37] "GET /uploads/3_20260209181301_515965373_122229892940219653_5349989227687190653_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:56:37] "GET /uploads/5_20260209021021_514272707_122132576630943335_4145897255646117723_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:56:37] "GET /uploads/3_20260209233830_570616940_10243618641780362_801884485051471186_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:57:37] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:58:37] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2026 23:59:37] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:00:37] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:01:37] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:02:37] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:04:33] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:05:33] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:06:33] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:07:24] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:07:33] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:07:34] "GET /uploads/1_20260209182152_Onother1led.jpeg HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:07:34] "GET /uploads/2_20260209181452_574472021_122142462788943335_6215441750056714414_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:07:34] "GET /uploads/3_20260209181301_515965373_122229892940219653_5349989227687190653_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:07:34] "GET /uploads/3_20260209233830_570616940_10243618641780362_801884485051471186_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:07:34] "GET /uploads/5_20260209021021_514272707_122132576630943335_4145897255646117723_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:07:34] "GET /uploads/1_20260209012701_515373809_122229433952219653_1219881942302589549_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:08:34] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:09:34] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:10:34] "GET /api/public_ads HTTP/1.1" 200 -
+
+
+
+
+
+
+Ad 12: Using photo: http://127.0.0.1:5000/uploads/5_20260209021021_514272707_122132576630943335_4145897255646117723_n.jpg
+index.html:1645 ✅ Added ad to mw4m section
+index.html:1671 Ad 11: Using photo: http://127.0.0.1:5000/uploads/1_20260209012701_515373809_122229433952219653_1219881942302589549_n.jpg
+index.html:1645 ✅ Added ad to mw4m section
+index.html:1671 Ad 10: Using photo: https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&h=250
+index.html:1645 ✅ Added ad to hookups section
+index.html:1671 Ad 9: Using photo: https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&h=250
+index.html:1645 ✅ Added ad to mw4m section
+index.html:1671 Ad 7: Using photo: https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&h=250
+index.html:1645 ✅ Added ad to wf4w section
+index.html:1671 Ad 1: Using photo: https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&h=250
+index.html:1645 ✅ Added ad to mw4m section
+favicon.ico:1  GET http://127.0.0.1:5500/favicon.ico 404 (File not found)
+index.html:1778 Error parsing gallery: SyntaxError: Unexpected end of JSON input
+    at JSON.parse (<anonymous>)
+    at openDetailModal (index.html:1775:55)
+    at HTMLDivElement.onclick (index.html:1868:2)
+    
+    
+    
+    
+    127.0.0.1 - - [10/Feb/2026 00:07:34] "GET /uploads/3_20260209181301_515965373_122229892940219653_5349989227687190653_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:07:34] "GET /uploads/3_20260209233830_570616940_10243618641780362_801884485051471186_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:07:34] "GET /uploads/5_20260209021021_514272707_122132576630943335_4145897255646117723_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:07:34] "GET /uploads/1_20260209012701_515373809_122229433952219653_1219881942302589549_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:08:34] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:09:34] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:10:34] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:11:27] "GET /api/public_ads HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:11:29] "GET /uploads/1_20260209182152_Onother1led.jpeg HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:11:29] "GET /uploads/2_20260209181452_574472021_122142462788943335_6215441750056714414_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:11:29] "GET /uploads/3_20260209233830_570616940_10243618641780362_801884485051471186_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:11:29] "GET /uploads/3_20260209181301_515965373_122229892940219653_5349989227687190653_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:11:29] "GET /uploads/5_20260209021021_514272707_122132576630943335_4145897255646117723_n.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [10/Feb/2026 00:11:29] "GET /uploads/1_20260209012701_515373809_122229433952219653_1219881942302589549_n.jpg HTTP/1.1" 200 -
+

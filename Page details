@@ -1,0 +1,20 @@
+All your original ad cards (every category, every title, description, expiry text)
+The full post-ad form (all fields, labels, checkboxes, button)
+The exact navbar wording and layout
+The exact hero wording
+The exact CTA banners wording
+The search/filter bar exactly as it was
+
+So we are not losing anything — we are merging your full original content into the new polished style.
+Below is the corrected, complete index.html that:
+
+Uses the new visual style you love
+Contains 100% of your original ad cards (all categories, all text, all expiry data)
+Contains your full post-ad form (nothing cut)
+Has the new ad detail popup modal (click card → shows full details + gallery for premium)
+Has 4 premium fake cards at the top (with gallery)
+Has verified badges & online dots on some cards
+Has the floating WhatsApp button
+Has the age verification modal
+Has the quick message modal as fallback
+Filter code is kept but commented out so cards are visible locally (we'll fix it properly next)

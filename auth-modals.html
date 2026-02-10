@@ -1,0 +1,458 @@
+<!-- auth-modals.html - Shared login/signup/forgot modals -->
+
+<!-- Signup Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content bg-dark text-light border-danger">
+      <div class="modal-header border-danger">
+        <h5 class="modal-title text-danger">
+          <i class="bi bi-shield-lock-fill me-2"></i>Create Your Private Account
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <!-- Privacy Notice -->
+        <div class="alert alert-info border-info bg-transparent mb-4">
+          <h6 class="fw-bold mb-2">
+            <i class="bi bi-incognito me-2"></i>100% Anonymous Signup
+          </h6>
+          <ul class="small mb-0 ps-3">
+            <li>No email required - just pick a username</li>
+            <li>No personal info stored</li>
+            <li>Messages auto-delete after 30 days</li>
+            <li>Delete your account anytime, instantly</li>
+          </ul>
+        </div>
+
+        <!-- Account Type Selection -->
+        <div class="mb-4">
+          <h6 class="text-warning mb-3">Choose Account Type:</h6>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="account-type-card p-4 rounded border border-secondary cursor-pointer"
+                   onclick="selectAccountType('free')"
+                   id="freeAccountCard">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                  <h5 class="text-success mb-0">
+                    <i class="bi bi-person-circle me-2"></i>Free User
+                  </h5>
+                  <span class="badge bg-success">R0/month</span>
+                </div>
+                <ul class="small mb-0 ps-3">
+                  <li>Post unlimited free ads (3-day expiry)</li>
+                  <li>Browse all listings</li>
+                  <li>Send/receive messages</li>
+                  <li>Basic profile</li>
+                  <li>Upload 1 photos max</li>
+                </ul>
+                <div class="form-check mt-3">
+                  <input class="form-check-input" type="radio" name="accountType" id="freeAccount" value="free" checked>
+                  <label class="form-check-label fw-bold" for="freeAccount">
+                    Select Free Account
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="account-type-card p-4 rounded border border-warning cursor-pointer"
+                   onclick="selectAccountType('vendor')"
+                   id="vendorAccountCard">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                  <h5 class="text-warning mb-0">
+                    <i class="bi bi-star-fill me-2"></i>Vendor Premium
+                  </h5>
+                  <span class="badge bg-warning text-dark">R299/month</span>
+                </div>
+                <ul class="small mb-0 ps-3">
+                  <li>Featured ads (30-day expiry)</li>
+                  <li>Priority in search results</li>
+                  <li>Photo galleries (up to 10 photos)</li>
+                  <li>Verified badge</li>
+                  <li>Video call options</li>
+                  <li>Analytics dashboard</li>
+                </ul>
+                <div class="form-check mt-3">
+                  <input class="form-check-input" type="radio" name="accountType" id="vendorAccount" value="vendor">
+                  <label class="form-check-label fw-bold" for="vendorAccount">
+                    Select Vendor Account
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Signup Form -->
+        <form id="signupForm">
+          <!-- ... paste the rest of your signup form fields here (username, password, age, location, email, vendor fields, terms, etc.) ... -->
+          
+            <!-- Signup Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content bg-dark text-light border-danger">
+      <div class="modal-header border-danger">
+        <h5 class="modal-title text-danger">
+          <i class="bi bi-shield-lock-fill me-2"></i>Create Your Private Account
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <!-- Privacy Notice -->
+        <div class="alert alert-info border-info bg-transparent mb-4">
+          <h6 class="fw-bold mb-2">
+            <i class="bi bi-incognito me-2"></i>100% Anonymous Signup
+          </h6>
+          <ul class="small mb-0 ps-3">
+            <li>No email required - just pick a username</li>
+            <li>No personal info stored</li>
+            <li>Messages auto-delete after 30 days</li>
+            <li>Delete your account anytime, instantly</li>
+          </ul>
+        </div>
+
+        <!-- Account Type Selection -->
+        <div class="mb-4">
+          <h6 class="text-warning mb-3">Choose Account Type:</h6>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="account-type-card p-4 rounded border border-secondary cursor-pointer" 
+                   onclick="selectAccountType('free')" 
+                   id="freeAccountCard">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                  <h5 class="text-success mb-0">
+                    <i class="bi bi-person-circle me-2"></i>Free User
+                  </h5>
+                  <span class="badge bg-success">R0/month</span>
+                </div>
+                <ul class="small mb-0 ps-3">
+                  <li>Post unlimited free ads (3-day expiry)</li>
+                  <li>Browse all listings</li>
+                  <li>Send/receive messages</li>
+                  <li>Basic profile</li>
+                  <li>Upload 1 photos max</li>
+                </ul>
+                <div class="form-check mt-3">
+                  <input class="form-check-input" type="radio" name="accountType" id="freeAccount" value="free" checked>
+                  <label class="form-check-label fw-bold" for="freeAccount">
+                    Select Free Account
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="account-type-card p-4 rounded border border-warning cursor-pointer" 
+                   onclick="selectAccountType('vendor')" 
+                   id="vendorAccountCard">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                  <h5 class="text-warning mb-0">
+                    <i class="bi bi-star-fill me-2"></i>Vendor Premium
+                  </h5>
+                  <span class="badge bg-warning text-dark">R299/month</span>
+                </div>
+                <ul class="small mb-0 ps-3">
+                  <li>Featured ads (30-day expiry)</li>
+                  <li>Priority in search results</li>
+                  <li>Photo galleries (up to 10 photos)</li>
+                  <li>Verified badge</li>
+                  <li>Video call options</li>
+                  <li>Analytics dashboard</li>
+                </ul>
+                <div class="form-check mt-3">
+                  <input class="form-check-input" type="radio" name="accountType" id="vendorAccount" value="vendor">
+                  <label class="form-check-label fw-bold" for="vendorAccount">
+                    Select Vendor Account
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Signup Form -->
+        <form id="signupForm">
+          <div class="row g-3">
+            <!-- Username (Required) -->
+            <div class="col-md-6">
+              <label class="form-label">
+                Username <span class="text-danger">*</span>
+                <i class="bi bi-info-circle text-muted" data-bs-toggle="tooltip" 
+                   title="No real names - pick something anonymous"></i>
+              </label>
+              <div class="input-group">
+                <span class="input-group-text bg-dark border-secondary">
+                  <i class="bi bi-person-badge"></i>
+                </span>
+                <input type="text" class="form-control bg-dark border-secondary text-light" 
+                       id="username" placeholder="e.g., SexyCapeTown25" required>
+              </div>
+              <small class="text-muted">This is your public display name</small>
+            </div>
+
+            <!-- Password (Required) -->
+            <div class="col-md-6">
+              <label class="form-label">
+                Password <span class="text-danger">*</span>
+              </label>
+              <div class="input-group">
+                <span class="input-group-text bg-dark border-secondary">
+                  <i class="bi bi-lock-fill"></i>
+                </span>
+                <input type="password" class="form-control bg-dark border-secondary text-light" 
+                       id="password" placeholder="Min 8 characters" required>
+                <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('password')">
+                  <i class="bi bi-eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Age Verification (Required) -->
+            <div class="col-md-6">
+              <label class="form-label">
+                Age <span class="text-danger">*</span>
+              </label>
+              <select class="form-select bg-dark border-secondary text-light" id="age" required>
+                <option value="">Select your age</option>
+                <option value="18-24">18-24</option>
+                <option value="25-34">25-34</option>
+                <option value="35-44">35-44</option>
+                <option value="45-54">45-54</option>
+                <option value="55+">55+</option>
+              </select>
+              <small class="text-muted">Must be 18+ to join</small>
+            </div>
+
+            <!-- Location (Optional) -->
+            <div class="col-md-6">
+              <label class="form-label">
+                Location <span class="text-muted">(Optional)</span>
+              </label>
+              <select class="form-select bg-dark border-secondary text-light" id="location">
+                <option value="">Select area</option>
+                <option value="City Bowl">City Bowl</option>
+                <option value="Sea Point">Sea Point</option>
+                <option value="Camps Bay">Camps Bay</option>
+                <option value="Waterfront">Waterfront</option>
+                <option value="Green Point">Green Point</option>
+                <option value="Gardens">Gardens</option>
+                <option value="Observatory">Observatory</option>
+                <option value="Woodstock">Woodstock</option>
+                <option value="Rondebosch">Rondebosch</option>
+                <option value="Constantia">Constantia</option>
+                <option value="Bellville">Bellville</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <!-- Email (OPTIONAL - for account recovery only) -->
+            <div class="col-12">
+              <label class="form-label">
+                Email <span class="text-muted">(Optional - for password recovery only)</span>
+                <i class="bi bi-info-circle text-warning" data-bs-toggle="tooltip" 
+                   title="We'll NEVER share your email or send spam. This is only for password recovery."></i>
+              </label>
+              <div class="input-group">
+                <span class="input-group-text bg-dark border-secondary">
+                  <i class="bi bi-envelope"></i>
+                </span>
+                <input type="email" class="form-control bg-dark border-secondary text-light" 
+                       id="email" placeholder="your@email.com (optional)">
+              </div>
+              <small class="text-warning">
+                <i class="bi bi-shield-check me-1"></i>
+                Encrypted & never shared. You can skip this if you prefer.
+              </small>
+            </div>
+
+            <!-- Vendor-Specific Fields (Hidden by default) -->
+            <div id="vendorFields" class="d-none">
+              <div class="col-12">
+                <hr class="border-warning my-4">
+                <h6 class="text-warning mb-3">
+                  <i class="bi bi-briefcase me-2"></i>Vendor Information
+                </h6>
+              </div>
+              
+              <div class="col-md-6">
+                <label class="form-label">Business Name</label>
+                <input type="text" class="form-control bg-dark border-secondary text-light" 
+                       id="businessName" placeholder="e.g., Elite Companions CT">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">WhatsApp Number</label>
+                <input type="tel" class="form-control bg-dark border-secondary text-light" 
+                       id="whatsapp" placeholder="e.g., 082 123 4567">
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">Service Description</label>
+                <textarea class="form-control bg-dark border-secondary text-light" 
+                          id="serviceDesc" rows="3" 
+                          placeholder="Describe your services..."></textarea>
+              </div>
+            </div>
+
+            <!-- Terms & Conditions -->
+            <div class="col-12">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="terms" required>
+                <label class="form-check-label small" for="terms">
+                  I confirm I am 18+ and agree to the 
+                  <a href="#" class="text-danger">Terms of Service</a> and 
+                  <a href="#" class="text-danger">Privacy Policy</a>
+                </label>
+              </div>
+            </div>
+
+            <!-- Privacy Reminder -->
+            <div class="col-12">
+              <div class="alert alert-success border-success bg-transparent mb-0">
+                <h6 class="fw-bold mb-2">
+                  <i class="bi bi-shield-check-fill me-2"></i>Your Privacy is Protected
+                </h6>
+                <p class="small mb-0">
+                  ✓ No ID verification required<br>
+                  ✓ No credit check<br>
+                  ✓ Delete account anytime - all data erased instantly<br>
+                  ✓ Payments show as "Online Services" (vendors only)
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="d-grid gap-2 mt-4">
+            <button type="submit" class="btn btn-danger btn-lg fw-bold" id="signupBtn">
+              <i class="bi bi-check-circle me-2"></i>Create My Private Account
+            </button>
+            <p class="text-center small text-muted mb-0">
+              Already have an account? 
+              <a href="#" class="text-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#loginModal">
+                Login here
+              </a>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-dark text-light border-danger">
+      <div class="modal-header border-danger">
+        <h5 class="modal-title text-danger">
+          <i class="bi bi-box-arrow-in-right me-2"></i>Login to Your Account
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <!-- Privacy Reminder -->
+        <div class="alert alert-info border-info bg-transparent mb-4">
+          <p class="small mb-0">
+            <i class="bi bi-incognito me-2"></i>
+            <strong>Anonymous Login:</strong> No tracking, no data collection
+          </p>
+        </div>
+
+        <form id="loginForm">
+          <div class="mb-3">
+            <label class="form-label">Username</label>
+            <div class="input-group">
+              <span class="input-group-text bg-dark border-secondary">
+                <i class="bi bi-person"></i>
+              </span>
+              <input type="text" class="form-control bg-dark border-secondary text-light" 
+                     id="loginUsername" placeholder="Your username" required>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <div class="input-group">
+              <span class="input-group-text bg-dark border-secondary">
+                <i class="bi bi-lock"></i>
+              </span>
+              <input type="password" class="form-control bg-dark border-secondary text-light" 
+                     id="loginPassword" placeholder="Your password" required>
+              <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('loginPassword')">
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="rememberMe">
+            <label class="form-check-label small" for="rememberMe">
+              Remember me (uses encrypted cookie)
+            </label>
+          </div>
+
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-danger btn-lg fw-bold">
+              <i class="bi bi-box-arrow-in-right me-2"></i>Login Securely
+            </button>
+            <a href="#" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">
+              Forgot Password?
+            </a>
+          </div>
+
+          <p class="text-center small text-muted mt-3 mb-0">
+            Don't have an account? 
+            <a href="#" class="text-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#signupModal">
+              Sign up now
+            </a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Forgot Password Modal -->
+<div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-dark text-light border-danger">
+      <div class="modal-header border-danger">
+        <h5 class="modal-title text-danger">Reset Password</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <p class="small text-muted mb-3">
+          If you provided an email during signup, we'll send you a secure reset link.
+        </p>
+        <form id="forgotPasswordForm">
+          <div class="mb-3">
+            <label class="form-label">Username or Email</label>
+            <input type="text" class="form-control bg-dark border-secondary text-light" 
+                   placeholder="Enter your username or email" required>
+          </div>
+          <div class="d-grid">
+            <button type="submit" class="btn btn-danger">
+              Send Reset Link
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+          <!-- Keep everything exactly as you have it -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+  <!-- ... paste your full login modal content here ... -->
+</div>
+
+<!-- Forgot Password Modal -->
+<div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-hidden="true">
+  <!-- ... paste your full forgot password modal content here ... -->
+</div>

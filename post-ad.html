@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post Ad - HookUpZA</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .photo-preview {
+      position: relative;
+      display: inline-block;
+    }
+    .photo-preview img {
+      max-width: 150px;
+      max-height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .photo-preview .remove-btn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      padding: 4px 8px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body class="bg-black text-light">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top shadow-lg">
+    <div class="container">
+      <a class="navbar-brand fw-bold fs-3" href="index.html">
+        <span class="text-danger">Hook</span><span class="text-white">UpZA</span>
+      </a>
+      <div class="d-flex gap-3">
+        <a href="dashboard.html" class="btn btn-outline-light btn-sm">
+          <i class="bi bi-speedometer"></i> Dashboard
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="py-5 mt-5">
+     -- ENHANCED POST AD FORM - REPLACE YOUR FORM SECTION -->
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="card bg-dark border-danger">
+        <div class="card-header bg-danger text-white">
+          <h3 class="mb-0"><i class="bi bi-plus-circle me-2"></i>Post Your Ad</h3>
+        </div>
+        <div class="card-body p-4">
+          <form id="postAdForm">
+            
+            <!-- Basic Info -->
+            <h5 class="text-warning mb-3">Basic Information</h5>
+            <div class="row g-3 mb-4">
+              <div class="col-md-6">
+                <label class="form-label">Ad Title <span class="text-danger">*</span></label>
+                <input type="text" class="form-control bg-dark border-secondary text-light" id="title" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Category <span class="text-danger">*</span></label>
+                <select class="form-select bg-dark border-secondary text-light" id="category" required>
+                  <option value="">Select category</option>
+                  <option value="mw4m">Men Looking for Women</option>
+                  <option value="wf4m">Women Looking for Men</option>
+                  <option value="mw4mw">Men Looking for Men</option>
+                  <option value="wf4w">Women Looking for Women</option>
+                  <option value="couples">Couples</option>
+                  <option value="lgbtq">LGBTQ+</option>
+                  <option value="hookups">Casual Hookups</option>
+                  <option value="services">Services & Escorts</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Description <span class="text-danger">*</span></label>
+                <textarea class="form-control bg-dark border-secondary text-light" id="description" rows="4" required></textarea>
+              </div>
+            </div>
+
+            <!-- Location & Contact -->
+            <h5 class="text-warning mb-3">Location & Contact</h5>
+            <div class="row g-3 mb-4">
+              <div class="col-md-6">
+                <label class="form-label">Location <span class="text-danger">*</span></label>
+                <input type="text" class="form-control bg-dark border-secondary text-light" id="location" placeholder="e.g., Sea Point, Cape Town" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Contact Info <span class="text-danger">*</span></label>
+                <input type="text" class="form-control bg-dark border-secondary text-light" id="contact" placeholder="WhatsApp: 082 xxx xxxx" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Rate (Optional)</label>
+                <input type="text" class="form-control bg-dark border-secondary text-light" id="rate" placeholder="e.g., R500/hr">
+              </div>
+            </div>
+
+            <!-- VENDOR SERVICES -->
+            <h5 class="text-warning mb-3"><i class="bi bi-star-fill me-2"></i>Vendor Services Offered</h5>
+            <p class="text-muted small mb-3">Select all services you provide:</p>
+            
+            <!-- Communication Services -->
+            <div class="mb-4">
+              <h6 class="text-info mb-2">Communication & Booking</h6>
+              <div class="row g-2">
+                <div class="col-md-3 col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="service_whatsapp" value="WhatsApp Available">
+                    <label class="form-check-label" for="service_whatsapp">
+                      <i class="bi bi-whatsapp text-success"></i> WhatsApp
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3 col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="service_calls" value="Phone Calls">
+                    <label class="form-check-label" for="service_calls">
+                      <i class="bi bi-telephone"></i> Phone Calls
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3 col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="service_video_calls" value="Video Calls">
+                    <label class="form-check-label" for="service_video_calls">
+                      <i class="bi bi-camera-video"></i> Video Calls
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3 col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="service_telegram" value="Telegram">
+                    <label class="form-check-label" for="service_telegram">
+                      <i class="bi bi-send"></i> Telegram
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Meeting Services -->
+            <div class="mb-4">
+              <h6 class="text-info mb-2">Meeting Options</h6>
+              <div class="row g-2">
+                <div class="col-md-3 col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="service_incalls" value="Incalls">
+                    <label class="form-check-label" for="service_incalls">
+                      <i class="bi bi-house-door"></i> Incalls (My Place)
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3 col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="service_outcalls" value="Outcalls">
+                    <label class="form-check-label" for="service_outcalls">
+                      <i class="bi bi-geo-alt"></i> Outcalls (Your Place)
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3 col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="service_hotel" value="Hotel Meets">
+                    <label class="form-check-label" for="service_hotel">
+                      <i class="bi bi-building"></i> Hotel Meets
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3 col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="service_travel" value="Travel Companion">
+                    <label class="form-check-label" for="service_travel">
+                      <i class="bi bi-airplane"></i> Travel
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Digital Services -->
+            <div class="mb-4">
+              <h6 class="text-info mb-2">Digital Content & Services</h6>
+              <div class="row g-2">
+                <div class="col-md-3 col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="service_webcam" value="Webcam Shows">
+                    <label class="form-check-label" for="service_webcam">
+                      <i class="bi bi-camera-video-fill text-danger"></i> Webcam Shows
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3 col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="service_sell_pics" value="Sells Pictures">
+                    <label class="form-check-label" for="service_sell_pics">
+                      <i class="bi bi-images"></i> Sell Pictures
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3 col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="service_sell_videos" value="Sells Videos">
+                    <label class="form-check-label" for="service_sell_videos">
+                      <i class="bi bi-film"></i> Sell Videos
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3 col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="service_onlyfans" value="OnlyFans">
+                    <label class="form-check-label" for="service_onlyfans">
+                      <i class="bi bi-star"></i> OnlyFans
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Experience Services -->
+            <div class="mb-4">
+              <h6 class="text-info mb-2">Experience Type</h6>
+              <div class="row g-2">
+                <div class="col-md-3 col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="service_gfe" value="GFE (Girlfriend Experience)">
+                    <label class="form-check-label" for="service_gfe">
+                      <i class="bi bi-heart-fill text-danger"></i> GFE
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3 col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="service_bfe" value="BFE (Boyfriend Experience)">
+                    <label class="form-check-label" for="service_bfe">
+                      <i class="bi bi-heart"></i> BFE
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3 col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="service_pse" value="PSE (Porn Star Experience)">
+                    <label class="form-check-label" for="service_pse">
+                      <i class="bi bi-fire text-danger"></i> PSE
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3 col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="service_roleplay" value="Roleplay">
+                    <label class="form-check-label" for="service_roleplay">
+                      <i class="bi bi-mask"></i> Roleplay
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Additional Services -->
+            <div class="mb-4">
+              <h6 class="text-info mb-2">Additional Services</h6>
+              <div class="row g-2">
+                <div class="col-md-3 col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="service_massage" value="Massage">
+                    <label class="form-check-label" for="service_massage">
+                      <i class="bi bi-droplet"></i> Massage
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3 col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="service_couples" value="Couples Welcome">
+                    <label class="form-check-label" for="service_couples">
+                      <i class="bi bi-people"></i> Couples
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3 col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="service_fetish" value="Fetish Friendly">
+                    <label class="form-check-label" for="service_fetish">
+                      <i class="bi bi-emoji-wink"></i> Fetish Friendly
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3 col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="service_verified" value="Verified">
+                    <label class="form-check-label" for="service_verified">
+                      <i class="bi bi-patch-check-fill text-success"></i> Verified
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo Upload -->
+            <h5 class="text-warning mb-3">Photos</h5>
+            <div class="mb-4">
+              <label class="form-label">Upload Photos (Max 10)</label>
+              <input type="file" class="form-control bg-dark border-secondary text-light" id="photos" multiple accept="image/*">
+              <div id="photoPreview" class="mt-3 row g-2"></div>
+            </div>
+
+            <!-- Submit -->
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-danger btn-lg fw-bold">
+                <i class="bi bi-check-circle me-2"></i>Post Ad
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/auth.js"></script>
+  
+  
+<script>
+document.getElementById('postAdForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  
+  // Collect selected services
+  const services = [];
+  document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
+    services.push(checkbox.value);
+  });
+  
+  // Collect form data
+  const formData = {
+    title: document.getElementById('title').value,
+    description: document.getElementById('description').value,
+    category: document.getElementById('category').value,
+    location: document.getElementById('location').value,
+    contact: document.getElementById('contact').value,
+    rate: document.getElementById('rate').value,
+    services: services // Array of selected services
+  };
+  
+  console.log('Posting ad with services:', services);
+  
+  // ... rest of your posting logic
+});
+</script>
+
+  <script>
+    const API = 'http://127.0.0.1:5000/api';
+    let uploadedPhotos = [];
+
+    // Handle photo selection
+    document.getElementById('photoInput').addEventListener('change', async function(e) {
+      const files = e.target.files;
+      
+      if (uploadedPhotos.length + files.length > 5) {
+        alert('Maximum 5 photos allowed');
+        return;
+      }
+      
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        
+        // Validate file size
+        if (file.size > 5 * 1024 * 1024) {
+          alert(`${file.name} is too large. Maximum 5MB per photo.`);
+          continue;
+        }
+        
+        // Show preview immediately
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          displayPhotoPreview(event.target.result, file.name, true);
+        };
+        reader.readAsDataURL(file);
+        
+        // Upload to server
+        await uploadPhoto(file);
+      }
+      
+      // Clear input
+      e.target.value = '';
+    });
+
+    // Upload photo to server
+    async function uploadPhoto(file) {
+      const formData = new FormData();
+      formData.append('photo', file);
+      
+      try {
+        const res = await fetch(`${API}/upload_photo`, {
+          method: 'POST',
+          credentials: 'include',
+          body: formData
+        });
+        
+        if (!res.ok) throw new Error('Upload failed');
+        
+        const data = await res.json();
+        uploadedPhotos.push(data.url);
+        
+        console.log('✅ Photo uploaded:', data.url);
+        
+      } catch (error) {
+        console.error('Upload error:', error);
+        alert(`Failed to upload ${file.name}. Please try again.`);
+      }
+    }
+
+    // Display photo preview
+    function displayPhotoPreview(src, filename, isUploading) {
+      const container = document.getElementById('photoPreviewContainer');
+      const index = uploadedPhotos.length - 1;
+      
+      const preview = document.createElement('div');
+      preview.className = 'photo-preview';
+      preview.innerHTML = `
+        <img src="${src}" alt="${filename}">
+        <button type="button" class="btn btn-sm btn-danger remove-btn" onclick="removePhoto(${index})">
+          <i class="bi bi-x"></i>
+        </button>
+        ${isUploading ? '<div class="spinner-border spinner-border-sm position-absolute top-50 start-50"></div>' : ''}
+      `;
+      
+      container.appendChild(preview);
+    }
+
+    // Remove photo
+    function removePhoto(index) {
+      const photoUrl = uploadedPhotos[index];
+      
+      // Delete from server
+      const filename = photoUrl.split('/').pop();
+      fetch(`${API}/delete_photo`, {
+        method: 'DELETE',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ filename })
+      });
+      
+      // Remove from array
+      uploadedPhotos.splice(index, 1);
+      
+      // Refresh preview
+      document.getElementById('photoPreviewContainer').innerHTML = '';
+      uploadedPhotos.forEach((url, i) => {
+        displayPhotoPreview(url, `Photo ${i+1}`, false);
+      });
+    }
+
+    // Submit form
+    document.getElementById('postAdForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Posting...';
+      
+      const adData = {
+        title: document.getElementById('title').value.trim(),
+        category: document.getElementById('category').value,
+        location: document.getElementById('location').value.trim(),
+        description: document.getElementById('description').value.trim(),
+        rate: document.getElementById('rate').value.trim(),
+        contact: document.getElementById('contact').value.trim(),
+        photos: uploadedPhotos,
+        services: []
+      };
+      
+      try {
+        const res = await fetch(`${API}/post_ad`, {
+          method: 'POST',
+          credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(adData)
+        });
+        
+        const data = await res.json();
+        
+        if (!res.ok) throw new Error(data.error || 'Failed to post ad');
+        
+        alert('✅ Ad posted successfully!\n\nVendor ads go live immediately.\nFree ads are reviewed within 24 hours.');
+        window.location.href = 'my-ads.html';
+        
+      } catch (error) {
+        console.error('Post error:', error);
+        alert(`❌ Failed to post ad: ${error.message}`);
+        
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="bi bi-send me-2"></i>Post My Ad';
+      }
+    });
+  </script>
+</body>
+</html>
