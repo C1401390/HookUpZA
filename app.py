@@ -7,32 +7,29 @@ import os
 import json
 from datetime import datetime, timedelta
 
-# Photo upload configuration - BEFORE app creation
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
-MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
-
-# Create uploads folder
+MAX_FILE_SIZE = 5 * 1024 * 1024
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-app = Flask(__name__)
-
-# File upload config
+app = Flask(__name__, static_folder='.', static_url_path='')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024  # 10MB max request
+app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
 app.secret_key = 'hookupza_secret_2026_change_in_production'
 
-# CRITICAL: Proper CORS configuration for sessions
 CORS(app,
      supports_credentials=True,
-     origins=['http://127.0.0.1:5500', 'http://localhost:5500', 'http://127.0.0.1:5501', 'http://localhost:5501'],
+     origins=[
+         'http://127.0.0.1:5500', 'http://localhost:5500',
+         'http://127.0.0.1:5501', 'http://localhost:5501',
+         'https://hookupza.onrender.com'
+     ],
      allow_headers=['Content-Type'],
      methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
 
-# Session configuration
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 app.config['SESSION_COOKIE_SECURE'] = False
 app.config['SESSION_COOKIE_HTTPONLY'] = False
@@ -40,7 +37,6 @@ app.config['SESSION_COOKIE_NAME'] = 'hookupza_session'
 app.config['SESSION_COOKIE_DOMAIN'] = None
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)
 
-# Database setup
 DB_FILE = 'hookupza.db'
 
 def get_db():
@@ -51,7 +47,6 @@ def get_db():
 def init_db():
     with get_db() as conn:
         cursor = conn.cursor()
-        
         cursor.execute('''
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -67,13 +62,11 @@ def init_db():
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
         ''')
-        
         cursor.execute("PRAGMA table_info(users)")
         columns = {row['name'] for row in cursor.fetchall()}
         if 'role' not in columns:
             cursor.execute("ALTER TABLE users ADD COLUMN role TEXT DEFAULT 'user'")
-            print("✅ Added 'role' column to users table")
-        
+            print("Added role column")
         cursor.execute('''
         CREATE TABLE IF NOT EXISTS ads (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -93,18 +86,14 @@ def init_db():
             FOREIGN KEY (user_id) REFERENCES users (id)
         )
         ''')
-        
         conn.commit()
-        print("✅ Database initialized/updated successfully!")
+        print("Database ready!")
 
 init_db()
 
 def debug_session(f):
     def wrapper(*args, **kwargs):
-        print(f"\n🔍 SESSION DEBUG for {f.__name__}:")
-        print(f"   Session ID: {session.get('user_id', 'NONE')}")
-        print(f"   Username: {session.get('username', 'NONE')}")
-        print(f"   Role: {session.get('role', 'NONE')}")
+        print(f"\nSESSION for {f.__name__}: user_id={session.get('user_id','NONE')} username={session.get('username','NONE')} role={session.get('role','NONE')}")
         return f(*args, **kwargs)
     wrapper.__name__ = f.__name__
     return wrapper
@@ -113,225 +102,185 @@ def is_admin():
     if 'user_id' not in session:
         return False
     with get_db() as conn:
-        user = conn.execute('SELECT role FROM users WHERE id = ?', (session['user_id'],)).fetchone()
-        if user:
-            return dict(user).get('role', 'user') == 'admin'
-        return False
+        user = conn.execute('SELECT role FROM users WHERE id=?', (session['user_id'],)).fetchone()
+        return dict(user).get('role') == 'admin' if user else False
 
-# ============================================
-# SERVE UPLOADED FILES
-# ============================================
+@app.route('/')
+def serve_index():
+    return send_from_directory('.', 'index.html')
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
-    """Serve uploaded photos"""
     return send_from_directory(UPLOAD_FOLDER, filename)
 
-# ============================================
-# AUTHENTICATION
-# ============================================
-
-@app.route('/api/signup', methods=['POST'])
+@app.route('/api/signup', methods=['POST', 'OPTIONS'])
 @debug_session
 def signup():
+    if request.method == 'OPTIONS': return '', 204
     try:
         data = request.json
-        username = data.get('username')
-        password = data.get('password')
+        username = data.get('username', '').strip()
+        password = data.get('password', '')
         age = data.get('age')
-        location = data.get('location', '')
-        email = data.get('email', '')
-        account_type = data.get('account_type', 'free')
-        vendor_data = data.get('vendor_data')
-        
         if not username or not password or not age:
             return jsonify({'error': 'Missing required fields'}), 400
-        
         if len(password) < 8:
             return jsonify({'error': 'Password must be at least 8 characters'}), 400
-        
         password_hash = generate_password_hash(password)
-        vendor_data_json = json.dumps(vendor_data) if vendor_data else None
-        
+        account_type = data.get('account_type', 'free')
+        vendor_data_json = json.dumps(data.get('vendor_data')) if data.get('vendor_data') else None
         with get_db() as conn:
             try:
                 cursor = conn.execute('''
                 INSERT INTO users (username, password_hash, age, location, email, account_type, role, vendor_data, verified, vendor_paid)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                ''', (username, password_hash, age, location, email, account_type, 'user', vendor_data_json, 1 if account_type == 'free' else 0, 0))
-                
+                VALUES (?, ?, ?, ?, ?, ?, 'user', ?, ?, 0)
+                ''', (username, password_hash, age, data.get('location',''), data.get('email',''),
+                      account_type, vendor_data_json, 1 if account_type == 'free' else 0))
                 user_id = cursor.lastrowid
                 conn.commit()
-                
                 session.permanent = True
                 session['user_id'] = user_id
                 session['username'] = username
                 session['account_type'] = account_type
                 session['role'] = 'user'
                 session.modified = True
-                
-                print(f"✅ User created: {username} (ID: {user_id})")
-                
-                return jsonify({
-                    'message': 'Account created successfully',
-                    'username': username,
-                    'account_type': account_type,
-                    'role': 'user',
-                    'user_id': user_id
-                }), 201
-                
+                print(f"User registered: {username} ID={user_id}")
+                return jsonify({'message': 'Account created successfully', 'username': username,
+                                'account_type': account_type, 'role': 'user', 'user_id': user_id}), 201
             except sqlite3.IntegrityError:
                 return jsonify({'error': 'Username already exists'}), 400
-                
     except Exception as e:
-        print(f"❌ Signup error: {str(e)}")
-        return jsonify({'error': f'Server error: {str(e)}'}), 500
+        print(f"Signup error: {e}")
+        return jsonify({'error': str(e)}), 500
 
-@app.route('/api/login', methods=['POST'])
+@app.route('/api/login', methods=['POST', 'OPTIONS'])
 @debug_session
 def login():
+    if request.method == 'OPTIONS': return '', 204
     try:
         data = request.json
-        username = data.get('username')
-        password = data.get('password')
-        
+        username = data.get('username', '').strip()
+        password = data.get('password', '')
         if not username or not password:
             return jsonify({'error': 'Missing username or password'}), 400
-        
         with get_db() as conn:
-            user = conn.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
-            
-            if user and check_password_hash(user['password_hash'], password):
-                user_dict = dict(user)
-                
-                session.permanent = True
-                session['user_id'] = user_dict['id']
-                session['username'] = user_dict['username']
-                session['account_type'] = user_dict.get('account_type', 'free')
-                session['role'] = user_dict.get('role', 'user')
-                session.modified = True
-                
-                print(f"✅ Login successful: {username}")
-                
-                return jsonify({
-                    'message': 'Login successful',
-                    'username': user_dict['username'],
-                    'account_type': user_dict.get('account_type', 'free'),
-                    'role': user_dict.get('role', 'user'),
-                    'user_id': user_dict['id']
-                })
-            
-            return jsonify({'error': 'Invalid credentials'}), 401
-            
+            user = conn.execute('SELECT * FROM users WHERE username=?', (username,)).fetchone()
+            if not user:
+                return jsonify({'error': 'Invalid credentials'}), 401
+            user_dict = dict(user)
+            if not check_password_hash(user_dict['password_hash'], password):
+                return jsonify({'error': 'Invalid credentials'}), 401
+            session.permanent = True
+            session['user_id'] = user_dict['id']
+            session['username'] = user_dict['username']
+            session['account_type'] = user_dict.get('account_type', 'free')
+            session['role'] = user_dict.get('role', 'user')
+            session.modified = True
+            print(f"Login OK: {username} role={session['role']}")
+            return jsonify({'message': 'Login successful', 'username': user_dict['username'],
+                            'account_type': user_dict.get('account_type','free'),
+                            'role': user_dict.get('role','user'), 'user_id': user_dict['id']})
     except Exception as e:
-        print(f"❌ Login error: {str(e)}")
-        return jsonify({'error': f'Server error: {str(e)}'}), 500
+        print(f"Login error: {e}")
+        return jsonify({'error': str(e)}), 500
 
-@app.route('/api/check_auth', methods=['GET'])
+@app.route('/api/check_auth', methods=['GET', 'OPTIONS'])
 @debug_session
 def check_auth():
-    if 'user_id' in session:
-        with get_db() as conn:
-            user = conn.execute('SELECT * FROM users WHERE id = ?', (session['user_id'],)).fetchone()
-            
-            if user:
-                user_dict = dict(user)
-                return jsonify({
-                    'logged_in': True,
-                    'user_data': {
-                        'user_id': user_dict['id'],
-                        'username': user_dict['username'],
-                        'account_type': user_dict.get('account_type', 'free'),
-                        'age': user_dict.get('age'),
-                        'location': user_dict.get('location'),
-                        'email': user_dict.get('email'),
-                        'verified': bool(user_dict.get('verified', 0)),
-                        'vendor_paid': bool(user_dict.get('vendor_paid', 0)),
-                        'created_at': user_dict.get('created_at'),
-                        'role': user_dict.get('role', 'user')
-                    }
-                })
-    
-    return jsonify({'logged_in': False, 'error': 'Not logged in'}), 401
+    if request.method == 'OPTIONS': return '', 204
+    if 'user_id' not in session:
+        return jsonify({'logged_in': False, 'error': 'Not logged in'}), 401
+    with get_db() as conn:
+        user = conn.execute('SELECT * FROM users WHERE id=?', (session['user_id'],)).fetchone()
+        if not user:
+            session.clear()
+            return jsonify({'logged_in': False}), 401
+        u = dict(user)
+        return jsonify({'logged_in': True, 'authenticated': True, 'username': u['username'],
+                        'role': u.get('role','user'), 'account_type': u.get('account_type','free'),
+                        'user_id': u['id'],
+                        'user_data': {'user_id': u['id'], 'username': u['username'],
+                                      'account_type': u.get('account_type','free'),
+                                      'age': u.get('age'), 'location': u.get('location'),
+                                      'email': u.get('email'), 'verified': bool(u.get('verified',0)),
+                                      'vendor_paid': bool(u.get('vendor_paid',0)),
+                                      'created_at': u.get('created_at'), 'role': u.get('role','user')}})
 
-@app.route('/api/logout', methods=['POST'])
+@app.route('/api/logout', methods=['POST', 'OPTIONS'])
 @debug_session
 def logout():
+    if request.method == 'OPTIONS': return '', 204
     username = session.get('username', 'Unknown')
     session.clear()
-    print(f"✅ Logout successful: {username}")
+    print(f"Logout: {username}")
     return jsonify({'message': 'Logged out successfully'})
-
-# ============================================
-# AD MANAGEMENT
-# ============================================
 
 @app.route('/api/post_ad', methods=['POST', 'OPTIONS'])
 @debug_session
 def post_ad():
-    if request.method == 'OPTIONS':
-        return '', 204
-    
+    if request.method == 'OPTIONS': return '', 204
     if 'user_id' not in session:
         return jsonify({'error': 'Login required'}), 401
-    
     try:
         data = request.json
-        user_id = session['user_id']
-        account_type = session.get('account_type', 'free')
-        
-        title = data.get('title')
-        category = data.get('category')
-        location = data.get('location')
-        description = data.get('description')
-        services = json.dumps(data.get('services', []))
-        rate = data.get('rate', '')
-        contact = data.get('contact')
-        photos = json.dumps(data.get('photos', []))
-        
+        title = data.get('title','').strip()
+        category = data.get('category','').strip()
+        description = data.get('description','').strip()
+        contact = data.get('contact','').strip()
         if not title or not category or not description or not contact:
             return jsonify({'error': 'Missing required fields'}), 400
-        
-        days = 30 if account_type == 'vendor' else 3
-        is_premium = 1 if account_type == 'vendor' else 0
-        status = 'active' if account_type == 'vendor' else 'pending'
-        
+        account_type = session.get('account_type', 'free')
+        role = session.get('role', 'user')
+        # Admin OR vendor = live immediately, 30 days
+        # Free user = pending, 3 days
+        if role == 'admin' or account_type == 'vendor':
+            days, is_premium, status = 30, 1, 'active'
+        else:
+            days, is_premium, status = 3, 0, 'pending'
         with get_db() as conn:
             cursor = conn.execute('''
             INSERT INTO ads (user_id, title, category, location, description, services, rate, contact, photos, status, is_premium, expires_at)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now', '+' || ? || ' days'))
-            ''', (user_id, title, category, location, description, services, rate, contact, photos, status, is_premium, days))
-            
+            ''', (session['user_id'], title, category, data.get('location',''), description,
+                  json.dumps(data.get('services',[])), data.get('rate',''), contact,
+                  json.dumps(data.get('photos',[])), status, is_premium, str(days)))
             ad_id = cursor.lastrowid
             conn.commit()
-        
-        print(f"✅ Ad posted: ID {ad_id}")
-        
-        return jsonify({
-            'message': 'Ad posted successfully',
-            'ad_id': ad_id,
-            'expires_in_days': days
-        }), 201
-        
+        print(f"Ad posted: ID={ad_id} status={status} premium={is_premium}")
+        return jsonify({'message': 'Ad posted successfully', 'ad_id': ad_id, 'status': status, 'expires_in_days': days}), 201
     except Exception as e:
-        print(f"❌ Post ad error: {str(e)}")
-        return jsonify({'error': f'Server error: {str(e)}'}), 500
+        print(f"Post ad error: {e}")
+        return jsonify({'error': str(e)}), 500
 
-@app.route('/api/my_ads', methods=['GET'])
+@app.route('/api/public_ads', methods=['GET', 'OPTIONS'])
+def get_public_ads():
+    if request.method == 'OPTIONS': return '', 204
+    try:
+        category = request.args.get('category', 'all')
+        with get_db() as conn:
+            if category == 'all':
+                ads = conn.execute('''SELECT a.*, u.username FROM ads a JOIN users u ON a.user_id=u.id
+                WHERE a.status='active' AND a.expires_at > datetime('now')
+                ORDER BY a.is_premium DESC, a.created_at DESC LIMIT 100''').fetchall()
+            else:
+                ads = conn.execute('''SELECT a.*, u.username FROM ads a JOIN users u ON a.user_id=u.id
+                WHERE a.status='active' AND a.category=? AND a.expires_at > datetime('now')
+                ORDER BY a.is_premium DESC, a.created_at DESC LIMIT 100''', (category,)).fetchall()
+            return jsonify({'ads': [dict(ad) for ad in ads]})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/my_ads', methods=['GET', 'OPTIONS'])
 @debug_session
 def my_ads():
+    if request.method == 'OPTIONS': return '', 204
     if 'user_id' not in session:
         return jsonify({'error': 'Login required'}), 401
-    
     try:
         with get_db() as conn:
-            ads = conn.execute('''
-            SELECT id, title, category, location, status, is_premium, created_at, expires_at
-            FROM ads WHERE user_id = ? ORDER BY created_at DESC
-            ''', (session['user_id'],)).fetchall()
-            
+            ads = conn.execute('''SELECT id, title, category, location, status, is_premium, created_at, expires_at
+            FROM ads WHERE user_id=? ORDER BY created_at DESC''', (session['user_id'],)).fetchall()
             return jsonify({'ads': [dict(ad) for ad in ads]})
-            
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -339,220 +288,123 @@ def my_ads():
 def get_ad_detail(ad_id):
     try:
         with get_db() as conn:
-            ad = conn.execute('''
-            SELECT a.*, u.username, u.account_type
-            FROM ads a JOIN users u ON a.user_id = u.id
-            WHERE a.id = ?
-            ''', (ad_id,)).fetchone()
-            
-            if not ad:
-                return jsonify({'error': 'Ad not found'}), 404
-            
+            ad = conn.execute('''SELECT a.*, u.username, u.account_type FROM ads a
+            JOIN users u ON a.user_id=u.id WHERE a.id=?''', (ad_id,)).fetchone()
+            if not ad: return jsonify({'error': 'Ad not found'}), 404
             ad_dict = dict(ad)
-            
-            if ad_dict.get('services'):
-                try:
-                    ad_dict['services'] = json.loads(ad_dict['services'])
-                except:
-                    pass
-            
-            if ad_dict.get('photos'):
-                try:
-                    ad_dict['photos'] = json.loads(ad_dict['photos'])
-                except:
-                    pass
-            
+            for field in ['services', 'photos']:
+                if ad_dict.get(field):
+                    try: ad_dict[field] = json.loads(ad_dict[field])
+                    except: pass
             return jsonify({'ad': ad_dict})
-            
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/api/edit_ad/<int:ad_id>', methods=['PUT'])
+@app.route('/api/edit_ad/<int:ad_id>', methods=['PUT', 'OPTIONS'])
 @debug_session
 def edit_ad(ad_id):
-    if 'user_id' not in session:
-        return jsonify({'error': 'Login required'}), 401
-    
+    if request.method == 'OPTIONS': return '', 204
+    if 'user_id' not in session: return jsonify({'error': 'Login required'}), 401
     try:
         with get_db() as conn:
-            ad = conn.execute('SELECT * FROM ads WHERE id = ?', (ad_id,)).fetchone()
-            
-            if not ad:
-                return jsonify({'error': 'Ad not found'}), 404
-            
+            ad = conn.execute('SELECT * FROM ads WHERE id=?', (ad_id,)).fetchone()
+            if not ad: return jsonify({'error': 'Ad not found'}), 404
             ad_dict = dict(ad)
-            
             if ad_dict['user_id'] != session['user_id'] and not is_admin():
                 return jsonify({'error': 'Unauthorized'}), 403
-            
             data = request.json
-            
-            title = data.get('title', ad_dict['title'])
-            description = data.get('description', ad_dict['description'])
-            category = data.get('category', ad_dict['category'])
-            location = data.get('location', ad_dict['location'])
             services = data.get('services', ad_dict['services'])
-            rate = data.get('rate', ad_dict['rate'])
-            contact = data.get('contact', ad_dict['contact'])
             photos = data.get('photos', ad_dict['photos'])
-            
-            if isinstance(services, list):
-                services = json.dumps(services)
-            if isinstance(photos, list):
-                photos = json.dumps(photos)
-            
-            conn.execute('''
-            UPDATE ads 
-            SET title = ?, description = ?, category = ?, location = ?, 
-                services = ?, rate = ?, contact = ?, photos = ?
-            WHERE id = ?
-            ''', (title, description, category, location, services, rate, contact, photos, ad_id))
-            
+            if isinstance(services, list): services = json.dumps(services)
+            if isinstance(photos, list): photos = json.dumps(photos)
+            conn.execute('''UPDATE ads SET title=?,description=?,category=?,location=?,
+            services=?,rate=?,contact=?,photos=? WHERE id=?''',
+            (data.get('title',ad_dict['title']), data.get('description',ad_dict['description']),
+             data.get('category',ad_dict['category']), data.get('location',ad_dict['location']),
+             services, data.get('rate',ad_dict['rate']), data.get('contact',ad_dict['contact']),
+             photos, ad_id))
             conn.commit()
-        
-        print(f"✅ Ad updated: ID {ad_id}")
         return jsonify({'message': 'Ad updated successfully'})
-        
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/delete_ad/<int:ad_id>', methods=['DELETE', 'OPTIONS'])
 @debug_session
 def delete_ad(ad_id):
-    if request.method == 'OPTIONS':
-        return '', 204
-    
-    if 'user_id' not in session:
-        return jsonify({'error': 'Login required'}), 401
-    
+    if request.method == 'OPTIONS': return '', 204
+    if 'user_id' not in session: return jsonify({'error': 'Login required'}), 401
     try:
         with get_db() as conn:
-            ad = conn.execute('SELECT * FROM ads WHERE id = ? AND user_id = ?',
-                            (ad_id, session['user_id'])).fetchone()
-            
-            if not ad:
-                return jsonify({'error': 'Ad not found or unauthorized'}), 404
-            
-            conn.execute('DELETE FROM ads WHERE id = ?', (ad_id,))
+            ad = conn.execute('SELECT * FROM ads WHERE id=? AND user_id=?', (ad_id, session['user_id'])).fetchone()
+            if not ad: return jsonify({'error': 'Ad not found or unauthorized'}), 404
+            conn.execute('DELETE FROM ads WHERE id=?', (ad_id,))
             conn.commit()
-        
-        print(f"✅ Ad deleted: ID {ad_id}")
         return jsonify({'message': 'Ad deleted successfully'})
-        
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/delete_account', methods=['DELETE', 'OPTIONS'])
 @debug_session
 def delete_account():
-    if request.method == 'OPTIONS':
-        return '', 204
-    
-    if 'user_id' not in session:
-        return jsonify({'error': 'Login required'}), 401
-    
+    if request.method == 'OPTIONS': return '', 204
+    if 'user_id' not in session: return jsonify({'error': 'Login required'}), 401
     try:
         user_id = session['user_id']
-        
         with get_db() as conn:
-            conn.execute('DELETE FROM ads WHERE user_id = ?', (user_id,))
-            conn.execute('DELETE FROM users WHERE id = ?', (user_id,))
+            conn.execute('DELETE FROM ads WHERE user_id=?', (user_id,))
+            conn.execute('DELETE FROM users WHERE id=?', (user_id,))
             conn.commit()
-        
         session.clear()
-        print(f"✅ Account deleted: {user_id}")
         return jsonify({'message': 'Account deleted successfully'})
-        
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-# ============================================
-# PHOTO UPLOAD
-# ============================================
-
-@app.route('/api/upload_photo', methods=['POST'])
+@app.route('/api/upload_photo', methods=['POST', 'OPTIONS'])
 @debug_session
 def upload_photo():
-    if 'user_id' not in session:
-        return jsonify({'error': 'Login required'}), 401
-    
-    if 'photo' not in request.files:
-        return jsonify({'error': 'No photo provided'}), 400
-    
+    if request.method == 'OPTIONS': return '', 204
+    if 'user_id' not in session: return jsonify({'error': 'Login required'}), 401
+    if 'photo' not in request.files: return jsonify({'error': 'No photo provided'}), 400
     file = request.files['photo']
-    
-    if file.filename == '':
-        return jsonify({'error': 'No file selected'}), 400
-    
-    if not allowed_file(file.filename):
-        return jsonify({'error': 'Invalid file type'}), 400
-    
+    if file.filename == '' or not allowed_file(file.filename):
+        return jsonify({'error': 'Invalid file'}), 400
     file.seek(0, os.SEEK_END)
-    file_size = file.tell()
+    if file.tell() > MAX_FILE_SIZE: return jsonify({'error': 'File too large (max 5MB)'}), 400
     file.seek(0)
-    
-    if file_size > MAX_FILE_SIZE:
-        return jsonify({'error': 'File too large. Max 5MB'}), 400
-    
     try:
-        filename = secure_filename(file.filename)
-        unique_filename = f"{session['user_id']}_{datetime.now().strftime('%Y%m%d%H%M%S')}_{filename}"
-        filepath = os.path.join(UPLOAD_FOLDER, unique_filename)
-        
-        file.save(filepath)
-        
-        print(f"✅ Photo uploaded: {unique_filename}")
-        
-        return jsonify({
-            'message': 'Photo uploaded successfully',
-            'filename': unique_filename,
-            'url': f'/uploads/{unique_filename}'
-        }), 201
-        
+        unique_filename = f"{session['user_id']}_{datetime.now().strftime('%Y%m%d%H%M%S')}_{secure_filename(file.filename)}"
+        file.save(os.path.join(UPLOAD_FOLDER, unique_filename))
+        print(f"Photo uploaded: {unique_filename}")
+        return jsonify({'message': 'Photo uploaded successfully', 'filename': unique_filename, 'url': f'/uploads/{unique_filename}'}), 201
     except Exception as e:
-        return jsonify({'error': f'Upload failed: {str(e)}'}), 500
+        return jsonify({'error': str(e)}), 500
 
-@app.route('/api/delete_photo', methods=['DELETE'])
+@app.route('/api/delete_photo', methods=['DELETE', 'OPTIONS'])
 @debug_session
 def delete_photo():
-    if 'user_id' not in session:
-        return jsonify({'error': 'Login required'}), 401
-    
+    if request.method == 'OPTIONS': return '', 204
+    if 'user_id' not in session: return jsonify({'error': 'Login required'}), 401
     try:
-        data = request.json
-        filename = data.get('filename')
-        
-        if not filename:
-            return jsonify({'error': 'No filename provided'}), 400
-        
+        filename = request.json.get('filename')
+        if not filename: return jsonify({'error': 'No filename provided'}), 400
         filepath = os.path.join(UPLOAD_FOLDER, filename)
-        
         if os.path.exists(filepath):
             os.remove(filepath)
             return jsonify({'message': 'Photo deleted successfully'})
-        else:
-            return jsonify({'error': 'Photo not found'}), 404
-            
+        return jsonify({'error': 'Photo not found'}), 404
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-# ============================================
-# ADMIN ENDPOINTS
-# ============================================
-
-@app.route('/api/admin/check_role', methods=['GET'])
+@app.route('/api/admin/check_role', methods=['GET', 'OPTIONS'])
 @debug_session
 def check_admin_role():
-    if 'user_id' not in session:
-        return jsonify({'is_admin': False}), 401
-    
+    if request.method == 'OPTIONS': return '', 204
+    if 'user_id' not in session: return jsonify({'is_admin': False}), 200
     try:
         with get_db() as conn:
-            user = conn.execute('SELECT role FROM users WHERE id = ?', (session['user_id'],)).fetchone()
-            
-            if user and dict(user).get('role', 'user') == 'admin':
+            user = conn.execute('SELECT role FROM users WHERE id=?', (session['user_id'],)).fetchone()
+            if user and dict(user).get('role') == 'admin':
                 return jsonify({'is_admin': True, 'username': session.get('username')})
-            
             return jsonify({'is_admin': False})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -560,234 +412,156 @@ def check_admin_role():
 @app.route('/api/admin/stats', methods=['GET'])
 @debug_session
 def admin_stats():
-    if not is_admin():
-        return jsonify({'error': 'Admin access required'}), 403
-    
+    if not is_admin(): return jsonify({'error': 'Admin access required'}), 403
     try:
         with get_db() as conn:
-            stats = {
+            return jsonify({
                 'total_users': conn.execute('SELECT COUNT(*) FROM users').fetchone()[0],
                 'total_ads': conn.execute('SELECT COUNT(*) FROM ads').fetchone()[0],
-                'pending_ads': conn.execute("SELECT COUNT(*) FROM ads WHERE status = 'pending'").fetchone()[0],
-                'active_ads': conn.execute("SELECT COUNT(*) FROM ads WHERE status = 'active'").fetchone()[0],
-                'expired_ads': conn.execute("SELECT COUNT(*) FROM ads WHERE status = 'expired'").fetchone()[0],
-                'premium_users': conn.execute("SELECT COUNT(*) FROM users WHERE account_type = 'vendor'").fetchone()[0],
-                'free_users': conn.execute("SELECT COUNT(*) FROM users WHERE account_type = 'free'").fetchone()[0],
-            }
-            return jsonify(stats)
+                'pending_ads': conn.execute("SELECT COUNT(*) FROM ads WHERE status='pending'").fetchone()[0],
+                'active_ads': conn.execute("SELECT COUNT(*) FROM ads WHERE status='active'").fetchone()[0],
+                'expired_ads': conn.execute("SELECT COUNT(*) FROM ads WHERE status='expired'").fetchone()[0],
+                'premium_users': conn.execute("SELECT COUNT(*) FROM users WHERE account_type='vendor'").fetchone()[0],
+                'free_users': conn.execute("SELECT COUNT(*) FROM users WHERE account_type='free'").fetchone()[0],
+            })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/api/admin/all_ads', methods=['GET'])
+@app.route('/api/admin/all_ads', methods=['GET', 'OPTIONS'])
 @debug_session
 def admin_all_ads():
-    if not is_admin():
-        return jsonify({'error': 'Admin access required'}), 403
-    
+    if request.method == 'OPTIONS': return '', 204
+    if not is_admin(): return jsonify({'error': 'Admin access required'}), 403
     try:
         with get_db() as conn:
-            ads = conn.execute('''
-            SELECT a.*, u.username, u.account_type
-            FROM ads a JOIN users u ON a.user_id = u.id
-            ORDER BY a.created_at DESC
-            ''').fetchall()
-            
+            ads = conn.execute('''SELECT a.*, u.username, u.account_type FROM ads a
+            JOIN users u ON a.user_id=u.id ORDER BY a.created_at DESC''').fetchall()
             return jsonify({'ads': [dict(ad) for ad in ads]})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/api/admin/approve_ad/<int:ad_id>', methods=['POST'])
+@app.route('/api/admin/approve_ad/<int:ad_id>', methods=['POST', 'OPTIONS'])
 @debug_session
 def approve_ad(ad_id):
-    if not is_admin():
-        return jsonify({'error': 'Admin access required'}), 403
-    
+    if request.method == 'OPTIONS': return '', 204
+    if not is_admin(): return jsonify({'error': 'Admin access required'}), 403
     try:
         with get_db() as conn:
-            conn.execute('UPDATE ads SET status = ? WHERE id = ?', ('active', ad_id))
+            conn.execute("UPDATE ads SET status='active' WHERE id=?", (ad_id,))
             conn.commit()
         return jsonify({'message': 'Ad approved'})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/api/admin/reject_ad/<int:ad_id>', methods=['POST'])
+@app.route('/api/admin/reject_ad/<int:ad_id>', methods=['POST', 'OPTIONS'])
 @debug_session
 def reject_ad(ad_id):
-    if not is_admin():
-        return jsonify({'error': 'Admin access required'}), 403
-    
+    if request.method == 'OPTIONS': return '', 204
+    if not is_admin(): return jsonify({'error': 'Admin access required'}), 403
     try:
         with get_db() as conn:
-            conn.execute('UPDATE ads SET status = ? WHERE id = ?', ('rejected', ad_id))
+            conn.execute("UPDATE ads SET status='rejected' WHERE id=?", (ad_id,))
             conn.commit()
         return jsonify({'message': 'Ad rejected'})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/api/admin/auto_approve', methods=['POST'])
+@app.route('/api/admin/auto_approve', methods=['POST', 'OPTIONS'])
 @debug_session
 def auto_approve_old_ads():
-    if not is_admin():
-        return jsonify({'error': 'Admin access required'}), 403
-    
+    if request.method == 'OPTIONS': return '', 204
+    if not is_admin(): return jsonify({'error': 'Admin access required'}), 403
     try:
         with get_db() as conn:
-            cursor = conn.execute('''
-            UPDATE ads SET status = 'active'
-            WHERE status = 'pending'
-            AND created_at <= datetime('now', '-24 hours')
-            ''')
-            approved_count = cursor.rowcount
+            cursor = conn.execute("""UPDATE ads SET status='active'
+            WHERE status='pending' AND created_at <= datetime('now', '-24 hours')""")
             conn.commit()
-        
-        return jsonify({'message': f'{approved_count} ads auto-approved', 'count': approved_count})
+        return jsonify({'message': f'{cursor.rowcount} ads auto-approved', 'count': cursor.rowcount})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/api/admin/expire_old_ads', methods=['POST'])
+@app.route('/api/admin/expire_old_ads', methods=['POST', 'OPTIONS'])
 @debug_session
 def expire_old_ads():
-    if not is_admin():
-        return jsonify({'error': 'Admin access required'}), 403
-    
+    if request.method == 'OPTIONS': return '', 204
+    if not is_admin(): return jsonify({'error': 'Admin access required'}), 403
     try:
         with get_db() as conn:
-            cursor = conn.execute('''
-            UPDATE ads SET status = 'expired'
-            WHERE status = 'active'
-            AND expires_at <= datetime('now')
-            ''')
-            expired_count = cursor.rowcount
+            cursor = conn.execute("""UPDATE ads SET status='expired'
+            WHERE status='active' AND expires_at <= datetime('now')""")
             conn.commit()
-        
-        return jsonify({'message': f'{expired_count} ads expired', 'count': expired_count})
+        return jsonify({'message': f'{cursor.rowcount} ads expired', 'count': cursor.rowcount})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/api/admin/users', methods=['GET'])
+@app.route('/api/admin/users', methods=['GET', 'OPTIONS'])
 @debug_session
 def get_all_users():
-    if not is_admin():
-        return jsonify({'error': 'Admin access required'}), 403
-    
+    if request.method == 'OPTIONS': return '', 204
+    if not is_admin(): return jsonify({'error': 'Admin access required'}), 403
     try:
         with get_db() as conn:
-            users = conn.execute('''
-            SELECT id, username, email, age, location, account_type, role,
-                   vendor_paid, verified, created_at
-            FROM users ORDER BY created_at DESC
-            ''').fetchall()
-            
-            return jsonify({'users': [dict(user) for user in users]})
+            users = conn.execute('''SELECT id, username, email, age, location, account_type, role,
+            vendor_paid, verified, created_at FROM users ORDER BY created_at DESC''').fetchall()
+            return jsonify({'users': [dict(u) for u in users]})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/api/admin/create_admin', methods=['POST'])
+@app.route('/api/admin/create_admin', methods=['POST', 'OPTIONS'])
 @debug_session
 def create_admin():
-    if not is_admin():
-        return jsonify({'error': 'Admin access required'}), 403
-    
+    if request.method == 'OPTIONS': return '', 204
+    if not is_admin(): return jsonify({'error': 'Admin access required'}), 403
     try:
         data = request.json
-        username = data.get('username')
-        password = data.get('password')
-        email = data.get('email', '')
-        
-        if not username or not password:
-            return jsonify({'error': 'Username and password required'}), 400
-        
+        username, password = data.get('username'), data.get('password')
+        if not username or not password: return jsonify({'error': 'Username and password required'}), 400
         password_hash = generate_password_hash(password)
-        
         with get_db() as conn:
-            cursor = conn.execute('''
-            INSERT INTO users (username, password_hash, email, age, account_type, role, verified)
-            VALUES (?, ?, ?, '35-44', 'free', 'admin', 1)
-            ''', (username, password_hash, email))
-            
+            cursor = conn.execute('''INSERT INTO users (username, password_hash, email, age, account_type, role, verified)
+            VALUES (?, ?, ?, '35-44', 'vendor', 'admin', 1)''', (username, password_hash, data.get('email','')))
             admin_id = cursor.lastrowid
             conn.commit()
-        
-        return jsonify({'message': 'Admin created successfully', 'admin_id': admin_id, 'username': username}), 201
-        
+        return jsonify({'message': 'Admin created', 'admin_id': admin_id, 'username': username}), 201
     except sqlite3.IntegrityError:
         return jsonify({'error': 'Username already exists'}), 400
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/api/admin/update_role', methods=['POST'])
+@app.route('/api/admin/update_role', methods=['POST', 'OPTIONS'])
 @debug_session
 def update_user_role():
-    if not is_admin():
-        return jsonify({'error': 'Admin access required'}), 403
-    
+    if request.method == 'OPTIONS': return '', 204
+    if not is_admin(): return jsonify({'error': 'Admin access required'}), 403
     try:
         data = request.json
-        user_id = data.get('user_id')
-        new_role = data.get('role')
-        
-        if new_role not in ['user', 'admin']:
-            return jsonify({'error': 'Invalid role'}), 400
-        
+        if data.get('role') not in ['user', 'admin']: return jsonify({'error': 'Invalid role'}), 400
         with get_db() as conn:
-            conn.execute('UPDATE users SET role = ? WHERE id = ?', (new_role, user_id))
+            conn.execute('UPDATE users SET role=? WHERE id=?', (data['role'], data['user_id']))
             conn.commit()
-        
-        return jsonify({'message': f'Role updated to {new_role}'})
-        
+        return jsonify({'message': f"Role updated to {data['role']}"})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/api/admin/delete_user', methods=['DELETE'])
+@app.route('/api/admin/delete_user', methods=['DELETE', 'OPTIONS'])
 @debug_session
 def admin_delete_user():
-    if not is_admin():
-        return jsonify({'error': 'Admin access required'}), 403
-    
+    if request.method == 'OPTIONS': return '', 204
+    if not is_admin(): return jsonify({'error': 'Admin access required'}), 403
     try:
         user_id = request.json.get('user_id')
-        
         with get_db() as conn:
-            conn.execute('DELETE FROM ads WHERE user_id = ?', (user_id,))
-            conn.execute('DELETE FROM users WHERE id = ?', (user_id,))
+            conn.execute('DELETE FROM ads WHERE user_id=?', (user_id,))
+            conn.execute('DELETE FROM users WHERE id=?', (user_id,))
             conn.commit()
-        
         return jsonify({'message': 'User deleted successfully'})
-        
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-@app.route('/api/public_ads', methods=['GET'])
-def get_public_ads():
-    try:
-        category = request.args.get('category', 'all')
-        
-        with get_db() as conn:
-            if category == 'all':
-                ads = conn.execute('''
-                SELECT a.*, u.username FROM ads a
-                JOIN users u ON a.user_id = u.id
-                WHERE a.status = 'active' AND a.expires_at > datetime('now')
-                ORDER BY a.is_premium DESC, a.created_at DESC LIMIT 100
-                ''').fetchall()
-            else:
-                ads = conn.execute('''
-                SELECT a.*, u.username FROM ads a
-                JOIN users u ON a.user_id = u.id
-                WHERE a.status = 'active' AND a.category = ? AND a.expires_at > datetime('now')
-                ORDER BY a.is_premium DESC, a.created_at DESC LIMIT 100
-                ''', (category,)).fetchall()
-            
-            return jsonify({'ads': [dict(ad) for ad in ads]})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     print("=" * 50)
-    print("🚀 HookUpZA Backend Server Starting...")
+    print("HookUpZA Backend Starting...")
+    print("Server: http://127.0.0.1:5000")
     print("=" * 50)
-    print("📍 Server: http://127.0.0.1:5000")
-    print("🔐 Database: hookupza.db")
-    print("🔧 CORS enabled for: 127.0.0.1:5500, 5501")
-    print("=" * 50)
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
