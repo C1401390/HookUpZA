@@ -1,470 +1,178 @@
-I suspected that we will have a lot of issues with our app.py once we attempt to edit it. I changed file paths as well and I had to install  1301  deactivate
- 1302  rm -rf venv
- 1303  python3 -m venv venv
- 1304  source venv/bin/activate
- 1305  pip install flask flask-cors
- 
- This may have deleted our history if not mistaken and all our ads posted lol now we may need to restart. I really loved our user accounts and current ads. I was fascinated by the fact that I was watching them count days down to their expiry dates. BUt now lets fix our current situation.
 
+DEployed to Render on https://hookupza.onrender.com/index.html and looks live on the link.
+Unable to log in with any user account by default from our known Flast 
+AccountUsernamePasswordExpected behaviourAdminadminadmin123Posts go LIVE immediately, 30 daysVendorvendor1vendor123Posts go LIVE immediately, 30 daysFreetest1test123Posts wait for approval, 3 days
+GEtting the following
 
+❌ Network error. Make sure the Flask server is running at http://127.0.0.1:5000
 
+❌ Network error. Make sure the Flask server is running at http://127.0.0.1:5000
 
-┌──(zwelie㉿zwelie)-[~]
-└─$ cd /home/zwelie/Downloads/Business_2026/Servexa_site/Current_websites/Claude
-cd: no such file or directory: /home/zwelie/Downloads/Business_2026/Servexa_site/Current_websites/Claude
-┌──(zwelie㉿zwelie)-[~]
-└─$ cd /home/zwelie/Downloads/Business_2026/Servexa_site/Current_websites/      
-┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites]
-└─$ ls
-Backup  Grok_site  HookUpZA
-┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites]
-└─$ cd HookUpZA                                                                   
-┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]
-└─$ pwd
-/home/zwelie/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA
-┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]
-└─$ cd /home/zwelie/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA        
-┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]
-└─$ ls
-'???????????????????????????????????????'   PRIVACY-AND-MESSAGING-GUIDE.md  'admin.php)'        css              images        post-ad.html
- Logo-2nd-small.png                        'Page details'                    ads                dashboard.html   index.html    uploads
- Logo.png                                   admin-dashboard.html             app.py             edit-ad.html     js            venv
-'New State index page sections'             admin-users.html                 auth-modals.html   hookupza.db      my-ads.html   venv_backup
-┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]
-└─$ source venv/bin/activate
+and F12 LOgs "
 
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]
-└─$ pip freeze > requirements.txt
-
-
-
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]
-└─$ 
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]
-└─$ 
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]
-└─$ git init
-
-hint: Using 'master' as the name for the initial branch. This default branch name
-hint: is subject to change. To configure the initial branch name to use in all
-hint: of your new repositories, which will suppress this warning, call:
-hint:
-hint:   git config --global init.defaultBranch <name>
-hint:
-hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
-hint: 'development'. The just-created branch can be renamed via this command:
-hint:
-hint:   git branch -m <name>
-hint:
-hint: Disable this message with "git config set advice.defaultBranchName false"
-Initialized empty Git repository in /home/zwelie/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA/.git/
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]
-└─$ git branch -M main
-
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]
-└─$ nano .gitignore
-
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]
-└─$ git add .
-
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]
-└─$ git commit -m "Initial commit of HookUpZA multivendor website with Flask backend"
-
-[main (root-commit) 9947ebd] Initial commit of HookUpZA multivendor website with Flask backend
- Committer: zwelie <zwelie@zwelie.zwelie>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 41 files changed, 7255 insertions(+)
- create mode 100644 .gitignore
- create mode 100644 .vscode/settings.json
- create mode 100644 ???????????????????????????????????????
- create mode 100755 Logo-2nd-small.png
- create mode 100755 Logo.png
- create mode 100644 PRIVACY-AND-MESSAGING-GUIDE.md
- create mode 100755 Page details
- create mode 100644 admin-dashboard.html
- create mode 100644 admin-users.html
- create mode 100644 admin.php)
- create mode 100644 app.py
- create mode 100644 auth-modals.html
- create mode 100644 css/style.css
- create mode 100644 dashboard.html
- create mode 100644 edit-ad.html
- create mode 100644 images/514272707_122132576630943335_4145897255646117723_n.jpg
- create mode 100644 images/515373809_122229433952219653_1219881942302589549_n.jpg
- create mode 100644 images/515499179_122229415802219653_222212495915293651_n.jpg
- create mode 100644 images/515965373_122229892940219653_5349989227687190653_n.jpg
- create mode 100644 images/516491050_122229501764219653_5694778988310018543_n.jpg
- create mode 100644 images/516732285_122229982202219653_1825105925334871332_n.jpg
- create mode 100644 images/517375979_122229526226219653_6194049181453333927_n.jpg
- create mode 100644 images/517811549_122230071920219653_4264667857265586986_n.jpg
- create mode 100644 images/549595481_122245347230219653_3891496152364322217_n.jpg
- create mode 100644 images/550519070_122132576264943335_7377005954400681863_n.jpg
- create mode 100644 images/552430012_122198283776310251_5550531860143171928_n.jpg
- create mode 100644 images/574472021_122142462788943335_6215441750056714414_n.jpg
- create mode 100644 images/576866105_122143268066943335_6419309508794578023_n.jpg
- create mode 100644 images/577552054_122143609376943335_6064164386044553869_n.jpg
- create mode 100644 images/578811775_122143267958943335_8716996419623219400_n.jpg
- create mode 100644 images/580483990_122144098124943335_7718206686263554031_n.jpg
- create mode 100644 images/581619530_3133229766848389_3894983916564564851_n.jpg
- create mode 100644 images/588480560_749748941467433_7853412342615526553_n.jpg
- create mode 100644 images/590301721_122146774034943335_1839658348222594584_n.jpg
- create mode 100644 images/Onother1led.jpeg
- create mode 100644 images/Untitled.jpeg
- create mode 100644 index.html
- create mode 100644 js/auth.js
- create mode 100644 my-ads.html
- create mode 100644 post-ad.html
- create mode 100644 requirements.txt
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]
-└─$ git status
-
-On branch main
-nothing to commit, working tree clean
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]
-└─$ git remote add origin https://github.com/C1401390/HookUpZA.git
-git branch -M main
-git push -u origin main
-
-Username for 'https://github.com': c1401390
-Password for 'https://c1401390@github.com': 
-remote: Invalid username or token. Password authentication is not supported for Git operations.
-fatal: Authentication failed for 'https://github.com/C1401390/HookUpZA.git/'
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]
-└─$ git push -u origin main                                                          
-
-
-Username for 'https://github.com': c1401390
-Password for 'https://c1401390@github.com': 
-Enumerating objects: 47, done.
-Counting objects: 100% (47/47), done.
-Delta compression using up to 4 threads
-Compressing objects: 100% (42/42), done.
-Writing objects: 100% (47/47), 11.92 MiB | 2.13 MiB/s, done.
-Total 47 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
-remote: Resolving deltas: 100% (2/2), done.
-To https://github.com/C1401390/HookUpZA.git
- * [new branch]      main -> main
-branch 'main' set up to track 'origin/main'.
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]
-└─$ nano requirements.txt
-
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]                                                                               
-└─$ git add requirements.txt
-git commit -m "Fix requirements for Render deployment"
-git push
-
-[main 16df52d] Fix requirements for Render deployment
- Committer: zwelie <zwelie@zwelie.zwelie>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 1 file changed, 4 insertions(+), 769 deletions(-)
-Username for 'https://github.com': c1401390
-Password for 'https://c1401390@github.com': 
-Enumerating objects: 5, done.
-Counting objects: 100% (5/5), done.
-Delta compression using up to 4 threads
-Compressing objects: 100% (2/2), done.
-Writing objects: 100% (3/3), 300 bytes | 300.00 KiB/s, done.
-Total 3 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
-remote: Resolving deltas: 100% (1/1), completed with 1 local object.
-To https://github.com/C1401390/HookUpZA.git
-   9947ebd..16df52d  main -> main
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]                                                                               
-└─$ nano .gitignore                
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]                                                                               
-└─$ pwd                          
-/home/zwelie/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]                                                                               
-└─$ cd /home/zwelie/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA/home/zwelie/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA/GITIGNORE .gitignore
-cd: string not in pwd: /home/zwelie/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA/home/zwelie/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA/GITIGNORE
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]                                                                               
-└─$ cp /home/zwelie/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA/GITIGNORE .gitignore          
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]
-└─$ ls
-'???????????????????????????????????????'  'admin.php)'        images
- GITIGNORE                                  ads                index.html
- Logo-2nd-small.png                         app.py             js
- Logo.png                                   auth-modals.html   my-ads.html
-'New State index page sections'             css                post-ad.html
- PRIVACY-AND-MESSAGING-GUIDE.md             dashboard.html     requirements.txt
-'Page details'                              edit-ad.html       uploads
- admin-dashboard.html                      'git token'         venv
- admin-users.html                           hookupza.db        venv_backup
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]                                                                               
-└─$ pwd
-/home/zwelie/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]                                                                               
-└─$ cp /home/zwelie/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA/UPLOADS-GITKEEP.txt uploads/.gitkeep
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]                                                                               
-└─$ python3 app.py             
-Traceback (most recent call last):
-  File "/home/zwelie/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA/app.py", line 2, in <module>                                                            
-    from flask_cors import CORS
-ModuleNotFoundError: No module named 'flask_cors'
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]                                                                               
-└─$ pip install flask flask-cors 
-
-error: externally-managed-environment
-
-× This environment is externally managed
-╰─> To install Python packages system-wide, try apt install
-    python3-xyz, where xyz is the package you are trying to
-    install.
+Evem sign ups fail 
+auth.js:286 Signup error: TypeError: Failed to fetch
+    at HTMLFormElement.<anonymous> (auth.js:247:30)
     
-    If you wish to install a non-Kali-packaged Python package,
-    create a virtual environment using python3 -m venv path/to/venv.
-    Then use path/to/venv/bin/python and path/to/venv/bin/pip. Make
-    sure you have pypy3-venv installed.
-    
-    If you wish to install a non-Kali-packaged Python application,
-    it may be easiest to use pipx install xyz, which will manage a
-    virtual environment for you. Make sure you have pipx installed.
-    
-    For more information, refer to the following:
-    * https://www.kali.org/docs/general-use/python3-external-packages/
-    * /usr/share/doc/python3.13/README.venv
+     Page loaded, loading ads...
+index.html:1597 🔄 Loading ads from: http://127.0.0.1:5000/api/public_ads
+index.html:1599  GET http://127.0.0.1:5000/api/public_ads net::ERR_BLOCKED_BY_CLIENT
+loadLiveAds @ index.html:1599
+(anonymous) @ index.html:1916
+index.html:1668 ❌ Error loading ads: TypeError: Failed to fetch
+    at loadLiveAds (index.html:1599:25)
+    at HTMLDocument.<anonymous> (index.html:1916:5)
+loadLiveAds @ index.html:1668
+await in loadLiveAds
+(anonymous) @ index.html:1916
+index.html:1941  GET http://127.0.0.1:5000/api/check_auth net::ERR_BLOCKED_BY_CLIENT
+checkAdminStatus @ index.html:1941
+(anonymous) @ index.html:1917
+index.html:1967 Not logged in
 
-note: If you believe this is a mistake, please contact your Python installation or OS distribution provider. You can override this, at the risk of breaking your Python installation or OS, by passing --break-system-packages.
-hint: See PEP 668 for the detailed specification.
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]                                                                               
-└─$ ls                                               
-'???????????????????????????????????????'  'admin.php)'        index.html
- GITIGNORE                                  ads                js
- Logo-2nd-small.png                         app.py             my-ads.html
- Logo.png                                   auth-modals.html   post-ad.html
-'New State index page sections'             css                requirements.txt
- PRIVACY-AND-MESSAGING-GUIDE.md             dashboard.html     uploads
-'Page details'                              edit-ad.html       venv
- UPLOADS-GITKEEP.txt                       'git token'         venv_backup
- admin-dashboard.html                       hookupza.db
- admin-users.html                           images
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]
-└─$ deactivate
-┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]
-└─$ rm -rf venv
-┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]
-└─$ python3 -m venv venv
-┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]
-└─$ source venv/bin/activate
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]
-└─$ pip install flask flask-cors
-Collecting flask
+But locally it works perfectly with all the tests ran I have no complaints,even admin navbar (use NAVBAR-WITH-ADMIN.html) works when logged in as admin on insex and thsts wonderful. We won a battle today as long as REnder gavre us a working lonk and site is live. We will work on the failing bus one by one. LOoks like we have a lot to work on in app.py to make it ready for REnder. Perheps the REnder challenges will be the real hosting challenges we will have once we host with a provider on our permanent domain name. We have a lot to add on the site, policies, privacy pages, cookies,. WE will respect the fact that WE can not provide end to end encrypted messages at the moment, we will leave the meassages field like that for ow since we can not implement a messaging system. And yes our site will state that 
+"
+"HookUpZA does NOT require email signup and does NOT sell your data. However, like any website, we can see technical information (IP addresses, browser data). For maximum anonymity, use a VPN. Messages are private but NOT end-to-end encrypted like Signal or WhatsApp."
+"
+**WE have GOOD basic privacy:**
+- No emails required
+- Session-based auth
+- Can add HTTPS easily
+
+**WE are MISSING:**
+- Encrypted messaging
+- IP address protection
+- Data encryption at rest
+
+
+### ✅ WHAT YOU ALREADY HAVE (GOOD):
+1. **Session-based authentication** - Users stay logged in without exposing passwords
+2. **Server-side validation** - Flask checks permissions before allowing actions
+3. **HTTPS ready** - Your app can use SSL/TLS encryption
+4. **No email required** - Users can sign up anonymously
+
+### ❌ WHAT YOU DON'T HAVE (NEEDS WORK):
+1. **End-to-end encryption on messages** - Currently NO messaging system
+2. **IP address masking** - Server logs show user IPs
+3. **Data encryption at rest** - Database stores data in plain text
+4. **Secure file deletion** - Deleted photos remain on disk
+
+Page loaded, loading ads...
+index.html:1597 🔄 Loading ads from: http://127.0.0.1:5000/api/public_ads
+127.0.0.1:5000/api/public_ads:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+index.html:1668 ❌ Error loading ads: TypeError: Failed to fetch
+    at loadLiveAds (index.html:1599:25)
+    at HTMLDocument.<anonymous> (index.html:1916:5)
+loadLiveAds @ index.html:1668
+127.0.0.1:5000/api/check_auth:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+index.html:1967 Not logged in
+index.html:1597 🔄 Loading ads from: http://127.0.0.1:5000/api/public_ads
+127.0.0.1:5000/api/public_ads:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+index.html:1668 ❌ Error loading ads: TypeError: Failed to fetch
+    at loadLiveAds (index.html:1599:25)
+loadLiveAds @ index.html:1668
+127.0.0.1:5000/api/login:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+auth.js:340 Login error: TypeError: Failed to fetch
+    at HTMLFormElement.<anonymous> (auth.js:307:30)
+(anonymous) @ auth.js:340
+index.html:1597 🔄 Loading ads from: http://127.0.0.1:5000/api/public_ads
+127.0.0.1:5000/api/public_ads:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+index.html:1668 ❌ Error loading ads: TypeError: Failed to fetch
+    at loadLiveAds (index.html:1599:25)
+loadLiveAds @ index.html:1668
+index.html:1597 🔄 Loading ads from: http://127.0.0.1:5000/api/public_ads
+127.0.0.1:5000/api/public_ads:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+index.html:1668 ❌ Error loading ads: TypeError: Failed to fetch
+    at loadLiveAds (index.html:1599:25)
+loadLiveAds @ index.html:1668
+index.html:1597 🔄 Loading ads from: http://127.0.0.1:5000/api/public_ads
+127.0.0.1:5000/api/public_ads:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+index.html:1668 ❌ Error loading ads: TypeError: Failed to fetch
+    at loadLiveAds (index.html:1599:25)
+loadLiveAds @ index.html:1668
+auth.js:307  POST http://127.0.0.1:5000/api/login net::ERR_BLOCKED_BY_CLIENT
+(anonymous) @ auth.js:307
+auth.js:340 Login error: TypeError: Failed to fetch
+    at HTMLFormElement.<anonymous> (auth.js:307:30)
+(anonymous) @ auth.js:340
+index.html:1597 🔄 Loading ads from: http://127.0.0.1:5000/api/public_ads
+index.html:1599  GET http://127.0.0.1:5000/api/public_ads net::ERR_BLOCKED_BY_CLIENT
+loadLiveAds @ index.html:1599
+index.html:1668 ❌ Error loading ads: TypeError: Failed to fetch
+    at loadLiveAds (index.html:1599:25)"
+
+==> Downloading cache...
+==> It looks like we don't have access to your repo, but we'll try to clone it anyway.
+==> Cloning from https://github.com/C1401390/HookUpZA
+==> Checking out commit 12ffc7a81b46e202170127858c17e81c485353ae in branch main
+==> Downloaded 62MB in 3s. Extraction took 1s.
+==> Installing Python version 3.13.4...
+==> Using Python version 3.13.4 (default)
+==> Docs on specifying a Python version: https://render.com/docs/python-version
+==> Using Poetry version 2.1.3 (default)
+==> Docs on specifying a Poetry version: https://render.com/docs/poetry-version
+==> Running build command 'pip install -r requirements.txt'...
+Collecting Flask (from -r requirements.txt (line 1))
   Using cached flask-3.1.2-py3-none-any.whl.metadata (3.2 kB)
-Collecting flask-cors
+Collecting gunicorn (from -r requirements.txt (line 2))
+  Using cached gunicorn-25.0.3-py3-none-any.whl.metadata (5.5 kB)
+Collecting flask-cors (from -r requirements.txt (line 3))
   Using cached flask_cors-6.0.2-py3-none-any.whl.metadata (5.3 kB)
-Collecting blinker>=1.9.0 (from flask)
-  Using cached blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
-Collecting click>=8.1.3 (from flask)
-  Using cached click-8.3.1-py3-none-any.whl.metadata (2.6 kB)
-Collecting itsdangerous>=2.2.0 (from flask)
-  Using cached itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
-Collecting jinja2>=3.1.2 (from flask)
-  Using cached jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
-Collecting markupsafe>=2.1.1 (from flask)
-  Using cached markupsafe-3.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
-Collecting werkzeug>=3.1.0 (from flask)
+Collecting werkzeug (from -r requirements.txt (line 4))
   Using cached werkzeug-3.1.5-py3-none-any.whl.metadata (4.0 kB)
+Collecting blinker>=1.9.0 (from Flask->-r requirements.txt (line 1))
+  Using cached blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+Collecting click>=8.1.3 (from Flask->-r requirements.txt (line 1))
+  Using cached click-8.3.1-py3-none-any.whl.metadata (2.6 kB)
+Collecting itsdangerous>=2.2.0 (from Flask->-r requirements.txt (line 1))
+  Using cached itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+Collecting jinja2>=3.1.2 (from Flask->-r requirements.txt (line 1))
+  Using cached jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+Collecting markupsafe>=2.1.1 (from Flask->-r requirements.txt (line 1))
+  Using cached markupsafe-3.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+Collecting packaging (from gunicorn->-r requirements.txt (line 2))
+  Using cached packaging-26.0-py3-none-any.whl.metadata (3.3 kB)
 Using cached flask-3.1.2-py3-none-any.whl (103 kB)
+Using cached gunicorn-25.0.3-py3-none-any.whl (171 kB)
 Using cached flask_cors-6.0.2-py3-none-any.whl (13 kB)
+Using cached werkzeug-3.1.5-py3-none-any.whl (225 kB)
 Using cached blinker-1.9.0-py3-none-any.whl (8.5 kB)
 Using cached click-8.3.1-py3-none-any.whl (108 kB)
 Using cached itsdangerous-2.2.0-py3-none-any.whl (16 kB)
 Using cached jinja2-3.1.6-py3-none-any.whl (134 kB)
 Using cached markupsafe-3.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
-Using cached werkzeug-3.1.5-py3-none-any.whl (225 kB)
-Installing collected packages: markupsafe, itsdangerous, click, blinker, werkzeug, jinja2, flask, flask-cors
-Successfully installed blinker-1.9.0 click-8.3.1 flask-3.1.2 flask-cors-6.0.2 itsdangerous-2.2.0 jinja2-3.1.6 markupsafe-3.0.3 werkzeug-3.1.5
-(venv) ┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]                                                                               
-└─$ python3 app.py
-✅ Database initialized/updated successfully!
-==================================================
-🚀 HookUpZA Backend Server Starting...
-==================================================
-📍 Server: http://127.0.0.1:5000
-🔐 Database: hookupza.db
-🔧 CORS enabled for: 127.0.0.1:5500, 5501
-==================================================
- * Serving Flask app 'app'
- * Debug mode: off
-WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.                                                      
- * Running on all addresses (0.0.0.0)
- * Running on http://127.0.0.1:5000
- * Running on http://10.195.144.128:5000
-Press CTRL+C to quit
-
-🔍 SESSION DEBUG for check_admin_role:
-   Session ID: NONE
-   Username: NONE
-   Role: NONE
-127.0.0.1 - - [10/Feb/2026 22:32:17] "GET /api/admin/check_role HTTP/1.1" 200 -
-
-🔍 SESSION DEBUG for admin_all_ads:
-   Session ID: NONE
-   Username: NONE
-   Role: NONE
-127.0.0.1 - - [10/Feb/2026 22:32:17] "GET /api/admin/all_ads HTTP/1.1" 403 -
-
-🔍 SESSION DEBUG for check_auth:
-   Session ID: NONE
-   Username: NONE
-   Role: NONE
-127.0.0.1 - - [10/Feb/2026 22:32:20] "GET /api/check_auth HTTP/1.1" 401 -
-127.0.0.1 - - [10/Feb/2026 22:32:20] "GET /api/public_ads HTTP/1.1" 200 -
-
-🔍 SESSION DEBUG for check_admin_role:
-   Session ID: NONE
-   Username: NONE
-   Role: NONE
-127.0.0.1 - - [10/Feb/2026 22:32:33] "GET /api/admin/check_role HTTP/1.1" 200 -
-127.0.0.1 - - [10/Feb/2026 22:32:33] "GET /api/admin/users HTTP/1.1" 404 -
-
-🔍 SESSION DEBUG for check_auth:
-   Session ID: NONE
-   Username: NONE
-   Role: NONE
-127.0.0.1 - - [10/Feb/2026 22:32:40] "GET /api/check_auth HTTP/1.1" 401 -
-127.0.0.1 - - [10/Feb/2026 22:32:40] "GET /api/public_ads HTTP/1.1" 200 -
-
-🔍 SESSION DEBUG for logout:
-   Session ID: NONE
-   Username: NONE
-   Role: NONE
-✅ Logout successful: Unknown
-127.0.0.1 - - [10/Feb/2026 22:32:43] "POST /api/logout HTTP/1.1" 200 -
-
-🔍 SESSION DEBUG for check_auth:
-   Session ID: NONE
-   Username: NONE
-   Role: NONE
-127.0.0.1 - - [10/Feb/2026 22:32:43] "GET /api/check_auth HTTP/1.1" 401 -
-127.0.0.1 - - [10/Feb/2026 22:32:43] "GET /api/public_ads HTTP/1.1" 200 -
-127.0.0.1 - - [10/Feb/2026 22:33:12] "OPTIONS /api/login HTTP/1.1" 204 -
-
-🔍 SESSION DEBUG for login:
-   Session ID: NONE
-   Username: NONE
-   Role: NONE
-[2026-02-10 22:33:12,652] ERROR in app: Exception on /api/login [POST]
-Traceback (most recent call last):
-  File "/home/zwelie/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/zwelie/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/zwelie/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA/venv/lib/python3.13/site-packages/flask_cors/extension.py", line 176, in wrapped_function
-    return cors_after_request(app.make_response(f(*args, **kwargs)))
-                                                ~^^^^^^^^^^^^^^^^^
-  File "/home/zwelie/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/zwelie/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
-  File "/home/zwelie/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA/app.py", line 171, in login
-    if user and check_password_hash(user['password'], data['password']):
-                                    ~~~~^^^^^^^^^^^^
-IndexError: No item with that key
-127.0.0.1 - - [10/Feb/2026 22:33:12] "POST /api/login HTTP/1.1" 500 -
-127.0.0.1 - - [10/Feb/2026 22:33:43] "GET /api/public_ads HTTP/1.1" 200 -
+Using cached packaging-26.0-py3-none-any.whl (74 kB)
+Installing collected packages: packaging, markupsafe, itsdangerous, click, blinker, werkzeug, jinja2, gunicorn, Flask, flask-cors
+Successfully installed Flask-3.1.2 blinker-1.9.0 click-8.3.1 flask-cors-6.0.2 gunicorn-25.0.3 itsdangerous-2.2.0 jinja2-3.1.6 markupsafe-3.0.3 packaging-26.0 werkzeug-3.1.5
+[notice] A new release of pip is available: 25.1.1 -> 26.0.1
+[notice] To update, run: pip install --upgrade pip
+==> Uploading build...
+==> Uploaded in 10.9s. Compression took 2.8s
+==> Build successful 🎉
+==> Deploying...
+==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
+==> Running 'gunicorn app:app'
+[2026-02-11 22:40:41 +0000] [56] [INFO] Starting gunicorn 25.0.3
+[2026-02-11 22:40:41 +0000] [56] [INFO] Listening at: http://0.0.0.0:10000 (56)
+[2026-02-11 22:40:41 +0000] [56] [INFO] Using worker: sync
+[2026-02-11 22:40:41 +0000] [57] [INFO] Booting worker with pid: 57
+Added role column
+Database ready!
+127.0.0.1 - - [11/Feb/2026:22:40:42 +0000] "HEAD / HTTP/1.1" 200 0 "-" "Go-http-client/1.1"
+==> Your service is live 🎉
+127.0.0.1 - - [11/Feb/2026:22:40:46 +0000] "GET / HTTP/1.1" 200 0 "-" "Go-http-client/2.0"
+==> 
+==> ///////////////////////////////////////////////////////////
+==> 
+==> Available at your primary URL https://hookupza.onrender.com
+==> 
+==> ///////////////////////////////////////////////////////////
+127.0.0.1 - - [11/Feb/2026:22:41:28 +0000] "GET / HTTP/1.1" 200 0 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+127.0.0.1 - - [11/Feb/2026:22:41:34 +0000] "GET /css/style.css HTTP/1.1" 200 0 "https://hookupza.onrender.com/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+127.0.0.1 - - [11/Feb/2026:22:41:34 +0000] "GET /js/auth.js HTTP/1.1" 200 0 "https://hookupza.onrender.com/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+127.0.0.1 - - [11/Feb/2026:22:41:36 +0000] "GET /favicon.ico HTTP/1.1" 404 207 "https://hookupza.onrender.com/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+127.0.0.1 - - [11/Feb/2026:22:42:23 +0000] "GET /index.html HTTP/1.1" 200 0 "https://hookupza.onrender.com/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+127.0.0.1 - - [11/Feb/2026:22:42:24 +0000] "GET /css/style.css HTTP/1.1" 304 0 "https://hookupza.onrender.com/index.html" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+127.0.0.1 - - [11/Feb/2026:22:42:24 +0000] "GET /js/auth.js HTTP/1.1" 304 0 "https://hookupza.onrender.com/index.html" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
 
 
-
-
-┌──(zwelie㉿zwelie)-[~/Downloads/Business_2026/Servexa_site/Current_websites/HookUpZA]
-└─$ python3 -m http.server 5500
-Serving HTTP on 0.0.0.0 port 5500 (http://0.0.0.0:5500/) ...
-127.0.0.1 - - [10/Feb/2026 22:32:19] "GET /index.html HTTP/1.1" 304 -
-127.0.0.1 - - [10/Feb/2026 22:32:33] "GET /admin-users.html HTTP/1.1" 304 -
-
-
-
-
-
-index.html:1915 🚀 Page loaded, loading ads...
-index.html:1597 🔄 Loading ads from: http://127.0.0.1:5000/api/public_ads
-:5000/api/check_auth:1  Failed to load resource: the server responded with a status of 401 (UNAUTHORIZED)
-index.html:1605 📡 Loaded ads: 0
-index.html:1608 ❌ No ads found
-:5000/api/login:1  Failed to load resource: the server responded with a status of 500 (INTERNAL SERVER ERROR)
-auth.js:340 Login error: SyntaxError: Unexpected token '<', "<!doctype "... is not valid JSON
-(anonymous) @ auth.js:340
-index.html:1597 🔄 Loading ads from: http://127.0.0.1:5000/api/public_ads
-index.html:1605 📡 Loaded ads: 0
-index.html:1608 ❌ No ads found
-index.html:1597 🔄 Loading ads from: http://127.0.0.1:5000/api/public_ads
-index.html:1605 📡 Loaded ads: 0
-index.html:1608 ❌ No ads found
-index.html:1597 🔄 Loading ads from: http://127.0.0.1:5000/api/public_ads
-index.html:1605 📡 Loaded ads: 0
-index.html:1608 ❌ No ads found
-index.html:1597 🔄 Loading ads from: http://127.0.0.1:5000/api/public_ads
-:5000/api/public_ads:1  Failed to load resource: net::ERR_CONNECTION_REFUSED
-index.html:1668 ❌ Error loading ads: TypeError: Failed to fetch
-    at loadLiveAds (index.html:1599:25)
-loadLiveAds @ index.html:1668
-index.html:1597 🔄 Loading ads from: http://127.0.0.1:5000/api/public_ads
-:5000/api/public_ads:1  Failed to load resource: net::ERR_CONNECTION_REFUSED
-index.html:1668 ❌ Error loading ads: TypeError: Failed to fetch
-    at loadLiveAds (index.html:1599:25)
-loadLiveAds @ index.html:1668
-:5000/api/login:1  Failed to load resource: net::ERR_CONNECTION_REFUSED
-auth.js:340 Login error: TypeError: Failed to fetch
-    at HTMLFormElement.<anonymous> (auth.js:307:30)
-(anonymous) @ auth.js:340
-index.html:1597 🔄 Loading ads from: http://127.0.0.1:5000/api/public_ads
-index.html:1605 📡 Loaded ads: 0
-index.html:1608 ❌ No ads found
-index.html:1774 🔍 MODAL DEBUG - Starting...
-index.html:1775 📦 Card element: <div class=​"card h-100 premium" onclick=​"openDetailModal(this)​" data-title=​"Elite VIP Escort – Waterfront" data-desc=​"Luxury GFE & companionship. Discreet, professional, unforgettable. Available for dinner dates, travel companionship, and private sessions. Upscale clientele only." data-contact=​"WhatsApp:​ 082 999 8888 | Email:​ elite@vip.za" data-social=​"Instagram:​ @elitevipct | Twitter:​ @VIPWaterfront | OnlyFans:​ elitevip" data-online=​"Online now" data-services=​"GFE:​ Yes | Webcam:​ Yes | Video Calls:​ Yes | Sells Pics/​Videos:​ Yes | Extra:​ Travel companion, fetish friendly, dinner dates" data-gallery=​"https:​/​/​images.unsplash.com/​photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800,https:​/​/​images.unsplash.com/​photo-1519741497674-8c4d8f3c9d5c?auto=format&fit=crop&w=800,https:​/​/​images.unsplash.com/​photo-1554151229-14d0188d57c9?auto=format&fit=crop&w=800">​…​</div>​flex
-index.html:1787 📸 Gallery string (raw): https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800,https://images.unsplash.com/photo-1519741497674-8c4d8f3c9d5c?auto=format&fit=crop&w=800,https://images.unsplash.com/photo-1554151229-14d0188d57c9?auto=format&fit=crop&w=800
-index.html:1788 📸 Gallery string type: string
-index.html:1802 ⚠️ Services parse failed, using split: Array(3)
-index.html:1808 🔄 Attempting to parse gallery...
-index.html:1813 ❌ Gallery parse error: SyntaxError: Unexpected token 'h', "https://im"... is not valid JSON
-    at JSON.parse (<anonymous>)
-    at openDetailModal (index.html:1809:57)
-    at HTMLDivElement.onclick (index.html:268:292)
-openDetailModal @ index.html:1813
-onclick @ index.html:268
-index.html:1814 🔄 Trying fallback parsing...
-index.html:1818 ⚠️ Fake ad detected, using split: Array(3)
-index.html:1824 📸 Final gallery array: Array(3)
-index.html:1825 📸 Gallery length: 3
-index.html:1838 🖼️ Main image element: <img id=​"adDetailMainImage" src=​"https:​/​/​images.unsplash.com/​photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800" class=​"img-fluid rounded shadow mb-3" alt=​"Teaser">​
-index.html:1842 📷 First photo from gallery: https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800
-index.html:1843 📷 First photo type: string
-index.html:1844 📷 Starts with http? true
-index.html:1845 📷 Starts with /? false
-index.html:1849 🖼️ FINAL IMAGE URL: https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800
-index.html:1872 🎠 Building carousel with 3 photos
-index.html:1875 📷 Carousel photo 0: https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800
-index.html:1875 📷 Carousel photo 1: https://images.unsplash.com/photo-1519741497674-8c4d8f3c9d5c?auto=format&fit=crop&w=800
-index.html:1875 📷 Carousel photo 2: https://images.unsplash.com/photo-1554151229-14d0188d57c9?auto=format&fit=crop&w=800
-index.html:1893 ✅ Opening modal...
-index.html:1860 ✅ IMAGE LOADED SUCCESSFULLY: https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800
-:5000/api/login:1  Failed to load resource: the server responded with a status of 500 (INTERNAL SERVER ERROR)
-auth.js:340 Login error: SyntaxError: Unexpected token '<', "<!doctype "... is not valid JSON
-(anonymous) @ auth.js:340
-:5000/api/login:1  Failed to load resource: the server responded with a status of 500 (INTERNAL SERVER ERROR)
-auth.js:340 Login error: SyntaxError: Unexpected token '<', "<!doctype "... is not valid JSON
-(anonymous) @ auth.js:340
-index.html:1597 🔄 Loading ads from: http://127.0.0.1:5000/api/public_ads
-index.html:1605 📡 Loaded ads: 0
-index.html:1608 ❌ No ads found
