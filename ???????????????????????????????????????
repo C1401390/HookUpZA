@@ -1,178 +1,68 @@
-
-DEployed to Render on https://hookupza.onrender.com/index.html and looks live on the link.
-Unable to log in with any user account by default from our known Flast 
-AccountUsernamePasswordExpected behaviourAdminadminadmin123Posts go LIVE immediately, 30 daysVendorvendor1vendor123Posts go LIVE immediately, 30 daysFreetest1test123Posts wait for approval, 3 days
-GEtting the following
-
-❌ Network error. Make sure the Flask server is running at http://127.0.0.1:5000
-
-❌ Network error. Make sure the Flask server is running at http://127.0.0.1:5000
-
-and F12 LOgs "
-
-Evem sign ups fail 
-auth.js:286 Signup error: TypeError: Failed to fetch
-    at HTMLFormElement.<anonymous> (auth.js:247:30)
-    
-     Page loaded, loading ads...
-index.html:1597 🔄 Loading ads from: http://127.0.0.1:5000/api/public_ads
-index.html:1599  GET http://127.0.0.1:5000/api/public_ads net::ERR_BLOCKED_BY_CLIENT
-loadLiveAds @ index.html:1599
-(anonymous) @ index.html:1916
-index.html:1668 ❌ Error loading ads: TypeError: Failed to fetch
-    at loadLiveAds (index.html:1599:25)
-    at HTMLDocument.<anonymous> (index.html:1916:5)
-loadLiveAds @ index.html:1668
-await in loadLiveAds
-(anonymous) @ index.html:1916
-index.html:1941  GET http://127.0.0.1:5000/api/check_auth net::ERR_BLOCKED_BY_CLIENT
-checkAdminStatus @ index.html:1941
-(anonymous) @ index.html:1917
-index.html:1967 Not logged in
-
-But locally it works perfectly with all the tests ran I have no complaints,even admin navbar (use NAVBAR-WITH-ADMIN.html) works when logged in as admin on insex and thsts wonderful. We won a battle today as long as REnder gavre us a working lonk and site is live. We will work on the failing bus one by one. LOoks like we have a lot to work on in app.py to make it ready for REnder. Perheps the REnder challenges will be the real hosting challenges we will have once we host with a provider on our permanent domain name. We have a lot to add on the site, policies, privacy pages, cookies,. WE will respect the fact that WE can not provide end to end encrypted messages at the moment, we will leave the meassages field like that for ow since we can not implement a messaging system. And yes our site will state that 
-"
-"HookUpZA does NOT require email signup and does NOT sell your data. However, like any website, we can see technical information (IP addresses, browser data). For maximum anonymity, use a VPN. Messages are private but NOT end-to-end encrypted like Signal or WhatsApp."
-"
-**WE have GOOD basic privacy:**
-- No emails required
-- Session-based auth
-- Can add HTTPS easily
-
-**WE are MISSING:**
-- Encrypted messaging
-- IP address protection
-- Data encryption at rest
+Uncaught SyntaxError: Identifier 'API_BASE' has already been declared (at (index):1588:9)
+/api/check_auth:1  Failed to load resource: the server responded with a status of 401 ()
+/api/login:1  Failed to load resource: the server responded with a status of 401 ()
+auth.js:265 [AUTH ERROR] ❌ Invalid credentials
+/api/login:1  Failed to load resource: the server responded with a status of 401 ()
+auth.js:265 [AUTH ERROR] ❌ Invalid credentials
 
 
-### ✅ WHAT YOU ALREADY HAVE (GOOD):
-1. **Session-based authentication** - Users stay logged in without exposing passwords
-2. **Server-side validation** - Flask checks permissions before allowing actions
-3. **HTTPS ready** - Your app can use SSL/TLS encryption
-4. **No email required** - Users can sign up anonymously
+I have tried all the default known created accounts with USERNAME : admin and PASS : admin123, test1 PASS: test123 and vendor1 Pass: vendor123
 
-### ❌ WHAT YOU DON'T HAVE (NEEDS WORK):
-1. **End-to-end encryption on messages** - Currently NO messaging system
-2. **IP address masking** - Server logs show user IPs
-3. **Data encryption at rest** - Database stores data in plain text
-4. **Secure file deletion** - Deleted photos remain on disk
+For admin its different it says the above but for other users its says the following 
 
-Page loaded, loading ads...
-index.html:1597 🔄 Loading ads from: http://127.0.0.1:5000/api/public_ads
-127.0.0.1:5000/api/public_ads:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
-index.html:1668 ❌ Error loading ads: TypeError: Failed to fetch
-    at loadLiveAds (index.html:1599:25)
-    at HTMLDocument.<anonymous> (index.html:1916:5)
-loadLiveAds @ index.html:1668
-127.0.0.1:5000/api/check_auth:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
-index.html:1967 Not logged in
-index.html:1597 🔄 Loading ads from: http://127.0.0.1:5000/api/public_ads
-127.0.0.1:5000/api/public_ads:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
-index.html:1668 ❌ Error loading ads: TypeError: Failed to fetch
-    at loadLiveAds (index.html:1599:25)
-loadLiveAds @ index.html:1668
-127.0.0.1:5000/api/login:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
-auth.js:340 Login error: TypeError: Failed to fetch
-    at HTMLFormElement.<anonymous> (auth.js:307:30)
-(anonymous) @ auth.js:340
-index.html:1597 🔄 Loading ads from: http://127.0.0.1:5000/api/public_ads
-127.0.0.1:5000/api/public_ads:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
-index.html:1668 ❌ Error loading ads: TypeError: Failed to fetch
-    at loadLiveAds (index.html:1599:25)
-loadLiveAds @ index.html:1668
-index.html:1597 🔄 Loading ads from: http://127.0.0.1:5000/api/public_ads
-127.0.0.1:5000/api/public_ads:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
-index.html:1668 ❌ Error loading ads: TypeError: Failed to fetch
-    at loadLiveAds (index.html:1599:25)
-loadLiveAds @ index.html:1668
-index.html:1597 🔄 Loading ads from: http://127.0.0.1:5000/api/public_ads
-127.0.0.1:5000/api/public_ads:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
-index.html:1668 ❌ Error loading ads: TypeError: Failed to fetch
-    at loadLiveAds (index.html:1599:25)
-loadLiveAds @ index.html:1668
-auth.js:307  POST http://127.0.0.1:5000/api/login net::ERR_BLOCKED_BY_CLIENT
-(anonymous) @ auth.js:307
-auth.js:340 Login error: TypeError: Failed to fetch
-    at HTMLFormElement.<anonymous> (auth.js:307:30)
-(anonymous) @ auth.js:340
-index.html:1597 🔄 Loading ads from: http://127.0.0.1:5000/api/public_ads
-index.html:1599  GET http://127.0.0.1:5000/api/public_ads net::ERR_BLOCKED_BY_CLIENT
-loadLiveAds @ index.html:1599
-index.html:1668 ❌ Error loading ads: TypeError: Failed to fetch
-    at loadLiveAds (index.html:1599:25)"
+/api/login:1  Failed to load resource: the server responded with a status of 401 ()
+auth.js:265 [AUTH ERROR] ❌ Invalid credentials
+/api/login:1  Failed to load resource: the server responded with a status of 401 ()
+auth.js:265 [AUTH ERROR] ❌ Invalid credentials
+auth.js:97  POST https://hookupza.onrender.com/api/login 401 (Unauthorized)
+handleLogin @ auth.js:97
+(anonymous) @ auth.js:175
+auth.js:265 [AUTH ERROR] ❌ Invalid credentials
+auth.js:97  POST https://hookupza.onrender.com/api/login 401 (Unauthorized)
+handleLogin @ auth.js:97
+(anonymous) @ auth.js:175
+auth.js:265 [AUTH ERROR] ❌ Invalid credentials
+auth.js:97  POST https://hookupza.onrender.com/api/login 401 (Unauthorized)
+handleLogin @ auth.js:97
+(anonymous) @ auth.js:175
+auth.js:265 [AUTH ERROR] ❌ Invalid credentials
+auth.js:97  POST https://hookupza.onrender.com/api/login 401 (Unauthorized)
+handleLogin @ auth.js:97
+(anonymous) @ auth.js:175
+auth.js:265 [AUTH ERROR] ❌ Invalid credentials
 
-==> Downloading cache...
-==> It looks like we don't have access to your repo, but we'll try to clone it anyway.
-==> Cloning from https://github.com/C1401390/HookUpZA
-==> Checking out commit 12ffc7a81b46e202170127858c17e81c485353ae in branch main
-==> Downloaded 62MB in 3s. Extraction took 1s.
-==> Installing Python version 3.13.4...
-==> Using Python version 3.13.4 (default)
-==> Docs on specifying a Python version: https://render.com/docs/python-version
-==> Using Poetry version 2.1.3 (default)
-==> Docs on specifying a Poetry version: https://render.com/docs/poetry-version
-==> Running build command 'pip install -r requirements.txt'...
-Collecting Flask (from -r requirements.txt (line 1))
-  Using cached flask-3.1.2-py3-none-any.whl.metadata (3.2 kB)
-Collecting gunicorn (from -r requirements.txt (line 2))
-  Using cached gunicorn-25.0.3-py3-none-any.whl.metadata (5.5 kB)
-Collecting flask-cors (from -r requirements.txt (line 3))
-  Using cached flask_cors-6.0.2-py3-none-any.whl.metadata (5.3 kB)
-Collecting werkzeug (from -r requirements.txt (line 4))
-  Using cached werkzeug-3.1.5-py3-none-any.whl.metadata (4.0 kB)
-Collecting blinker>=1.9.0 (from Flask->-r requirements.txt (line 1))
-  Using cached blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
-Collecting click>=8.1.3 (from Flask->-r requirements.txt (line 1))
-  Using cached click-8.3.1-py3-none-any.whl.metadata (2.6 kB)
-Collecting itsdangerous>=2.2.0 (from Flask->-r requirements.txt (line 1))
-  Using cached itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
-Collecting jinja2>=3.1.2 (from Flask->-r requirements.txt (line 1))
-  Using cached jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
-Collecting markupsafe>=2.1.1 (from Flask->-r requirements.txt (line 1))
-  Using cached markupsafe-3.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
-Collecting packaging (from gunicorn->-r requirements.txt (line 2))
-  Using cached packaging-26.0-py3-none-any.whl.metadata (3.3 kB)
-Using cached flask-3.1.2-py3-none-any.whl (103 kB)
-Using cached gunicorn-25.0.3-py3-none-any.whl (171 kB)
-Using cached flask_cors-6.0.2-py3-none-any.whl (13 kB)
-Using cached werkzeug-3.1.5-py3-none-any.whl (225 kB)
-Using cached blinker-1.9.0-py3-none-any.whl (8.5 kB)
-Using cached click-8.3.1-py3-none-any.whl (108 kB)
-Using cached itsdangerous-2.2.0-py3-none-any.whl (16 kB)
-Using cached jinja2-3.1.6-py3-none-any.whl (134 kB)
-Using cached markupsafe-3.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
-Using cached packaging-26.0-py3-none-any.whl (74 kB)
-Installing collected packages: packaging, markupsafe, itsdangerous, click, blinker, werkzeug, jinja2, gunicorn, Flask, flask-cors
-Successfully installed Flask-3.1.2 blinker-1.9.0 click-8.3.1 flask-cors-6.0.2 gunicorn-25.0.3 itsdangerous-2.2.0 jinja2-3.1.6 markupsafe-3.0.3 packaging-26.0 werkzeug-3.1.5
-[notice] A new release of pip is available: 25.1.1 -> 26.0.1
-[notice] To update, run: pip install --upgrade pip
-==> Uploading build...
-==> Uploaded in 10.9s. Compression took 2.8s
-==> Build successful 🎉
-==> Deploying...
-==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
-==> Running 'gunicorn app:app'
-[2026-02-11 22:40:41 +0000] [56] [INFO] Starting gunicorn 25.0.3
-[2026-02-11 22:40:41 +0000] [56] [INFO] Listening at: http://0.0.0.0:10000 (56)
-[2026-02-11 22:40:41 +0000] [56] [INFO] Using worker: sync
-[2026-02-11 22:40:41 +0000] [57] [INFO] Booting worker with pid: 57
-Added role column
-Database ready!
-127.0.0.1 - - [11/Feb/2026:22:40:42 +0000] "HEAD / HTTP/1.1" 200 0 "-" "Go-http-client/1.1"
-==> Your service is live 🎉
-127.0.0.1 - - [11/Feb/2026:22:40:46 +0000] "GET / HTTP/1.1" 200 0 "-" "Go-http-client/2.0"
-==> 
-==> ///////////////////////////////////////////////////////////
-==> 
-==> Available at your primary URL https://hookupza.onrender.com
-==> 
-==> ///////////////////////////////////////////////////////////
-127.0.0.1 - - [11/Feb/2026:22:41:28 +0000] "GET / HTTP/1.1" 200 0 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
-127.0.0.1 - - [11/Feb/2026:22:41:34 +0000] "GET /css/style.css HTTP/1.1" 200 0 "https://hookupza.onrender.com/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
-127.0.0.1 - - [11/Feb/2026:22:41:34 +0000] "GET /js/auth.js HTTP/1.1" 200 0 "https://hookupza.onrender.com/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
-127.0.0.1 - - [11/Feb/2026:22:41:36 +0000] "GET /favicon.ico HTTP/1.1" 404 207 "https://hookupza.onrender.com/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
-127.0.0.1 - - [11/Feb/2026:22:42:23 +0000] "GET /index.html HTTP/1.1" 200 0 "https://hookupza.onrender.com/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
-127.0.0.1 - - [11/Feb/2026:22:42:24 +0000] "GET /css/style.css HTTP/1.1" 304 0 "https://hookupza.onrender.com/index.html" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
-127.0.0.1 - - [11/Feb/2026:22:42:24 +0000] "GET /js/auth.js HTTP/1.1" 304 0 "https://hookupza.onrender.com/index.html" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+Attempted to create a new free user and this happened 
+auth.js:97  POST https://hookupza.onrender.com/api/login 401 (Unauthorized)
+handleLogin @ auth.js:97
+(anonymous) @ auth.js:175
+auth.js:265 [AUTH ERROR] ❌ Invalid credentials
+auth.js:265 [AUTH ERROR] Please fill in all required fields
 
+Tried to create a new vendor user
+
+[AUTH ERROR] Please fill in all required fields
+2(index):1447 Uncaught ReferenceError: selectAccountType is not defined
+    at HTMLDivElement.onclick ((index):1447:156)
+onclick @ (index):1447
+3(index):1430 Uncaught ReferenceError: selectAccountType is not defined
+    at HTMLDivElement.onclick ((index):1430:154)
+onclick @ (index):1430
+(index):1447 Uncaught ReferenceError: selectAccountType is not defined
+    at HTMLDivElement.onclick ((index):1447:156)
+onclick @ (index):1447
+auth.js:265 [AUTH ERROR] Please fill in all required fields
+
+visited post ad on https://hookupza.onrender.com/post-ad.html
+it alloewed me to visit the page although not logged in logged in
+
+Uncaught SyntaxError: Identifier 'API_BASE' has already been declared (at post-ad.html:324:11)
+auth.js:17  
+
+Added details on the form, uploaded an image and tried to post but couldnt 
+post-ad.html:324 Uncaught SyntaxError: Identifier 'API_BASE' has already been declared (at post-ad.html:324:11)
+auth.js:17  GET https://hookupza.onrender.com/api/check_auth 401 (Unauthorized)
+checkAuthStatus @ auth.js:17
+(anonymous) @ auth.js:235
+
+Admin-dashboard.html cannot be visited I tried ❌ Admin access required
 

@@ -86,6 +86,21 @@ def init_db():
             FOREIGN KEY (user_id) REFERENCES users (id)
         )
         ''')
+        # ✅ Auto-seed default accounts if DB is empty (fixes Render fresh deployments)
+        cursor.execute("SELECT COUNT(*) FROM users")
+        if cursor.fetchone()[0] == 0:
+            from werkzeug.security import generate_password_hash as gph
+            accounts = [
+                ('admin',   gph('admin123'),   'vendor', 'admin'),
+                ('vendor1', gph('vendor123'),  'vendor', 'user'),
+                ('test1',   gph('test123'),    'free',   'user'),
+            ]
+            for username, pw_hash, acc_type, role in accounts:
+                cursor.execute('''INSERT INTO users (username, password_hash, age, account_type, role, verified)
+                VALUES (?, ?, '25-34', ?, ?, 1)''', (username, pw_hash, acc_type, role))
+            conn.commit()
+            print("✅ Seeded default accounts: admin/admin123, vendor1/vendor123, test1/test123")
+
         conn.commit()
         print("Database ready!")
 
