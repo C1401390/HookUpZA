@@ -8,18 +8,25 @@
  * - No duplicate declarations
  */
 
-// ============================================
-// API URL - AUTO DETECTS LOCAL vs RENDER
-// ============================================
-const API_BASE = (window.location.hostname === '127.0.0.1' || 
-                  window.location.hostname === 'localhost')
-    ? 'http://127.0.0.1:5000'
-    : '';   // Empty string = relative URL (same server on Render)
 
-// Expose globally so inline scripts in HTML can use it
-window.API_BASE = API_BASE;
+// API_BASE is set by hookupza.js. This is a safety fallback only.
+if (typeof API_BASE === 'undefined') {
+    var API_BASE = (window.location.hostname === '127.0.0.1' || 
+                    window.location.hostname === 'localhost')
+        ? 'http://127.0.0.1:5000' : '';
+    window.API_BASE = API_BASE;
+}
 
-console.log(`🔧 API_BASE set to: "${API_BASE || '(relative - Render mode)'}"`);
+// ============================================
+// API_BASE is declared in js/hookupza.js (loaded before this file)
+// Do NOT redeclare it here - just use the global window.API_BASE
+// If hookupza.js isn't loaded, fall back gracefully
+if (typeof API_BASE === 'undefined') {
+    var API_BASE = (window.location.hostname === '127.0.0.1' || 
+                    window.location.hostname === 'localhost')
+        ? 'http://127.0.0.1:5000' : '';
+    window.API_BASE = API_BASE;
+}
 
 // ============================================
 // ACCOUNT TYPE SELECTOR (called from index.html onclick)

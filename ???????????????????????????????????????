@@ -1,47 +1,70 @@
-Logged as admin with default created admin details admin/admin123
-First thing I did is to visit the https://hookupza.onrender.com/admin-users.html since the admin dashboard was on navbar as it used to and what a lovely view, recognised ne as admin after login. The users page keeps loading although lended to it but does not show any users on the database or signed up. 
-Uncaught ReferenceError: API_BASE is not defined
-    at admin-users.html:107:17
+🔧 API_BASE: (relative - production mode)
+auth.js:1 Uncaught SyntaxError: Identifier 'API_BASE' has already been declared (at auth.js:1:1)
+index.html:1917 🚀 Page loaded, loading ads...
+index.html:1599 🔄 Loading ads from: /api/public_ads
+index.html:1607 📡 Loaded ads: 0
+index.html:1610 ❌ No ads found
+3index.html:78 Uncaught ReferenceError: handleLogout is not defined
+    at HTMLAnchorElement.onclick (index.html:78:103)
     
     
-Attempted to create an admin but failed admin-users.html:107 Uncaught ReferenceError: API_BASE is not defined
-    at admin-users.html:107:17
+admin-users.html:111 Uncaught ReferenceError: API_BASE is not defined
+    at admin-users.html:111:17
     
-WEnt back to main page 🔧 API_BASE set to: "(relative - Render mode)"
-index.html:1915 🚀 Page loaded, loading ads...
-index.html:1597 🔄 Loading ads from: ${API_BASE}/api/public_ads
-index.html:1599  GET https://hookupza.onrender.com/$%7BAPI_BASE%7D/api/public_ads 404 (Not Found)
-loadLiveAds @ index.html:1599
-(anonymous) @ index.html:1916
-index.html:1668 ❌ Error loading ads: Error: HTTP 404
-    at loadLiveAds (index.html:1601:15)
-loadLiveAds @ index.html:1668
-await in loadLiveAds
-(anonymous) @ index.html:1916
-index.html:1941  GET https://hookupza.onrender.com/$%7BAPI_BASE%7D/api/check_auth 404 (Not Found)
+auth.js:1 Uncaught SyntaxError: Identifier 'API_BASE' has already been declared (at auth.js:1:1)
+post-ad.html:379 ✅ Photo uploaded: /uploads/1_20260212064116_Onother1led.jpeg
+post-ad.html:379 ✅ Photo uploaded: /uploads/1_20260212064117_588480560_749748941467433_7853412342615526553_n.jpg
+post-ad.html:379 ✅ Photo uploaded: /uploads/1_20260212064118_580483990_122144098124943335_7718206686263554031_n.jpg
 
-Attempted to post an ad on index as logged adim and selected pics
+auth.js:1 Uncaught SyntaxError: Identifier 'API_BASE' has already been declared (at auth.js:1:1)
 
-🔧 API_BASE set to: "(relative - Render mode)"
-post-ad.html:378 ✅ Photo uploaded: /uploads/1_20260212060639_Untitled.jpeg
-post-ad.html:378 ✅ Photo uploaded: /uploads/1_20260212060639_Onother1led.jpeg
-post-ad.html:378 ✅ Photo uploaded: /uploads/1_20260212060640_552430012_122198283776310251_5550531860143171928_n.jpg
+Loads back to my ads my-ads.html and nothing laods there after redirection. Went to dashboard.html. auth.js:1 Uncaught SyntaxError: Identifier 'API_BASE' has already been declared (at auth.js:1:1). Dashboard shows ad posted and alive as admin but cannot edit, delete or do any further.
+ 
+Index loaded the new ad posted as logged in
+🔧 API_BASE: (relative - production mode)
+auth.js:1 Uncaught SyntaxError: Identifier 'API_BASE' has already been declared (at auth.js:1:1)
+index.html:1917 🚀 Page loaded, loading ads...
+index.html:1599 🔄 Loading ads from: /api/public_ads
+index.html:1607 📡 Loaded ads: 1
+index.html:1618 💎 Premium ads: 1
+index.html:1619 🆓 Free ads: 0
+index.html:1693 Ad 1: Using photo: /uploads/1_20260212064116_Onother1led.jpeg
+index.html:1627 ✅ Premium ads loaded, fake ads removed
+index.html:1776 🔍 MODAL DEBUG - Starting...
+index.html:1777 📦 Card element: <div class=​"card h-100 premium" onclick=​"openDetailModal(this)​" data-title=​"Dave dee" data-desc=​"Hallow ladies" data-contact=​"0712965468" data-social data-online=​"Online now" data-services=​"["WhatsApp Available","Phone Calls","Video Calls","Incalls","Outcalls","Sells Pictures","Sells Videos","Roleplay","Massage","Verified"]​" data-gallery=​"["/​uploads/​1_20260212064116_Onother1led.jpeg","/​uploads/​1_20260212064117_588480560_749748941467433_7853412342615526553_n.jpg","/​uploads/​1_20260212064118_580483990_122144098124943335_7718206686263554031_n.jpg"]​" data-rate=​"500" data-location=​"Bellville" data-expires=​"2026-03-14 06:​41:​54">​…​</div>​flex
+index.html:1789 📸 Gallery string (raw): ["/uploads/1_20260212064116_Onother1led.jpeg","/uploads/1_20260212064117_588480560_749748941467433_7853412342615526553_n.jpg","/uploads/1_20260212064118_580483990_122144098124943335_7718206686263554031_n.jpg"]
+index.html:1790 📸 Gallery string type: string
+index.html:1810 🔄 Attempting to parse gallery...
+index.html:1812 ✅ Gallery parsed successfully: (3) ['/uploads/1_20260212064116_Onother1led.jpeg', '/uploads/1_20260212064117_588480560_749748941467433_7853412342615526553_n.jpg', '/uploads/1_20260212064118_580483990_122144098124943335_7718206686263554031_n.jpg']
+index.html:1826 📸 Final gallery array: (3) ['/uploads/1_20260212064116_Onother1led.jpeg', '/uploads/1_20260212064117_588480560_749748941467433_7853412342615526553_n.jpg', '/uploads/1_20260212064118_580483990_122144098124943335_7718206686263554031_n.jpg']
+index.html:1827 📸 Gallery length: 3
+index.html:1840 🖼️ Main image element: <img id=​"adDetailMainImage" src=​"/​uploads/​1_20260212064116_Onother1led.jpeg" class=​"img-fluid rounded shadow mb-3" alt=​"Teaser">​
+index.html:1844 📷 First photo from gallery: /uploads/1_20260212064116_Onother1led.jpeg
+index.html:1845 📷 First photo type: string
+index.html:1846 📷 Starts with http? false
+index.html:1847 📷 Starts with /? true
+index.html:1851 🖼️ FINAL IMAGE URL: /uploads/1_20260212064116_Onother1led.jpeg
+index.html:1874 🎠 Building carousel with 3 photos
+index.html:1877 📷 Carousel photo 0: /uploads/1_20260212064116_Onother1led.jpeg
+index.html:1877 📷 Carousel photo 1: /uploads/1_20260212064117_588480560_749748941467433_7853412342615526553_n.jpg
+index.html:1877 📷 Carousel photo 2: /uploads/1_20260212064118_580483990_122144098124943335_7718206686263554031_n.jpg
+index.html:1895 ✅ Opening modal...
+index.html:1862 ✅ IMAGE LOADED SUCCESSFULLY: https://hookupza.onrender.com/uploads/1_20260212064116_Onother1led.jpeg
 
-Ad posted succesfully as usual but this time was on Render and it redirected me to https://hookupza.onrender.com/my-ads.html, page could not load or show anything. Same thing done by users page I visited.
-I visisted https://hookupza.onrender.com/dashboard.html and nothing was loaded here although ad confirmed succesful load. Dashboard has nothing to display.
-dashboard.html:230 Uncaught ReferenceError: isUserLoggedIn is not defined
-    at HTMLDocument.<anonymous> (dashboard.html:230:7)
+
+Admin page loaded https://hookupza.onrender.com/admin-dashboard.html and page shows nothing on it. No loaded ads, nothing to approve,Nothing to display or visible.
+
+admin-dashboard.html:111 Uncaught ReferenceError: API_BASE is not defined
+    at admin-dashboard.html:111:17
     
     
-Index page after that 🚀 Page loaded, loading ads...
-index.html:1597 🔄 Loading ads from: ${API_BASE}/api/public_ads
-index.html:1599  GET https://hookupza.onrender.com/$%7BAPI_BASE%7D/api/public_ads 404 (Not Found)
-loadLiveAds @ index.html:1599
-(anonymous) @ index.html:1916
-index.html:1668 ❌ Error loading ads: Error: HTTP 404
-    at loadLiveAds (index.html:1601:15)
-loadLiveAds @ index.html:1668
-await in loadLiveAds
-(anonymous) @ index.html:1916
-index.html:1941  GET https://hookupza.onrender.com/$%7BAPI_BASE%7D/api/check_auth 404 (Not Found)
+Can not log out as admin once logged in, ads posted succesfull as per the logs amnd on index ads are displayed.
+
+🆓 Free ads: 0
+index.html:1693 Ad 2: Using photo: /uploads/1_20260212064857_515499179_122229415802219653_222212495915293651_n.jpg
+index.html:1693 Ad 1: Using photo: /uploads/1_20260212064116_Onother1led.jpeg
+index.html:1627 ✅ Premium ads loaded, fake ads removed
+index.html:78 Uncaught ReferenceError: handleLogout is not defined
+    at HTMLAnchorElement.onclick (index.html:78:103)
+
 
