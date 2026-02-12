@@ -30,35 +30,36 @@
   </nav>
 
   <div class="container-fluid py-4">
-    
+
     <!-- Create New Admin -->
     <div class="card bg-dark border-warning mb-4 shadow">
       <div class="card-header admin-header text-white border-0">
         <h5 class="mb-0"><i class="bi bi-shield-plus"></i> Create New Admin</h5>
       </div>
       <div class="card-body">
-        <form id="createAdminForm" class="row g-3">
+        <div class="row g-3">
           <div class="col-md-4">
             <label class="form-label small">Username</label>
-            <input type="text" class="form-control bg-secondary text-light border-0" 
-                   id="newAdminUsername" placeholder="admin_username" required>
+            <input type="text" class="form-control bg-secondary text-light border-0"
+                   id="newAdminUsername" placeholder="admin_username">
           </div>
           <div class="col-md-3">
             <label class="form-label small">Password</label>
-            <input type="password" class="form-control bg-secondary text-light border-0" 
-                   id="newAdminPassword" placeholder="Min 8 characters" required>
+            <input type="password" class="form-control bg-secondary text-light border-0"
+                   id="newAdminPassword" placeholder="Min 8 characters">
           </div>
           <div class="col-md-3">
             <label class="form-label small">Email (optional)</label>
-            <input type="email" class="form-control bg-secondary text-light border-0" 
+            <input type="email" class="form-control bg-secondary text-light border-0"
                    id="newAdminEmail" placeholder="admin@email.com">
           </div>
           <div class="col-md-2 d-flex align-items-end">
-            <button type="submit" class="btn btn-warning w-100 fw-bold">
+            <button class="btn btn-warning w-100 fw-bold" onclick="createAdmin()">
               <i class="bi bi-plus-circle"></i> Create Admin
             </button>
           </div>
-        </form>
+        </div>
+        <div id="createMsg" class="mt-2" style="display:none"></div>
       </div>
     </div>
 
@@ -77,14 +78,14 @@
           <table class="table table-dark table-hover mb-0">
             <thead class="table-secondary">
               <tr>
-                <th width="5%">ID</th>
-                <th width="15%">Username</th>
-                <th width="15%">Email</th>
-                <th width="10%">Age</th>
-                <th width="10%">Type</th>
-                <th width="10%">Role</th>
-                <th width="15%">Created</th>
-                <th width="20%">Actions</th>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Type</th>
+                <th>Role</th>
+                <th>Created</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody id="usersTableBody">
@@ -99,28 +100,24 @@
         </div>
       </div>
     </div>
-
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-    // API URL - auto detects local vs Render
-    </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/hookupza.js"></script>
   <script>
-    const API = `${API_BASE}/api`;
 
-    // Check if current user is admin
+    // Check admin on load
     async function checkAdmin() {
       try {
-        const res = await fetch(`${API}/admin/check_role`, { credentials: 'include' });
-        const data = await res.json();
-        
+        var res = await fetch(API_BASE + '/api/admin/check_role', { credentials: 'include' });
+        var data = await res.json();
         if (!data.is_admin) {
           alert('❌ Admin access required. Please login as admin.');
           window.location.href = 'index.html';
         } else {
-          console.log('✅ Admin access confirmed:', data.username);
+          console.log('✅ Admin confirmed:', data.username);
         }
-      } catch (error) {
+      } catch(e) {
         alert('❌ Failed to verify admin status');
         window.location.href = 'index.html';
       }
@@ -129,184 +126,129 @@
     // Load all users
     async function loadUsers() {
       try {
-        const res = await fetch(`${API}/admin/users`, { credentials: 'include' });
-        const data = await res.json();
-        
-        const tbody = document.getElementById('usersTableBody');
-        
+        var res = await fetch(API_BASE + '/api/admin/users', { credentials: 'include' });
+        var data = await res.json();
+        var tbody = document.getElementById('usersTableBody');
+
         if (!data.users || data.users.length === 0) {
           tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted py-4">No users found</td></tr>';
           return;
         }
-        
-        tbody.innerHTML = data.users.map(user => `
-          <tr>
-            <td>${user.id}</td>
-            <td>
-              <strong>${user.username}</strong>
-              ${user.verified ? '<i class="bi bi-patch-check-fill text-success ms-1"></i>' : ''}
-            </td>
-            <td class="small">${user.email || '<span class="text-muted">-</span>'}</td>
-            <td class="small">${user.age || '-'}</td>
-            <td>
-              <span class="badge ${user.account_type === 'vendor' ? 'bg-warning text-dark' : 'bg-info'}">
-                ${user.account_type}
-              </span>
-            </td>
-            <td>
-              <span class="badge ${user.role === 'admin' ? 'bg-danger' : 'bg-secondary'}">
-                ${user.role || 'user'}
-              </span>
-            </td>
-            <td class="small">${formatDate(user.created_at)}</td>
-            <td>
-              <div class="btn-group btn-group-sm">
-                ${user.role !== 'admin' ? `
-                  <button class="btn btn-outline-warning" onclick="makeAdmin(${user.id}, '${user.username}')" 
-                          title="Make admin">
-                    <i class="bi bi-shield-fill-plus"></i>
-                  </button>
-                ` : `
-                  <button class="btn btn-outline-secondary" onclick="removeAdmin(${user.id}, '${user.username}')"
-                          title="Remove admin">
-                    <i class="bi bi-shield-fill-x"></i>
-                  </button>
-                `}
-                <button class="btn btn-outline-danger" onclick="deleteUser(${user.id}, '${user.username}')"
-                        title="Delete user">
-                  <i class="bi bi-trash"></i>
-                </button>
-              </div>
-            </td>
-          </tr>
-        `).join('');
-        
+
+        tbody.innerHTML = data.users.map(function(user) {
+          return '<tr>' +
+            '<td>' + user.id + '</td>' +
+            '<td><strong>' + user.username + '</strong>' +
+              (user.verified ? ' <i class="bi bi-patch-check-fill text-success"></i>' : '') +
+            '</td>' +
+            '<td class="small">' + (user.email || '<span class="text-muted">-</span>') + '</td>' +
+            '<td class="small">' + (user.age || '-') + '</td>' +
+            '<td><span class="badge ' + (user.account_type==='vendor' ? 'bg-warning text-dark' : 'bg-info') + '">' + (user.account_type||'free') + '</span></td>' +
+            '<td><span class="badge ' + (user.role==='admin' ? 'bg-danger' : 'bg-secondary') + '">' + (user.role||'user') + '</span></td>' +
+            '<td class="small">' + formatDate(user.created_at) + '</td>' +
+            '<td>' +
+              '<div class="btn-group btn-group-sm">' +
+                (user.role !== 'admin'
+                  ? '<button class="btn btn-outline-warning" onclick="makeAdmin(' + user.id + ',\'' + user.username + '\')" title="Make admin"><i class="bi bi-shield-fill-plus"></i></button>'
+                  : '<button class="btn btn-outline-secondary" onclick="removeAdmin(' + user.id + ',\'' + user.username + '\')" title="Remove admin"><i class="bi bi-shield-fill-x"></i></button>') +
+                '<button class="btn btn-outline-danger" onclick="deleteUser(' + user.id + ',\'' + user.username + '\')" title="Delete"><i class="bi bi-trash"></i></button>' +
+              '</div>' +
+            '</td>' +
+          '</tr>';
+        }).join('');
+
         console.log('✅ Loaded', data.users.length, 'users');
-        
-      } catch (error) {
-        console.error('Failed to load users:', error);
-        alert('❌ Failed to load users');
+      } catch(e) {
+        console.error('Failed to load users:', e);
+        document.getElementById('usersTableBody').innerHTML =
+          '<tr><td colspan="8" class="text-center text-danger py-4">Failed to load users: ' + e.message + '</td></tr>';
       }
     }
 
     // Create admin
-    document.getElementById('createAdminForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      const username = document.getElementById('newAdminUsername').value.trim();
-      const password = document.getElementById('newAdminPassword').value;
-      const email = document.getElementById('newAdminEmail').value.trim();
-      
-      if (password.length < 8) {
-        alert('❌ Password must be at least 8 characters');
-        return;
-      }
-      
+    async function createAdmin() {
+      var username = document.getElementById('newAdminUsername').value.trim();
+      var password = document.getElementById('newAdminPassword').value;
+      var email    = document.getElementById('newAdminEmail').value.trim();
+      var msg = document.getElementById('createMsg');
+
+      if (!username || !password) { showMsg('Please enter username and password', 'danger'); return; }
+      if (password.length < 8)    { showMsg('Password must be at least 8 characters', 'danger'); return; }
+
       try {
-        const res = await fetch(`${API}/admin/create_admin`, {
+        var res = await fetch(API_BASE + '/api/admin/create_admin', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include',
           body: JSON.stringify({ username, password, email })
         });
-        
-        const data = await res.json();
-        
+        var data = await res.json();
         if (res.ok) {
-          alert(`✅ Admin created successfully!\n\nUsername: ${username}\nPassword: (saved securely)`);
-          document.getElementById('createAdminForm').reset();
+          showMsg('✅ Admin "' + username + '" created successfully!', 'success');
+          document.getElementById('newAdminUsername').value = '';
+          document.getElementById('newAdminPassword').value = '';
+          document.getElementById('newAdminEmail').value = '';
           loadUsers();
         } else {
-          alert(`❌ Failed to create admin: ${data.error}`);
+          showMsg('❌ ' + (data.error || 'Failed to create admin'), 'danger');
         }
-      } catch (error) {
-        alert('❌ Network error. Make sure Flask is running.');
+      } catch(e) {
+        showMsg('❌ Network error: ' + e.message, 'danger');
       }
-    });
+    }
 
-    // Make user admin
+    function showMsg(text, type) {
+      var el = document.getElementById('createMsg');
+      el.className = 'alert alert-' + type + ' py-2';
+      el.textContent = text;
+      el.style.display = 'block';
+      setTimeout(function(){ el.style.display = 'none'; }, 4000);
+    }
+
     async function makeAdmin(userId, username) {
-      if (!confirm(`Grant admin access to "${username}"?`)) return;
-      
-      try {
-        const res = await fetch(`${API}/admin/update_role`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
-          body: JSON.stringify({ user_id: userId, role: 'admin' })
-        });
-        
-        if (res.ok) {
-          alert(`✅ ${username} is now an admin`);
-          loadUsers();
-        } else {
-          alert('❌ Failed to update role');
-        }
-      } catch (error) {
-        alert('❌ Network error');
-      }
+      if (!confirm('Grant admin access to "' + username + '"?')) return;
+      var res = await fetch(API_BASE + '/api/admin/update_role', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ user_id: userId, role: 'admin' })
+      });
+      if (res.ok) { alert('✅ ' + username + ' is now an admin'); loadUsers(); }
+      else alert('❌ Failed to update role');
     }
 
-    // Remove admin role
     async function removeAdmin(userId, username) {
-      if (!confirm(`Remove admin access from "${username}"?`)) return;
-      
-      try {
-        const res = await fetch(`${API}/admin/update_role`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
-          body: JSON.stringify({ user_id: userId, role: 'user' })
-        });
-        
-        if (res.ok) {
-          alert(`✅ Admin access removed from ${username}`);
-          loadUsers();
-        } else {
-          alert('❌ Failed to update role');
-        }
-      } catch (error) {
-        alert('❌ Network error');
-      }
+      if (!confirm('Remove admin access from "' + username + '"?')) return;
+      var res = await fetch(API_BASE + '/api/admin/update_role', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ user_id: userId, role: 'user' })
+      });
+      if (res.ok) { alert('✅ Admin removed from ' + username); loadUsers(); }
+      else alert('❌ Failed to update role');
     }
 
-    // Delete user
     async function deleteUser(userId, username) {
-      if (!confirm(`⚠️ Delete user "${username}"?\n\nThis will:\n• Delete the user account\n• Delete all their ads\n• Cannot be undone`)) {
-        return;
-      }
-      
-      // Double confirmation
-      if (!confirm(`Are you ABSOLUTELY SURE you want to delete "${username}"?`)) {
-        return;
-      }
-      
-      try {
-        const res = await fetch(`${API}/admin/delete_user`, {
-          method: 'DELETE',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
-          body: JSON.stringify({ user_id: userId })
-        });
-        
-        if (res.ok) {
-          alert(`✅ User "${username}" has been deleted`);
-          loadUsers();
-        } else {
-          alert('❌ Failed to delete user');
-        }
-      } catch (error) {
-        alert('❌ Network error');
-      }
+      if (!confirm('⚠️ Delete user "' + username + '"?\nThis will delete the account and all their ads.\nCannot be undone.')) return;
+      if (!confirm('Are you ABSOLUTELY SURE you want to delete "' + username + '"?')) return;
+      var res = await fetch(API_BASE + '/api/admin/delete_user', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ user_id: userId })
+      });
+      if (res.ok) { alert('✅ User "' + username + '" deleted'); loadUsers(); }
+      else alert('❌ Failed to delete user');
     }
 
-    // Format date
-    function formatDate(dateStr) {
-      const date = new Date(dateStr);
-      return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    function formatDate(d) {
+      if (!d) return '-';
+      var dt = new Date(d);
+      return dt.toLocaleDateString() + ' ' + dt.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
     }
 
-    // Initialize
+    // Init
     checkAdmin();
     loadUsers();
   </script>
