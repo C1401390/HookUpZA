@@ -1,68 +1,47 @@
-Uncaught SyntaxError: Identifier 'API_BASE' has already been declared (at (index):1588:9)
-/api/check_auth:1  Failed to load resource: the server responded with a status of 401 ()
-/api/login:1  Failed to load resource: the server responded with a status of 401 ()
-auth.js:265 [AUTH ERROR] ❌ Invalid credentials
-/api/login:1  Failed to load resource: the server responded with a status of 401 ()
-auth.js:265 [AUTH ERROR] ❌ Invalid credentials
+Logged as admin with default created admin details admin/admin123
+First thing I did is to visit the https://hookupza.onrender.com/admin-users.html since the admin dashboard was on navbar as it used to and what a lovely view, recognised ne as admin after login. The users page keeps loading although lended to it but does not show any users on the database or signed up. 
+Uncaught ReferenceError: API_BASE is not defined
+    at admin-users.html:107:17
+    
+    
+Attempted to create an admin but failed admin-users.html:107 Uncaught ReferenceError: API_BASE is not defined
+    at admin-users.html:107:17
+    
+WEnt back to main page 🔧 API_BASE set to: "(relative - Render mode)"
+index.html:1915 🚀 Page loaded, loading ads...
+index.html:1597 🔄 Loading ads from: ${API_BASE}/api/public_ads
+index.html:1599  GET https://hookupza.onrender.com/$%7BAPI_BASE%7D/api/public_ads 404 (Not Found)
+loadLiveAds @ index.html:1599
+(anonymous) @ index.html:1916
+index.html:1668 ❌ Error loading ads: Error: HTTP 404
+    at loadLiveAds (index.html:1601:15)
+loadLiveAds @ index.html:1668
+await in loadLiveAds
+(anonymous) @ index.html:1916
+index.html:1941  GET https://hookupza.onrender.com/$%7BAPI_BASE%7D/api/check_auth 404 (Not Found)
 
+Attempted to post an ad on index as logged adim and selected pics
 
-I have tried all the default known created accounts with USERNAME : admin and PASS : admin123, test1 PASS: test123 and vendor1 Pass: vendor123
+🔧 API_BASE set to: "(relative - Render mode)"
+post-ad.html:378 ✅ Photo uploaded: /uploads/1_20260212060639_Untitled.jpeg
+post-ad.html:378 ✅ Photo uploaded: /uploads/1_20260212060639_Onother1led.jpeg
+post-ad.html:378 ✅ Photo uploaded: /uploads/1_20260212060640_552430012_122198283776310251_5550531860143171928_n.jpg
 
-For admin its different it says the above but for other users its says the following 
-
-/api/login:1  Failed to load resource: the server responded with a status of 401 ()
-auth.js:265 [AUTH ERROR] ❌ Invalid credentials
-/api/login:1  Failed to load resource: the server responded with a status of 401 ()
-auth.js:265 [AUTH ERROR] ❌ Invalid credentials
-auth.js:97  POST https://hookupza.onrender.com/api/login 401 (Unauthorized)
-handleLogin @ auth.js:97
-(anonymous) @ auth.js:175
-auth.js:265 [AUTH ERROR] ❌ Invalid credentials
-auth.js:97  POST https://hookupza.onrender.com/api/login 401 (Unauthorized)
-handleLogin @ auth.js:97
-(anonymous) @ auth.js:175
-auth.js:265 [AUTH ERROR] ❌ Invalid credentials
-auth.js:97  POST https://hookupza.onrender.com/api/login 401 (Unauthorized)
-handleLogin @ auth.js:97
-(anonymous) @ auth.js:175
-auth.js:265 [AUTH ERROR] ❌ Invalid credentials
-auth.js:97  POST https://hookupza.onrender.com/api/login 401 (Unauthorized)
-handleLogin @ auth.js:97
-(anonymous) @ auth.js:175
-auth.js:265 [AUTH ERROR] ❌ Invalid credentials
-
-Attempted to create a new free user and this happened 
-auth.js:97  POST https://hookupza.onrender.com/api/login 401 (Unauthorized)
-handleLogin @ auth.js:97
-(anonymous) @ auth.js:175
-auth.js:265 [AUTH ERROR] ❌ Invalid credentials
-auth.js:265 [AUTH ERROR] Please fill in all required fields
-
-Tried to create a new vendor user
-
-[AUTH ERROR] Please fill in all required fields
-2(index):1447 Uncaught ReferenceError: selectAccountType is not defined
-    at HTMLDivElement.onclick ((index):1447:156)
-onclick @ (index):1447
-3(index):1430 Uncaught ReferenceError: selectAccountType is not defined
-    at HTMLDivElement.onclick ((index):1430:154)
-onclick @ (index):1430
-(index):1447 Uncaught ReferenceError: selectAccountType is not defined
-    at HTMLDivElement.onclick ((index):1447:156)
-onclick @ (index):1447
-auth.js:265 [AUTH ERROR] Please fill in all required fields
-
-visited post ad on https://hookupza.onrender.com/post-ad.html
-it alloewed me to visit the page although not logged in logged in
-
-Uncaught SyntaxError: Identifier 'API_BASE' has already been declared (at post-ad.html:324:11)
-auth.js:17  
-
-Added details on the form, uploaded an image and tried to post but couldnt 
-post-ad.html:324 Uncaught SyntaxError: Identifier 'API_BASE' has already been declared (at post-ad.html:324:11)
-auth.js:17  GET https://hookupza.onrender.com/api/check_auth 401 (Unauthorized)
-checkAuthStatus @ auth.js:17
-(anonymous) @ auth.js:235
-
-Admin-dashboard.html cannot be visited I tried ❌ Admin access required
+Ad posted succesfully as usual but this time was on Render and it redirected me to https://hookupza.onrender.com/my-ads.html, page could not load or show anything. Same thing done by users page I visited.
+I visisted https://hookupza.onrender.com/dashboard.html and nothing was loaded here although ad confirmed succesful load. Dashboard has nothing to display.
+dashboard.html:230 Uncaught ReferenceError: isUserLoggedIn is not defined
+    at HTMLDocument.<anonymous> (dashboard.html:230:7)
+    
+    
+Index page after that 🚀 Page loaded, loading ads...
+index.html:1597 🔄 Loading ads from: ${API_BASE}/api/public_ads
+index.html:1599  GET https://hookupza.onrender.com/$%7BAPI_BASE%7D/api/public_ads 404 (Not Found)
+loadLiveAds @ index.html:1599
+(anonymous) @ index.html:1916
+index.html:1668 ❌ Error loading ads: Error: HTTP 404
+    at loadLiveAds (index.html:1601:15)
+loadLiveAds @ index.html:1668
+await in loadLiveAds
+(anonymous) @ index.html:1916
+index.html:1941  GET https://hookupza.onrender.com/$%7BAPI_BASE%7D/api/check_auth 404 (Not Found)
 
