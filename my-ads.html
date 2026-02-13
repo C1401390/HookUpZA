@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,233 +7,173 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <style>
-    body { background: #0a0a0a; }
-    .ad-card { background: #1a1a1a; border: 1px solid #333; border-radius: 12px; margin-bottom: 16px; padding: 20px; }
+    * { box-sizing: border-box; }
+    html, body { background: #111; color: #eee; margin: 0; padding: 0; font-family: sans-serif; }
+    nav { background: #000; border-bottom: 2px solid #dc3545; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; }
+    nav a.brand { color: #eee; text-decoration: none; font-size: 1.4rem; font-weight: 700; }
+    nav a.brand span { color: #dc3545; }
+    .nav-btns a { background: #dc3545; color: #fff; border: none; padding: 6px 14px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; margin-left: 8px; }
+    .nav-btns a.outline { background: transparent; border: 1px solid #aaa; color: #aaa; }
+    .page { max-width: 900px; margin: 30px auto; padding: 0 16px; }
+    h2 { color: #dc3545; margin-bottom: 20px; }
+    .count { background: #444; color: #eee; padding: 3px 10px; border-radius: 20px; font-size: 0.85rem; }
+    #statusBar { padding: 10px 16px; margin-bottom: 16px; border-radius: 6px; display: none; font-weight: 600; }
+    .ad-card { background: #1e1e1e; border: 1px solid #333; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
     .ad-card:hover { border-color: #dc3545; }
-    .ad-thumb { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; background: #222; }
-    .ad-thumb-placeholder { width: 80px; height: 80px; border-radius: 8px; background: #222; display: flex; align-items: center; justify-content: center; }
+    .ad-top { display: flex; gap: 14px; align-items: flex-start; }
+    .ad-thumb { width: 76px; height: 76px; border-radius: 8px; object-fit: cover; background: #2a2a2a; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .ad-thumb img { width: 76px; height: 76px; border-radius: 8px; object-fit: cover; }
+    .ad-info { flex: 1; min-width: 0; }
+    .ad-title { font-size: 1.1rem; font-weight: 700; color: #fff; margin: 0 0 6px; }
+    .ad-meta { font-size: 0.8rem; color: #888; margin-bottom: 8px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .badge { display: inline-block; padding: 3px 9px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin-right: 4px; }
+    .badge-success { background: #198754; color: #fff; }
+    .badge-warning { background: #ffc107; color: #000; }
+    .badge-secondary { background: #6c757d; color: #fff; }
+    .badge-danger { background: #dc3545; color: #fff; }
+    .badge-premium { background: #ffc107; color: #000; }
+    .ad-actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+    .btn-edit { background: transparent; border: 1px solid #ffc107; color: #ffc107; padding: 5px 14px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; text-decoration: none; }
+    .btn-edit:hover { background: #ffc107; color: #000; }
+    .btn-delete { background: transparent; border: 1px solid #dc3545; color: #dc3545; padding: 5px 14px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
+    .btn-delete:hover { background: #dc3545; color: #fff; }
+    .pending-note { color: #ffc107; font-size: 0.8rem; margin-top: 6px; }
+    .empty { text-align: center; padding: 60px 20px; color: #666; }
+    .empty i { font-size: 4rem; display: block; margin-bottom: 16px; }
+    .btn-post { background: #dc3545; color: #fff; border: none; padding: 12px 28px; border-radius: 8px; font-size: 1rem; cursor: pointer; text-decoration: none; display: inline-block; margin-top: 12px; }
   </style>
 </head>
-<body class="text-light">
+<body>
 
-  <!-- Simple navbar -->
-  <nav class="navbar navbar-dark bg-black border-bottom border-danger">
-    <div class="container-fluid">
-      <a class="navbar-brand fw-bold" href="index.html">
-        <span class="text-danger">Hook</span><span class="text-white">UpZA</span>
-      </a>
-      <div class="d-flex gap-2">
-        <a href="post-ad.html" class="btn btn-danger btn-sm">
-          <i class="bi bi-plus-circle me-1"></i>Post New Ad
-        </a>
-        <a href="dashboard.html" class="btn btn-outline-light btn-sm">
-          <i class="bi bi-speedometer2 me-1"></i>Dashboard
-        </a>
-        <a href="index.html" class="btn btn-outline-secondary btn-sm">
-          <i class="bi bi-house me-1"></i>Home
-        </a>
-      </div>
+  <nav>
+    <a class="brand" href="index.html"><span>Hook</span>UpZA</a>
+    <div class="nav-btns">
+      <a href="post-ad.html">+ Post Ad</a>
+      <a href="dashboard.html" class="outline">Dashboard</a>
     </div>
   </nav>
 
-  <!-- Status bar -->
-  <div id="statusBar" style="display:none" class="alert rounded-0 mb-0 py-2 text-center"></div>
-
-  <div class="container py-4">
-
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <h3 class="text-danger fw-bold mb-0">
-        <i class="bi bi-megaphone-fill me-2"></i>My Ads
-      </h3>
-      <span id="countBadge" class="badge bg-secondary">Loading...</span>
+  <div class="page">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+      <h2 style="margin:0;"><i class="bi bi-megaphone-fill"></i> My Ads</h2>
+      <span class="count" id="countBadge">Loading...</span>
     </div>
 
-    <div id="main">
-      <div class="text-center py-5">
-        <div class="spinner-border text-danger"></div>
-        <p class="mt-3 text-muted">Loading your ads...</p>
-      </div>
-    </div>
-
+    <div id="statusBar"></div>
+    <div id="main"><p style="color:#888;text-align:center;padding:40px;">Loading your ads...</p></div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- hookupza.js sets API_BASE only — no auth.js to avoid conflicts -->
   <script src="js/hookupza.js"></script>
   <script>
-    // ── helper: safe HTML escape ──────────────────────────────
-    function h(s) {
-      return String(s == null ? '' : s)
-        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
-        .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-    }
-
-    // ── status bar ────────────────────────────────────────────
     function showMsg(msg, type) {
       var el = document.getElementById('statusBar');
-      el.className = 'alert alert-' + type + ' rounded-0 mb-0 py-2 text-center';
-      el.textContent = msg;
+      var colors = { success:'#0f5132', danger:'#5c1a1a', warning:'#6b4f00', info:'#0a3d5c' };
+      el.style.background = colors[type] || '#333';
       el.style.display = 'block';
+      el.textContent = msg;
       if (type === 'success') setTimeout(function(){ el.style.display='none'; }, 3000);
     }
 
-    // ── main init ─────────────────────────────────────────────
     async function init() {
-      // 1. Auth check
       try {
         var r = await fetch(API_BASE + '/api/check_auth', { credentials: 'include' });
-        if (!r.ok) { window.location.href = 'index.html'; return; }
         var d = await r.json();
         if (!d.logged_in) { window.location.href = 'index.html'; return; }
       } catch(e) { window.location.href = 'index.html'; return; }
-
-      // 2. Load ads
-      loadMyAds();
+      loadAds();
     }
 
-    async function loadMyAds() {
+    async function loadAds() {
       try {
         var r = await fetch(API_BASE + '/api/my_ads', { credentials: 'include' });
-        if (!r.ok) {
-          if (r.status === 401) { window.location.href = 'index.html'; return; }
-          throw new Error('Server error ' + r.status);
-        }
+        if (!r.ok) { if (r.status===401) { window.location.href='index.html'; return; } throw new Error('HTTP '+r.status); }
         var data = await r.json();
         var ads = data.ads || [];
-        console.log('Loaded', ads.length, 'ads, rendering...');
-        render(ads);
+        console.log('Got', ads.length, 'ads');
+        document.getElementById('countBadge').textContent = ads.length + ' ad' + (ads.length!==1?'s':'');
+        renderAds(ads);
       } catch(e) {
-        console.error('loadMyAds:', e);
-        document.getElementById('main').innerHTML =
-          '<div class="alert alert-danger">Failed to load ads: ' + h(e.message) + '</div>';
+        document.getElementById('main').innerHTML = '<p style="color:#dc3545;padding:20px;">Error: ' + e.message + '</p>';
       }
     }
 
-    function render(ads) {
-      var badge = document.getElementById('countBadge');
-      var main  = document.getElementById('main');
-
-      badge.textContent = ads.length + (ads.length === 1 ? ' ad' : ' ads');
-      badge.className = 'badge ' + (ads.length ? 'bg-danger' : 'bg-secondary');
-
-      if (ads.length === 0) {
-        main.innerHTML =
-          '<div class="text-center py-5">' +
-            '<i class="bi bi-inbox display-1 text-muted d-block mb-3"></i>' +
-            '<h4 class="text-muted">No ads yet</h4>' +
-            '<p class="text-muted">Post your first ad to get started!</p>' +
-            '<a href="post-ad.html" class="btn btn-danger mt-2">' +
-              '<i class="bi bi-plus-circle me-2"></i>Post Your First Ad' +
-            '</a>' +
-          '</div>';
+    function renderAds(ads) {
+      var el = document.getElementById('main');
+      if (!ads.length) {
+        el.innerHTML = '<div class="empty"><i class="bi bi-inbox"></i><p>No ads yet</p><a href="post-ad.html" class="btn-post">Post Your First Ad</a></div>';
         return;
       }
-
-      var parts = [];
+      var html = '';
       for (var i = 0; i < ads.length; i++) {
-        parts.push(renderCard(ads[i]));
+        html += buildCard(ads[i]);
       }
-      main.innerHTML = parts.join('');
-      console.log('Rendered', ads.length, 'ad cards into #main');
+      el.innerHTML = html;
+      console.log('Rendered', ads.length, 'cards, container height:', el.offsetHeight);
     }
 
-    function renderCard(ad) {
-      // Parse photos
+    function buildCard(ad) {
       var photos = [];
-      try {
-        if (ad.photos) {
-          photos = (typeof ad.photos === 'string') ? JSON.parse(ad.photos) : ad.photos;
-        }
-      } catch(e) {}
+      try { if (ad.photos) photos = JSON.parse(ad.photos); } catch(e){}
 
-      // Days left
-      var daysLeft = -1;
-      if (ad.expires_at) {
-        daysLeft = Math.floor((new Date(ad.expires_at) - Date.now()) / 86400000);
-      }
+      var daysLeft = ad.expires_at ? Math.floor((new Date(ad.expires_at) - Date.now()) / 86400000) : -1;
 
-      // Status
-      var statusInfo = {
-        active:   ['success',   'check-circle-fill',  'Active'],
-        pending:  ['warning',   'clock-fill',         'Pending Review'],
-        expired:  ['secondary', 'x-circle',           'Expired'],
-        rejected: ['danger',    'x-octagon-fill',     'Rejected']
-      }[ad.status] || ['secondary', 'question', ad.status || 'Unknown'];
+      var statusLabel = { active:'Active', pending:'Pending Review', expired:'Expired', rejected:'Rejected' }[ad.status] || ad.status;
+      var statusClass = { active:'badge-success', pending:'badge-warning', expired:'badge-secondary', rejected:'badge-danger' }[ad.status] || 'badge-secondary';
 
       var thumb = photos[0]
-        ? '<img src="' + h(photos[0]) + '" class="ad-thumb me-3" alt="" onerror="this.style.opacity=0">'
-        : '<div class="ad-thumb-placeholder me-3"><i class="bi bi-image text-muted fs-4"></i></div>';
+        ? '<div class="ad-thumb"><img src="' + photos[0] + '" onerror="this.parentElement.innerHTML=\'<i class=bi bi-image style=color:#555;font-size:1.8rem></i>\'"></div>'
+        : '<div class="ad-thumb"><i class="bi bi-image" style="color:#555;font-size:1.8rem;"></i></div>';
 
-      var daysHtml = (daysLeft >= 0)
-        ? '<span class="' + (daysLeft <= 3 ? 'text-warning' : 'text-muted') + '">' +
-            '<i class="bi bi-hourglass me-1"></i>' + daysLeft + ' days left</span>'
-        : '<span class="text-danger"><i class="bi bi-hourglass-bottom me-1"></i>Expired</span>';
+      var daysStr = daysLeft >= 0
+        ? '<span style="color:' + (daysLeft<=3?'#ffc107':'#888') + '">' + daysLeft + ' days left</span>'
+        : '<span style="color:#dc3545;">Expired</span>';
 
       var editBtn = (ad.status !== 'expired' && ad.status !== 'rejected')
-        ? '<a href="edit-ad.html?id=' + ad.id + '" class="btn btn-sm btn-outline-warning me-2">' +
-            '<i class="bi bi-pencil me-1"></i>Edit</a>'
+        ? '<a href="edit-ad.html?id=' + ad.id + '" class="btn-edit"><i class="bi bi-pencil"></i> Edit</a>'
         : '';
 
-      var pendingNote = (ad.status === 'pending')
-        ? '<p class="small text-warning mt-2 mb-0">' +
-            '<i class="bi bi-info-circle me-1"></i>Under review — goes live within 24 hours.</p>'
+      var pendingNote = ad.status === 'pending'
+        ? '<div class="pending-note"><i class="bi bi-info-circle"></i> Under review — goes live within 24 hours.</div>'
         : '';
 
-      return (
-        '<div class="ad-card">' +
-          '<div class="d-flex align-items-start">' +
-            thumb +
-            '<div class="flex-grow-1">' +
-              '<div class="d-flex flex-wrap align-items-center gap-2 mb-2">' +
-                '<h5 class="mb-0">' + h(ad.title || 'Untitled') + '</h5>' +
-                '<span class="badge bg-' + statusInfo[0] + '">' +
-                  '<i class="bi bi-' + statusInfo[1] + ' me-1"></i>' + statusInfo[2] +
-                '</span>' +
-                (ad.is_premium ? '<span class="badge bg-warning text-dark">PREMIUM</span>' : '') +
-              '</div>' +
-              '<div class="d-flex flex-wrap gap-3 text-muted small">' +
-                '<span><i class="bi bi-tag me-1"></i>' + h(ad.category || '-') + '</span>' +
-                '<span><i class="bi bi-geo-alt me-1"></i>' + h(ad.location || '-') + '</span>' +
-                '<span><i class="bi bi-calendar me-1"></i>' +
-                  (ad.created_at ? new Date(ad.created_at).toLocaleDateString() : '-') +
-                '</span>' +
-                daysHtml +
-              '</div>' +
-              pendingNote +
+      return '<div class="ad-card">' +
+        '<div class="ad-top">' +
+          thumb +
+          '<div class="ad-info">' +
+            '<div class="ad-title">' + escHtml(ad.title || 'Untitled') + '</div>' +
+            '<div class="ad-meta">' +
+              '<span>' + escHtml(ad.category || '-') + '</span>' +
+              '<span>' + escHtml(ad.location || '-') + '</span>' +
+              '<span>' + (ad.created_at ? new Date(ad.created_at).toLocaleDateString() : '-') + '</span>' +
+              daysStr +
             '</div>' +
-            '<div class="ms-3 d-flex flex-column gap-2 flex-shrink-0">' +
-              editBtn +
-              '<button class="btn btn-sm btn-outline-danger" ' +
-                'onclick="deleteAd(' + ad.id + ',\'' + h(ad.title).replace(/'/g,"\\'") + '\')">' +
-                '<i class="bi bi-trash me-1"></i>Delete' +
-              '</button>' +
-            '</div>' +
+            '<span class="badge ' + statusClass + '">' + statusLabel + '</span>' +
+            (ad.is_premium ? ' <span class="badge badge-premium">PREMIUM</span>' : '') +
+            pendingNote +
           '</div>' +
-        '</div>'
-      );
+        '</div>' +
+        '<div class="ad-actions">' +
+          editBtn +
+          '<button class="btn-delete" onclick="deleteAd(' + ad.id + ',\'' + escHtml(ad.title||'').replace(/'/g,"\\'") + '\')"><i class="bi bi-trash"></i> Delete</button>' +
+        '</div>' +
+      '</div>';
     }
 
     async function deleteAd(id, title) {
-      if (!confirm('Delete "' + title + '"?\n\nThis cannot be undone.')) return;
+      if (!confirm('Delete "' + title + '"?\nThis cannot be undone.')) return;
+      showMsg('Deleting...', 'info');
       try {
-        showMsg('Deleting...', 'info');
-        var r = await fetch(API_BASE + '/api/delete_ad/' + id, {
-          method: 'DELETE',
-          credentials: 'include'
-        });
-        if (r.ok) {
-          showMsg('✅ Ad deleted', 'success');
-          loadMyAds();
-        } else {
-          var d = await r.json().catch(function(){ return {}; });
-          showMsg('❌ ' + (d.error || 'Failed to delete'), 'danger');
-        }
-      } catch(e) {
-        showMsg('❌ Network error', 'danger');
-      }
+        var r = await fetch(API_BASE + '/api/delete_ad/' + id, { method:'DELETE', credentials:'include' });
+        if (r.ok) { showMsg('Deleted', 'success'); loadAds(); }
+        else { var d = await r.json().catch(function(){return {};}); showMsg('Error: '+(d.error||'failed'), 'danger'); }
+      } catch(e) { showMsg('Network error', 'danger'); }
     }
 
-    // Start
+    function escHtml(s) {
+      return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
     init();
   </script>
 </body>
