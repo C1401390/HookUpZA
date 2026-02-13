@@ -30,12 +30,16 @@ CORS(app,
      allow_headers=['Content-Type'],
      methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
 
+# Auto-detect HTTPS (Render) vs HTTP (local) for secure cookies
+import os as _os
+_on_render = _os.environ.get('RENDER', '') != ''
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
-app.config['SESSION_COOKIE_SECURE'] = False
-app.config['SESSION_COOKIE_HTTPONLY'] = False
+app.config['SESSION_COOKIE_SECURE'] = _on_render   # True on Render HTTPS, False locally
+app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_NAME'] = 'hookupza_session'
 app.config['SESSION_COOKIE_DOMAIN'] = None
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)
+app.config['SESSION_PERMANENT'] = True
 
 DB_FILE = 'hookupza.db'
 
@@ -293,7 +297,7 @@ def my_ads():
         return jsonify({'error': 'Login required'}), 401
     try:
         with get_db() as conn:
-            ads = conn.execute('''SELECT id, title, category, location, status, is_premium, created_at, expires_at
+            ads = conn.execute('''SELECT id, title, category, location, description, status, is_premium, created_at, expires_at, photos, contact, rate
             FROM ads WHERE user_id=? ORDER BY created_at DESC''', (session['user_id'],)).fetchall()
             return jsonify({'ads': [dict(ad) for ad in ads]})
     except Exception as e:
@@ -478,6 +482,19 @@ def reject_ad(ad_id):
             conn.execute("UPDATE ads SET status='rejected' WHERE id=?", (ad_id,))
             conn.commit()
         return jsonify({'message': 'Ad rejected'})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/admin/delete_ad/<int:ad_id>', methods=['DELETE', 'OPTIONS'])
+@debug_session
+def admin_delete_ad(ad_id):
+    if request.method == 'OPTIONS': return '', 204
+    if not is_admin(): return jsonify({'error': 'Admin access required'}), 403
+    try:
+        with get_db() as conn:
+            conn.execute('DELETE FROM ads WHERE id=?', (ad_id,))
+            conn.commit()
+        return jsonify({'message': 'Ad deleted'})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 

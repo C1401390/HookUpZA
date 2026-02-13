@@ -7,6 +7,11 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .ad-card { background:#1a1a1a; border:1px solid #333; border-radius:12px; transition:border-color .2s; }
+    .ad-card:hover { border-color:#dc3545; }
+    .ad-thumb { width:80px; height:80px; object-fit:cover; border-radius:8px; }
+  </style>
 </head>
 <body class="bg-black text-light">
 
@@ -15,29 +20,38 @@
       <a class="navbar-brand fw-bold fs-3" href="index.html">
         <span class="text-danger">Hook</span><span class="text-white">UpZA</span>
       </a>
-      <div class="d-flex gap-3">
-        <a href="dashboard.html" class="btn btn-outline-light btn-sm">
-          <i class="bi bi-speedometer"></i> Dashboard
-        </a>
+      <div class="d-flex gap-2">
         <a href="post-ad.html" class="btn btn-danger btn-sm">
-          <i class="bi bi-plus-circle"></i> Post New Ad
+          <i class="bi bi-plus-circle me-1"></i>Post New Ad
+        </a>
+        <a href="dashboard.html" class="btn btn-outline-light btn-sm">
+          <i class="bi bi-speedometer2 me-1"></i>Dashboard
         </a>
       </div>
     </div>
   </nav>
 
-  <section class="py-5 mt-5">
+  <section class="py-5" style="padding-top:90px">
     <div class="container">
-      <h2 class="text-center mb-5 fw-bold text-danger">
-        <i class="bi bi-file-earmark-text me-2"></i>My Ads
-      </h2>
 
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-danger fw-bold mb-0">
+          <i class="bi bi-megaphone-fill me-2"></i>My Ads
+        </h2>
+        <span id="adsCountBadge" class="badge bg-secondary fs-6">Loading...</span>
+      </div>
+
+      <!-- Status message -->
+      <div id="statusMsg" class="alert py-2 mb-3" style="display:none"></div>
+
+      <!-- Ads list -->
       <div id="adsContainer">
         <div class="text-center py-5">
           <div class="spinner-border text-danger"></div>
-          <p class="mt-3">Loading your ads...</p>
+          <p class="mt-3 text-muted">Loading your ads...</p>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -45,141 +59,140 @@
   <script src="js/hookupza.js"></script>
   <script src="js/auth.js"></script>
   <script>
-    const API = `${API_BASE}/api`;
+
+    document.addEventListener('DOMContentLoaded', async function() {
+      // Check auth
+      var loggedIn = await isUserLoggedIn();
+      if (!loggedIn) {
+        window.location.href = 'index.html';
+        return;
+      }
+      loadMyAds();
+    });
 
     async function loadMyAds() {
       try {
-        const res = await fetch(`${API}/my_ads`, {
-          credentials: 'include'
-        });
-
-        if (!res.ok) {
-          throw new Error('Failed to load ads');
+        var r = await fetch(API_BASE + '/api/my_ads', { credentials: 'include' });
+        if (!r.ok) {
+          if (r.status === 401) { window.location.href = 'index.html'; return; }
+          throw new Error('HTTP ' + r.status);
         }
-
-        const data = await res.json();
-        const container = document.getElementById('adsContainer');
-
-        if (!data.ads || data.ads.length === 0) {
-          container.innerHTML = `
-            <div class="text-center py-5">
-              <i class="bi bi-inbox display-1 text-muted"></i>
-              <h4 class="mt-3">No ads yet</h4>
-              <p class="text-muted">Post your first ad to get started!</p>
-              <a href="post-ad.html" class="btn btn-danger">
-                <i class="bi bi-plus-circle me-2"></i>Post Your First Ad
-              </a>
-            </div>
-          `;
-          return;
-        }
-
-        container.innerHTML = data.ads.map(ad => {
-          const daysLeft = calculateDaysLeft(ad.expires_at);
-          const statusColor = {
-            'pending': 'warning',
-            'active': 'success',
-            'expired': 'secondary',
-            'rejected': 'danger'
-          }[ad.status] || 'secondary';
-
-          return `
-            <div class="card bg-dark border-secondary mb-3">
-              <div class="card-body">
-                <div class="row align-items-center">
-                  <div class="col-md-6">
-                    <h5 class="card-title">${escapeHtml(ad.title)}</h5>
-                    <p class="text-muted mb-2">
-                      <i class="bi bi-tag me-1"></i>${escapeHtml(ad.category)} 
-                      ${ad.location ? `<i class="bi bi-geo-alt ms-2 me-1"></i>${escapeHtml(ad.location)}` : ''}
-                    </p>
-                    <div class="d-flex gap-2 flex-wrap">
-                      <span class="badge bg-${statusColor}">${ad.status.toUpperCase()}</span>
-                      ${ad.is_premium ? '<span class="badge bg-warning text-dark">PREMIUM</span>' : '<span class="badge bg-info">FREE</span>'}
-                      ${daysLeft >= 0 ? 
-                        `<span class="badge bg-dark">${daysLeft} days left</span>` : 
-                        '<span class="badge bg-danger">EXPIRED</span>'
-                      }
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <p class="small mb-0"><strong>Posted:</strong> ${formatDate(ad.created_at)}</p>
-                    <p class="small mb-0"><strong>Expires:</strong> ${formatDate(ad.expires_at)}</p>
-                  </div>
-                  <div class="col-md-3 text-end">
-                    <div class="btn-group-vertical w-100">
-                      <button class="btn btn-sm btn-outline-warning mb-2" onclick="editAd(${ad.id})">
-                        <i class="bi bi-pencil-square"></i> Edit
-                      </button>
-                      <button class="btn btn-sm btn-outline-danger" onclick="deleteAd(${ad.id}, '${escapeHtml(ad.title)}')">
-                        <i class="bi bi-trash"></i> Delete
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          `;
-        }).join('');
-
-      } catch (error) {
-        console.error('Error loading ads:', error);
-        document.getElementById('adsContainer').innerHTML = `
-          <div class="alert alert-danger">
-            <i class="bi bi-exclamation-triangle me-2"></i>
-            Failed to load your ads. Please make sure you're logged in.
-            <br><small>Error: ${error.message}</small>
-          </div>
-        `;
+        var data = await r.json();
+        var ads = data.ads || [];
+        console.log('✅ My ads loaded:', ads.length);
+        document.getElementById('adsCountBadge').textContent = ads.length + ' ad' + (ads.length !== 1 ? 's' : '');
+        displayMyAds(ads);
+      } catch(e) {
+        console.error('loadMyAds error:', e);
+        document.getElementById('adsContainer').innerHTML =
+          '<div class="alert alert-danger"><i class="bi bi-exclamation-triangle me-2"></i>Failed to load ads: ' + e.message + '</div>';
       }
     }
 
-    function editAd(adId) {
-      console.log('Editing ad:', adId);
-      window.location.href = `edit-ad.html?id=${adId}`;
-    }
-
-    async function deleteAd(adId, title) {
-      if (!confirm(`Are you sure you want to delete "${title}"?\n\nThis cannot be undone.`)) {
+    function displayMyAds(ads) {
+      var c = document.getElementById('adsContainer');
+      if (!ads || ads.length === 0) {
+        c.innerHTML =
+          '<div class="text-center py-5">' +
+            '<i class="bi bi-inbox display-1 text-muted mb-4"></i>' +
+            '<h4 class="text-muted mb-3">No ads yet</h4>' +
+            '<p class="text-muted mb-4">Post your first ad to get started!</p>' +
+            '<a href="post-ad.html" class="btn btn-danger btn-lg"><i class="bi bi-plus-circle me-2"></i>Post Your First Ad</a>' +
+          '</div>';
         return;
       }
 
-      try {
-        const res = await fetch(`${API}/delete_ad/${adId}`, {
-          method: 'DELETE',
-          credentials: 'include'
-        });
+      var html = '';
+      for (var i = 0; i < ads.length; i++) {
+        var ad = ads[i];
+        var daysLeft = ad.expires_at ? Math.floor((new Date(ad.expires_at) - new Date()) / 86400000) : -1;
+        var statusMap = {
+          pending:  { color: 'warning',   icon: 'clock',        label: 'Pending Review' },
+          active:   { color: 'success',   icon: 'check-circle', label: 'Active' },
+          expired:  { color: 'secondary', icon: 'x-circle',     label: 'Expired' },
+          rejected: { color: 'danger',    icon: 'x-octagon',    label: 'Rejected' }
+        };
+        var st = statusMap[ad.status] || { color: 'secondary', icon: 'question', label: ad.status };
 
-        if (!res.ok) throw new Error('Delete failed');
+        // Parse photos
+        var photos = [];
+        try {
+          if (ad.photos) photos = typeof ad.photos === 'string' ? JSON.parse(ad.photos) : ad.photos;
+        } catch(e) {}
+        var thumbSrc = photos.length ? photos[0] : null;
 
-        alert('✅ Ad deleted successfully!');
-        loadMyAds();
+        html += '<div class="ad-card p-4 mb-3">';
+        html += '<div class="row align-items-center">';
 
-      } catch (error) {
-        console.error('Delete error:', error);
-        alert('❌ Failed to delete ad. Please try again.');
+        // Thumbnail
+        html += '<div class="col-auto">';
+        if (thumbSrc) {
+          html += '<img src="' + escHtml(thumbSrc) + '" class="ad-thumb" alt="Ad photo" onerror="this.style.display=\'none\'">';
+        } else {
+          html += '<div class="ad-thumb bg-dark d-flex align-items-center justify-content-center rounded"><i class="bi bi-image text-muted fs-3"></i></div>';
+        }
+        html += '</div>';
+
+        // Info
+        html += '<div class="col">';
+        html += '<div class="d-flex flex-wrap align-items-center gap-2 mb-1">';
+        html += '<h5 class="mb-0">' + escHtml(ad.title || 'Untitled') + '</h5>';
+        html += '<span class="badge bg-' + st.color + '"><i class="bi bi-' + st.icon + ' me-1"></i>' + st.label + '</span>';
+        if (ad.is_premium) html += '<span class="badge bg-warning text-dark">PREMIUM</span>';
+        html += '</div>';
+        html += '<div class="d-flex flex-wrap gap-3 text-muted small mt-1">';
+        html += '<span><i class="bi bi-tag me-1"></i>' + escHtml(ad.category || '-') + '</span>';
+        html += '<span><i class="bi bi-geo-alt me-1"></i>' + escHtml(ad.location || '-') + '</span>';
+        html += '<span><i class="bi bi-calendar me-1"></i>Posted ' + (ad.created_at ? new Date(ad.created_at).toLocaleDateString() : '-') + '</span>';
+        if (daysLeft >= 0) {
+          html += '<span class="text-' + (daysLeft <= 3 ? 'warning' : 'light') + '"><i class="bi bi-hourglass me-1"></i>' + daysLeft + ' days left</span>';
+        } else {
+          html += '<span class="text-danger"><i class="bi bi-hourglass-bottom me-1"></i>Expired</span>';
+        }
+        html += '</div>';
+
+        if (ad.status === 'pending') {
+          html += '<p class="small text-warning mt-2 mb-0"><i class="bi bi-info-circle me-1"></i>Your ad is being reviewed. It will go live within 24 hours.</p>';
+        }
+        html += '</div>';
+
+        // Actions
+        html += '<div class="col-auto d-flex flex-column flex-md-row gap-2">';
+        if (ad.status !== 'expired' && ad.status !== 'rejected') {
+          html += '<a href="edit-ad.html?id=' + ad.id + '" class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil me-1"></i>Edit</a>';
+        }
+        html += '<button class="btn btn-sm btn-outline-danger" onclick="deleteMyAd(' + ad.id + ', \'' + escHtml(ad.title || 'this ad') + '\')"><i class="bi bi-trash me-1"></i>Delete</button>';
+        html += '</div>';
+
+        html += '</div></div>';
       }
+      c.innerHTML = html;
     }
 
-    function calculateDaysLeft(expiresAt) {
-      const now = new Date();
-      const expires = new Date(expiresAt);
-      const diff = expires - now;
-      return Math.floor(diff / (1000 * 60 * 60 * 24));
+    async function deleteMyAd(id, title) {
+      if (!confirm('Delete "' + title + '"?\nThis cannot be undone.')) return;
+      try {
+        var r = await fetch(API_BASE + '/api/delete_ad/' + id, { method: 'DELETE', credentials: 'include' });
+        if (r.ok) {
+          showStatus('✅ Ad deleted', 'success');
+          loadMyAds();
+        } else {
+          var d = await r.json();
+          showStatus('❌ ' + (d.error || 'Failed to delete'), 'danger');
+        }
+      } catch(e) { showStatus('❌ Network error', 'danger'); }
     }
 
-    function formatDate(dateStr) {
-      return new Date(dateStr).toLocaleDateString();
+    function showStatus(msg, type) {
+      var el = document.getElementById('statusMsg');
+      el.className = 'alert alert-' + type + ' py-2 mb-3';
+      el.textContent = msg;
+      el.style.display = 'block';
+      setTimeout(function(){ el.style.display = 'none'; }, 4000);
     }
-
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
+    function escHtml(str) {
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
-
-    // Load ads on page load
-    loadMyAds();
   </script>
 </body>
 </html>
