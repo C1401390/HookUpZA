@@ -64,9 +64,14 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/hookupza.js"></script>
   <script>
-    function showMsg(msg, type) {
+    // Inline API_BASE - no external dependency
+    var API_BASE = (window.location.hostname === '127.0.0.1' || 
+                    window.location.hostname === 'localhost')
+                   ? 'http://127.0.0.1:5000' : '';
+    console.log('API_BASE:', JSON.stringify(API_BASE));
+
+        function showMsg(msg, type) {
       var el = document.getElementById('statusBar');
       var colors = { success:'#0f5132', danger:'#5c1a1a', warning:'#6b4f00', info:'#0a3d5c' };
       el.style.background = colors[type] || '#333';

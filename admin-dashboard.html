@@ -97,9 +97,14 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/hookupza.js"></script>
   <script>
-    var ALL_ADS = [];
+    // Inline API_BASE - no external dependency
+    var API_BASE = (window.location.hostname === '127.0.0.1' || 
+                    window.location.hostname === 'localhost')
+                   ? 'http://127.0.0.1:5000' : '';
+    console.log('API_BASE:', JSON.stringify(API_BASE));
+
+        var ALL_ADS = [];
     var currentFilter = 'all';
 
     function showMsg(msg, type) {
